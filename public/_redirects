@@ -1,0 +1,19 @@
+# Cloudflare Pages Redirects Configuration
+
+# Redirect root to /public/index.html (if needed)
+/  /public/index.html  200
+
+# Clean URLs - redirect /projects to /public/projects
+/projects/alphaflow  /public/projects/alphaflow.html  200
+/projects/pulsegate  /public/projects/pulsegate.html  200
+/projects/swapex  /public/projects/swapex.html  200
+/projects/erevshabbat  /public/projects/erevshabbat.html  200
+/projects/metasleek  /public/projects/metasleek.html  200
+
+# Legal pages clean URLs
+/privacy  /public/privacy.html  200
+/terms  /public/terms.html  200
+
+# 404 page - redirect to home
+/404.html  /public/index.html  404
+/*  /public/index.html  404

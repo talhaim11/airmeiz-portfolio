@@ -1,0 +1,54 @@
+# Operating System Files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# Editor Directories and Files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.settings/
+*.sublime-project
+*.sublime-workspace
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Temporary Files
+*.tmp
+*.temp
+.cache/
+
+# Environment Variables
+.env
+.env.local
+.env.*.local
+
+# Build Output (if you add build tools later)
+dist/
+build/
+out/
+
+# Dependency Directories (if you add package managers later)
+node_modules/
+vendor/
+
+# Optional: Ignore large media files during development
+# (Uncomment if needed)
+# assets/video/*.mp4
+# assets/video/*.mov
+# assets/img/*.psd
+# assets/img/*.ai
