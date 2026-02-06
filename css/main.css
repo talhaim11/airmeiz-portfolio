@@ -778,9 +778,17 @@ ul {
   justify-content: center;
   color: var(--color-text-muted);
   font-size: var(--font-size-md);
+  overflow: hidden;
 }
 
 /* Placeholder for future video/image content */
+
+.project-media-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: var(--border-radius);
+}
 
 .project-details {
   background-color: var(--color-primary);
