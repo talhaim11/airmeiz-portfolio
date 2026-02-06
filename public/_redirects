@@ -1,8 +1,5 @@
 # Cloudflare Pages Redirects Configuration
 
-# Redirect root to /index.html (if needed)
-/  /index.html  200
-
 # Clean URLs - redirect /projects to /projects
 /projects/alphaflow  /projects/alphaflow.html  200
 /projects/pulsegate  /projects/pulsegate.html  200
