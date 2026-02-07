@@ -1,6 +1,6 @@
 # Cloudflare Pages Redirects Configuration
 
-# Clean URLs - redirect /projects to /projects
+# Clean URLs - serve HTML files without .html extension
 /projects/alphaflow  /projects/alphaflow.html  200
 /projects/pulsegate  /projects/pulsegate.html  200
 /projects/swapex  /projects/swapex.html  200
@@ -10,6 +10,3 @@
 # Legal pages clean URLs
 /privacy  /privacy.html  200
 /terms  /terms.html  200
-
-# 404 page - redirect to home
-/404.html  /index.html  404
