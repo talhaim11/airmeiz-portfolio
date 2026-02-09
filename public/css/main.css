@@ -313,6 +313,14 @@ ul {
   animation: fadeInUp 1s ease-out;
 }
 
+.hero-logo {
+  width: min(320px, 70vw);
+  height: auto;
+  margin: 0 auto var(--spacing-md);
+  display: block;
+  filter: drop-shadow(0 6px 18px rgba(0, 0, 0, 0.45));
+}
+
 @keyframes fadeInUp {
   from {
     opacity: 0;
