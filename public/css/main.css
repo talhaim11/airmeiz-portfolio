@@ -208,6 +208,13 @@ ul {
   transition: color var(--transition-fast);
 }
 
+.logo .site-logo {
+  height: 28px;
+  width: auto;
+  display: block;
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.35));
+}
+
 .logo:hover {
   color: var(--color-accent);
 }
@@ -1167,6 +1174,11 @@ body.has-home-video .contact,
 body.has-home-video .footer {
   position: relative;
   z-index: 1;
+}
+
+body.has-home-video .projects,
+body.has-home-video .contact {
+  background-color: transparent;
 }
 
 /* Scroll animation base classes */
