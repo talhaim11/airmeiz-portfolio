@@ -23,9 +23,9 @@
       
       // Prevent body scroll when menu is open
       if (navMenu.classList.contains('active')) {
-        document.body.style.overflow = 'hidden';
+        document.body.classList.add('menu-open');
       } else {
-        document.body.style.overflow = '';
+        document.body.classList.remove('menu-open');
       }
     });
 
@@ -34,7 +34,7 @@
       link.addEventListener('click', function() {
         mobileMenuToggle.classList.remove('active');
         navMenu.classList.remove('active');
-        document.body.style.overflow = '';
+        document.body.classList.remove('menu-open');
       });
     });
 
@@ -46,7 +46,7 @@
       if (!isClickInsideMenu && !isClickOnToggle && navMenu.classList.contains('active')) {
         mobileMenuToggle.classList.remove('active');
         navMenu.classList.remove('active');
-        document.body.style.overflow = '';
+        document.body.classList.remove('menu-open');
       }
     });
   }
@@ -72,12 +72,7 @@
 
         if (targetElement) {
           e.preventDefault();
-          
-          const headerHeight = document.querySelector('.header').offsetHeight;
-          const targetPosition = targetElement.offsetTop - headerHeight - 20;
-
-          window.scrollTo({
-            top: targetPosition,
+          targetElement.scrollIntoView({
             behavior: 'smooth'
           });
         }
@@ -153,6 +148,10 @@
       '.project-tile, .service-card, .team-member'
     );
 
+    animatedElements.forEach(function(element) {
+      element.classList.add('animate-on-scroll');
+    });
+
     const observerOptions = {
       threshold: 0.1,
       rootMargin: '0px 0px -50px 0px'
@@ -161,15 +160,7 @@
     const observer = new IntersectionObserver(function(entries) {
       entries.forEach(function(entry) {
         if (entry.isIntersecting) {
-          entry.target.style.opacity = '0';
-          entry.target.style.transform = 'translateY(30px)';
-          
-          setTimeout(function() {
-            entry.target.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-            entry.target.style.opacity = '1';
-            entry.target.style.transform = 'translateY(0)';
-          }, 100);
-
+          entry.target.classList.add('visible');
           observer.unobserve(entry.target);
         }
       });
@@ -178,6 +169,18 @@
     animatedElements.forEach(function(element) {
       observer.observe(element);
     });
+  }
+
+  // ==========================================
+  // VIDEO BODY CLASSES
+  // ==========================================
+  function initVideoBodyClasses() {
+    if (document.querySelector('.video-bg-container')) {
+      document.body.classList.add('has-video');
+    }
+    if (document.querySelector('.home-video')) {
+      document.body.classList.add('has-home-video');
+    }
   }
 
   // ==========================================
@@ -360,6 +363,7 @@
   }
 
   function runInit() {
+    initVideoBodyClasses();
     initMobileMenu();
     initSmoothScrolling();
     initHeaderScrollEffect();

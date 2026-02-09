@@ -74,6 +74,10 @@ body {
   overflow-x: hidden;
 }
 
+body.menu-open {
+  overflow: hidden;
+}
+
 /* RTL Support - Add [dir="rtl"] to html element when needed */
 [dir="rtl"] {
   direction: rtl;
@@ -1072,7 +1076,7 @@ section[id] {
   left: 0;
   width: 100vw;
   height: 100vh;
-  z-index: -1;
+  z-index: 0;
   overflow: hidden;
   pointer-events: none;
 }
@@ -1129,22 +1133,44 @@ section[id] {
   display: none;
 }
 
-/* Make content sections have solid background when video is present */
-body:has(.video-bg-container) .project-details,
-body:has(.video-bg-container) .footer {
+/* Make content layers sit above video */
+.video-hero,
+.about,
+.projects,
+.team,
+.contact,
+.project-details,
+.footer {
   position: relative;
-  background-color: var(--color-primary);
   z-index: 1;
 }
 
+/* Make content sections have solid background when video is present */
+body.has-video .project-details,
+body.has-video .footer {
+  background-color: var(--color-primary);
+}
+
 /* Homepage sections need solid backgrounds over video */
-body:has(.home-video) .about,
-body:has(.home-video) .projects,
-body:has(.home-video) .team,
-body:has(.home-video) .contact,
-body:has(.home-video) .footer {
+body.has-home-video .about,
+body.has-home-video .projects,
+body.has-home-video .team,
+body.has-home-video .contact,
+body.has-home-video .footer {
   position: relative;
   z-index: 1;
+}
+
+/* Scroll animation base classes */
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.animate-on-scroll.visible {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
 /* Mobile: disable video, show fallback image */
