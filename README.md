@@ -61,8 +61,9 @@ AirMeiZ site/
    - Go to "Pages" → "Create a project"
    - Connect your Git repository
    - Configure build settings:
-     - **Build command**: Leave empty (static site)
-     - **Build output directory**: `/` (root directory)
+     - **Build command**: `npm run build` (or leave empty)
+     - **Build output directory**: `public`
+     - **Root directory**: (leave blank)
    - Click "Save and Deploy"
 
 ### Method 2: Direct Upload
@@ -88,14 +89,11 @@ AirMeiZ site/
 
 ### _redirects File (Optional)
 
-Create a `public/_redirects` file for URL redirects:
+Only needed for custom redirects. The site uses real HTML files, so no SPA fallback is required. If you add `public/_redirects`, use paths relative to the site root (output is `public/`), e.g.:
 
 ```
-# Redirect /projects/* to /public/projects/*
-/projects/*  /public/projects/:splat  301
-
-# 404 page redirect
-/*  /public/index.html  404
+# Example: redirect old URL to new
+/old-page  /projects/alphaflow.html  301
 ```
 
 ### _headers File (Optional)
