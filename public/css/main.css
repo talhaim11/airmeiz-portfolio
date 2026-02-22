@@ -1203,21 +1203,24 @@ body.has-home-video .contact {
   transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
-/* Mobile: use gradient fallback (videos often don't autoplay on phones) */
-@media (max-width: 768px) {
+/* Mobile/tablet: use gradient fallback (videos often don't autoplay on phones) */
+@media (max-width: 900px) {
   .video-bg {
     display: none;
   }
   
+  /* Project pages - visible cyan-tinted gradient */
   .video-bg-container {
-    background: linear-gradient(135deg, #000000 0%, #1a1a2e 40%, #0d1b2a 70%, #000000 100%);
+    background: linear-gradient(135deg, #060a10 0%, #0c1828 20%, #0f2035 40%, #0a1828 60%, #060a10 100%);
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
   }
   
+  /* Homepage - cyan accent glow so it's not flat black */
   .video-bg-container.home-video {
-    background: linear-gradient(135deg, #000000 0%, #0a0a1a 30%, #001a2e 60%, #000000 100%);
+    background: radial-gradient(ellipse 100% 80% at 50% 30%, rgba(0, 80, 120, 0.35) 0%, rgba(0, 40, 70, 0.2) 50%, transparent 70%),
+                linear-gradient(180deg, #060a10 0%, #0a1525 30%, #081520 70%, #060a10 100%);
   }
 }
 
