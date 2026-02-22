@@ -320,7 +320,14 @@ ul {
   animation: fadeInUp 1s ease-out;
 }
 
-.hero-logo,
+.hero-logo {
+  width: min(320px, 70vw);
+  height: auto;
+  display: block;
+  margin: 0 auto var(--spacing-md);
+  filter: drop-shadow(0 6px 18px rgba(0, 0, 0, 0.45));
+}
+
 .hero-logo-text {
   font-size: clamp(2.5rem, 10vw, 4rem);
   font-weight: 800;
@@ -356,9 +363,6 @@ ul {
   background-clip: text;
 }
 
-.hero-logo-text ~ .hero-title {
-  font-size: var(--font-size-2xl);
-}
 
 .hero-subtitle {
   font-size: var(--font-size-lg);
