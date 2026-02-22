@@ -9,14 +9,14 @@ This directory is ready for your project videos.
 - `pulsegate-preview.mp4`
 - `swapex-preview.mp4`
 - `erevshabbat-preview.mp4`
-- `metasleek-preview.mp4`
+- `novapay-preview.mp4`
 
 ### Project Detail Pages
 - `alphaflow-demo.mp4` - Full project demonstration video
 - `pulsegate-demo.mp4`
 - `swapex-demo.mp4`
 - `erevshabbat-demo.mp4`
-- `metasleek-demo.mp4`
+- `novapay-demo.mp4`
 
 ## Video Guidelines
 

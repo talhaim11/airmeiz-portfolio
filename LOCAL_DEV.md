@@ -113,7 +113,7 @@ Visit each project page:
 - [ ] PULSEGATE (`/public/projects/pulsegate.html`)
 - [ ] SWAPEX (`/public/projects/swapex.html`)
 - [ ] EREVSHABBAT (`/public/projects/erevshabbat.html`)
-- [ ] METASLEEK (`/public/projects/metasleek.html`)
+- [ ] Novapay (`/public/projects/novapay.html`)
 
 ### Legal Pages Testing
 - [ ] Privacy Policy (`/public/privacy.html`)

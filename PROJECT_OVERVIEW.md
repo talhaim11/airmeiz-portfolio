@@ -44,7 +44,7 @@ AirMeiZ site/
 │       ├── 📄 pulsegate.html       # Registration platform
 │       ├── 📄 swapex.html          # Logistics application
 │       ├── 📄 erevshabbat.html     # Medical research
-│       └── 📄 metasleek.html       # Payment management
+│       └── 📄 novapay.html         # Payment management
 │
 ├── 📂 css/                         # Stylesheets
 │   └── 📄 main.css                 # Main stylesheet (1,500+ lines)
@@ -125,7 +125,7 @@ Border:                #2a2a2a (Dark Border)
 2. **PULSEGATE** - Class registration platform
 3. **SWAPEX** - Logistics and moving app
 4. **EREVSHABBAT** - Medical research platform
-5. **METASLEEK** - Credit/payment management
+5. **Novapay** - Credit/payment management
 
 ### 3. Legal Pages (2 pages)
 

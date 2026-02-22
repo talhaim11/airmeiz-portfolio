@@ -26,9 +26,9 @@ This directory is ready for your project images.
 - `erevshabbat-hero.jpg`
 - `erevshabbat-poster.jpg`
 
-- `metasleek-preview.jpg`
-- `metasleek-hero.jpg`
-- `metasleek-poster.jpg`
+- `novapay-preview.jpg`
+- `novapay-hero.jpg`
+- `novapay-poster.jpg`
 
 ### Team (create team/ subdirectory)
 - `team/member-1.jpg`

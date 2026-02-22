@@ -320,12 +320,18 @@ ul {
   animation: fadeInUp 1s ease-out;
 }
 
-.hero-logo {
-  width: min(320px, 70vw);
-  height: auto;
+.hero-logo,
+.hero-logo-text {
+  font-size: clamp(2.5rem, 10vw, 4rem);
+  font-weight: 800;
+  letter-spacing: 0.1em;
   margin: 0 auto var(--spacing-md);
-  display: block;
-  filter: drop-shadow(0 6px 18px rgba(0, 0, 0, 0.45));
+  text-align: center;
+  background: linear-gradient(135deg, #ffffff 0%, var(--color-accent) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-transform: uppercase;
 }
 
 @keyframes fadeInUp {
@@ -348,6 +354,10 @@ ul {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+}
+
+.hero-logo-text ~ .hero-title {
+  font-size: var(--font-size-2xl);
 }
 
 .hero-subtitle {
@@ -1193,16 +1203,21 @@ body.has-home-video .contact {
   transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
-/* Mobile: disable video, show fallback image */
+/* Mobile: use gradient fallback (videos often don't autoplay on phones) */
 @media (max-width: 768px) {
   .video-bg {
     display: none;
   }
   
   .video-bg-container {
+    background: linear-gradient(135deg, #000000 0%, #1a1a2e 40%, #0d1b2a 70%, #000000 100%);
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+  }
+  
+  .video-bg-container.home-video {
+    background: linear-gradient(135deg, #000000 0%, #0a0a1a 30%, #001a2e 60%, #000000 100%);
   }
 }
 

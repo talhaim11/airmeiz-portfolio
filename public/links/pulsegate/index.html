@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PULSEGATE - Open in App | AIRMEIZ</title>
+  <link rel="stylesheet" href="/links/css/deeplink.css">
+  <style>
+    .deeplink-page { background: linear-gradient(135deg, #0a0a0a 0%, #1a0a2e 50%, #0a0a0a 100%); }
+    .deeplink-page a, .deeplink-context { color: #b366ff; }
+    .deeplink-btn { background: #b366ff; color: #fff; }
+    .deeplink-btn.secondary { border-color: #b366ff; color: #b366ff; }
+  </style>
+</head>
+<body>
+  <div class="deeplink-page">
+    <div id="deeplink-expired" class="deeplink-expired">
+      <h1 class="deeplink-title">Link Expired</h1>
+      <p class="deeplink-subtitle">This link has expired. Please request a new one.</p>
+      <a href="/" class="deeplink-btn">Back to AIRMEIZ</a>
+    </div>
+    <div id="deeplink-main" class="deeplink-main">
+      <img src="/assets/img/pulsegate-preview.png" alt="PULSEGATE" class="deeplink-logo">
+      <h1 class="deeplink-title">PULSEGATE</h1>
+      <p class="deeplink-subtitle">Class & activity registration platform</p>
+      <p id="deeplink-context" class="deeplink-context"></p>
+      <button id="open-app" class="deeplink-btn">Open in App</button>
+      <div class="deeplink-stores">
+        <span class="deeplink-store coming ios">Coming to App Store</span>
+        <span class="deeplink-store coming android">Coming to Google Play</span>
+      </div>
+      <a href="/projects/pulsegate.html" class="deeplink-back">View project details</a>
+    </div>
+  </div>
+  <script src="/links/js/deeplink.js"></script>
+  <script>
+    (function(){
+      var s = window.DEELINK.init({ app: 'pulsegate' });
+      if (s.expired) return;
+      var ctx = document.getElementById('deeplink-context');
+      if (ctx && s.context) ctx.textContent = s.context;
+      document.getElementById('open-app').onclick = function() {
+        window.DEELINK.openApp('pulsegate', s.path);
+      };
+      if (s.platform === 'ios' || s.platform === 'android') {
+        setTimeout(function(){ window.DEELINK.openApp('pulsegate', s.path); }, 500);
+      }
+    })();
+  </script>
+</body>
+</html>

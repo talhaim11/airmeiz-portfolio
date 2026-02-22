@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SWAPEX - Open in App | AIRMEIZ</title>
+  <link rel="stylesheet" href="/links/css/deeplink.css">
+  <style>
+    .deeplink-page { background: linear-gradient(135deg, #0a0a0a 0%, #2e1a0a 50%, #0a0a0a 100%); }
+    .deeplink-page a, .deeplink-context { color: #ff9944; }
+    .deeplink-btn { background: #ff9944; color: #000; }
+    .deeplink-btn.secondary { border-color: #ff9944; color: #ff9944; }
+  </style>
+</head>
+<body>
+  <div class="deeplink-page">
+    <div id="deeplink-expired" class="deeplink-expired">
+      <h1 class="deeplink-title">Link Expired</h1>
+      <p class="deeplink-subtitle">This link has expired. Please request a new one.</p>
+      <a href="/" class="deeplink-btn">Back to AIRMEIZ</a>
+    </div>
+    <div id="deeplink-main" class="deeplink-main">
+      <img src="/assets/img/swapex-preview.png" alt="SWAPEX" class="deeplink-logo">
+      <h1 class="deeplink-title">SWAPEX</h1>
+      <p class="deeplink-subtitle">Logistics & moving application</p>
+      <p id="deeplink-context" class="deeplink-context"></p>
+      <button id="open-app" class="deeplink-btn">Open in App</button>
+      <div class="deeplink-stores">
+        <span class="deeplink-store coming ios">Coming to App Store</span>
+        <span class="deeplink-store coming android">Coming to Google Play</span>
+      </div>
+      <a href="/projects/swapex.html" class="deeplink-back">View project details</a>
+    </div>
+  </div>
+  <script src="/links/js/deeplink.js"></script>
+  <script>
+    (function(){
+      var s = window.DEELINK.init({ app: 'swapex' });
+      if (s.expired) return;
+      var ctx = document.getElementById('deeplink-context');
+      if (ctx && s.context) ctx.textContent = s.context;
+      document.getElementById('open-app').onclick = function() {
+        window.DEELINK.openApp('swapex', s.path);
+      };
+      if (s.platform === 'ios' || s.platform === 'android') {
+        setTimeout(function(){ window.DEELINK.openApp('swapex', s.path); }, 500);
+      }
+    })();
+  </script>
+</body>
+</html>

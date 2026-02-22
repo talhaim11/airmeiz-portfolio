@@ -172,7 +172,7 @@
   }
 
   // ==========================================
-  // VIDEO BODY CLASSES
+  // VIDEO BODY CLASSES & MOBILE PLAYBACK
   // ==========================================
   function initVideoBodyClasses() {
     if (document.querySelector('.video-bg-container')) {
@@ -181,6 +181,36 @@
     if (document.querySelector('.home-video')) {
       document.body.classList.add('has-home-video');
     }
+  }
+
+  function initMobileVideoPlayback() {
+    var videos = document.querySelectorAll('.video-bg');
+    if (videos.length === 0) return;
+
+    var playVideo = function(video) {
+      if (video && video.pause) {
+        var p = video.play();
+        if (p && p.catch) p.catch(function() {});
+      }
+    };
+
+    videos.forEach(function(video) {
+      video.setAttribute('playsinline', '');
+      video.setAttribute('webkit-playsinline', '');
+      video.muted = true;
+      video.playsInline = true;
+      try { video.playsInline = true; } catch (e) {}
+      playVideo(video);
+    });
+
+    document.addEventListener('touchstart', function tryPlayOnce() {
+      videos.forEach(playVideo);
+      document.removeEventListener('touchstart', tryPlayOnce);
+    }, { passive: true });
+    document.addEventListener('scroll', function tryPlayOnce() {
+      videos.forEach(playVideo);
+      document.removeEventListener('scroll', tryPlayOnce);
+    }, { passive: true });
   }
 
   // ==========================================
@@ -364,6 +394,7 @@
 
   function runInit() {
     initVideoBodyClasses();
+    initMobileVideoPlayback();
     initMobileMenu();
     initSmoothScrolling();
     initHeaderScrollEffect();

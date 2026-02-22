@@ -1,0 +1,20 @@
+# Deep link SPA-style routing - serve app landing page for all paths under /links/{app}
+/links/alphaflow    /links/alphaflow/index.html   200
+/links/alphaflow/   /links/alphaflow/index.html   200
+/links/alphaflow/*  /links/alphaflow/index.html   200
+
+/links/pulsegate    /links/pulsegate/index.html   200
+/links/pulsegate/   /links/pulsegate/index.html   200
+/links/pulsegate/*  /links/pulsegate/index.html   200
+
+/links/swapex       /links/swapex/index.html      200
+/links/swapex/      /links/swapex/index.html      200
+/links/swapex/*     /links/swapex/index.html      200
+
+/links/erevshabbat  /links/erevshabbat/index.html 200
+/links/erevshabbat/ /links/erevshabbat/index.html 200
+/links/erevshabbat/* /links/erevshabbat/index.html 200
+
+/links/novapay      /links/novapay/index.html     200
+/links/novapay/     /links/novapay/index.html     200
+/links/novapay/*    /links/novapay/index.html     200

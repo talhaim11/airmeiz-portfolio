@@ -7,13 +7,22 @@ A modern, elegant portfolio website built with pure HTML, CSS, and JavaScript. D
 - **Pure Static Site**: No frameworks, no build process required
 - **Dark Elegant Theme**: Black-based design with cyan accents
 - **Fully Responsive**: Optimized for desktop, tablet, and mobile
-- **5 Project Showcases**: Detailed pages for ALPHAFLOW, PULSEGATE, SWAPEX, EREVSHABBAT, and METASLEEK
+- **5 Project Showcases**: Detailed pages for ALPHAFLOW, PULSEGATE, SWAPEX, EREVSHABBAT, and Novapay
 - **RTL-Ready**: Structure prepared for right-to-left language support
 - **SEO Optimized**: Semantic HTML with proper meta tags
 - **Smooth Animations**: CSS-based entrance effects and transitions
 - **Mobile Navigation**: Hamburger menu for mobile devices
 - **Contact Form UI**: Ready for future API integration
 - **Legal Pages**: Privacy Policy and Terms of Service included
+- **Deep Links**: App landing pages and "Open in App" smart links for ALPHAFLOW, PULSEGATE, SWAPEX, EREVSHABBAT, Novapay
+
+## 🔗 Deep Links
+
+- **Base URL**: `https://airmeiz.com/links/{app}` (e.g. `/links/alphaflow`)
+- **Paths**: `/screens/{name}`, `/content/{type}/{id}`, `/auth` (e.g. `/links/alphaflow/screens/workouts`)
+- **Expiry**: Add `?expires=UNIX_TIMESTAMP` to any link; users will see "Link expired" if past that time
+- **Custom schemes**: `airmeiz-alphaflow://`, `airmeiz-pulsegate://`, etc.
+- **Web fallback**: App-specific landing page with platform detection (iOS/Android), "Open in App" button, and store placeholders
 
 ## 📁 Project Structure
 
@@ -28,7 +37,7 @@ AirMeiZ site/
 │       ├── pulsegate.html      # Class Registration Platform
 │       ├── swapex.html         # Logistics Application
 │       ├── erevshabbat.html    # Medical Research Platform
-│       └── metasleek.html      # Payment Management System
+│       └── novapay.html        # Payment Management System
 ├── css/
 │   └── main.css                # Main stylesheet
 ├── js/
@@ -36,6 +45,10 @@ AirMeiZ site/
 ├── assets/
 │   ├── img/                    # Image placeholders (empty for now)
 │   └── video/                  # Video placeholders (empty for now)
+│   └── links/                  # Deep link landing pages
+│       ├── alphaflow/, pulsegate/, swapex/, erevshabbat/, novapay/
+│       ├── css/deeplink.css
+│       └── js/deeplink.js
 └── README.md                   # This file
 ```
 
