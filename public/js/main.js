@@ -172,45 +172,15 @@
   }
 
   // ==========================================
-  // VIDEO BODY CLASSES & MOBILE PLAYBACK
+  // HERO BACKGROUND BODY CLASSES
   // ==========================================
-  function initVideoBodyClasses() {
-    if (document.querySelector('.video-bg-container')) {
-      document.body.classList.add('has-video');
+  function initHeroBodyClasses() {
+    if (document.querySelector('.hero-bg-container')) {
+      document.body.classList.add('has-hero-bg');
     }
-    if (document.querySelector('.home-video')) {
-      document.body.classList.add('has-home-video');
+    if (document.querySelector('.hero-bg-shader')) {
+      document.body.classList.add('has-home-shader');
     }
-  }
-
-  function initMobileVideoPlayback() {
-    var videos = document.querySelectorAll('.video-bg');
-    if (videos.length === 0) return;
-
-    var playVideo = function(video) {
-      if (video && video.pause) {
-        var p = video.play();
-        if (p && p.catch) p.catch(function() {});
-      }
-    };
-
-    videos.forEach(function(video) {
-      video.setAttribute('playsinline', '');
-      video.setAttribute('webkit-playsinline', '');
-      video.muted = true;
-      video.playsInline = true;
-      try { video.playsInline = true; } catch (e) {}
-      playVideo(video);
-    });
-
-    document.addEventListener('touchstart', function tryPlayOnce() {
-      videos.forEach(playVideo);
-      document.removeEventListener('touchstart', tryPlayOnce);
-    }, { passive: true });
-    document.addEventListener('scroll', function tryPlayOnce() {
-      videos.forEach(playVideo);
-      document.removeEventListener('scroll', tryPlayOnce);
-    }, { passive: true });
   }
 
   // ==========================================
@@ -271,67 +241,6 @@
   }
 
   // ==========================================
-  // VIDEO HOVER PREVIEW (FUTURE FEATURE)
-  // ==========================================
-  /*
-  function initVideoHoverPreview() {
-    const projectTiles = document.querySelectorAll('.project-tile');
-
-    projectTiles.forEach(function(tile) {
-      const video = tile.querySelector('.project-tile-video');
-      
-      if (!video) return;
-
-      tile.addEventListener('mouseenter', function() {
-        if (window.innerWidth > 768) { // Desktop only
-          video.play().catch(function(error) {
-            console.log('Video autoplay prevented:', error);
-          });
-        }
-      });
-
-      tile.addEventListener('mouseleave', function() {
-        video.pause();
-        video.currentTime = 0;
-      });
-    });
-  }
-  */
-
-  // ==========================================
-  // UTILITY: Debounce Function
-  // ==========================================
-  function debounce(func, wait) {
-    let timeout;
-    return function executedFunction() {
-      const context = this;
-      const args = arguments;
-      clearTimeout(timeout);
-      timeout = setTimeout(function() {
-        func.apply(context, args);
-      }, wait);
-    };
-  }
-
-  // ==========================================
-  // UTILITY: Throttle Function
-  // ==========================================
-  function throttle(func, limit) {
-    let inThrottle;
-    return function() {
-      const args = arguments;
-      const context = this;
-      if (!inThrottle) {
-        func.apply(context, args);
-        inThrottle = true;
-        setTimeout(function() {
-          inThrottle = false;
-        }, limit);
-      }
-    };
-  }
-
-  // ==========================================
   // LAZY LOADING FOR IMAGES (FUTURE)
   // ==========================================
   /*
@@ -370,15 +279,6 @@
   */
 
   // ==========================================
-  // PERFORMANCE: Optimize scroll events
-  // ==========================================
-  const optimizedScroll = throttle(function() {
-    // Add any scroll-based functionality here
-  }, 100);
-
-  window.addEventListener('scroll', optimizedScroll);
-
-  // ==========================================
   // INITIALIZE ALL FUNCTIONS
   // ==========================================
   function init() {
@@ -393,8 +293,7 @@
   }
 
   function runInit() {
-    initVideoBodyClasses();
-    initMobileVideoPlayback();
+    initHeroBodyClasses();
     initMobileMenu();
     initSmoothScrolling();
     initHeaderScrollEffect();
@@ -403,9 +302,7 @@
     initProjectTiles();
     initContactForm();
     
-    // Future features (uncomment when ready):
-    // initVideoHoverPreview();
-    // initLazyLoading();
+    // Future features: initLazyLoading(), initAnalytics()
     // initAnalytics();
     
     console.log('AIRMEIZ website initialized successfully');

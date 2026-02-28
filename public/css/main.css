@@ -209,8 +209,11 @@ ul {
 }
 
 .logo .site-logo {
-  height: 168px;
+  max-height: 48px;
+  max-width: 140px;
   width: auto;
+  height: auto;
+  object-fit: contain;
   display: block;
   filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.35));
 }
@@ -477,19 +480,6 @@ ul {
   margin-bottom: var(--spacing-md);
 }
 
-/* Placeholder for future video preview on hover */
-/* .project-tile-video {
-  display: none;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-.project-tile:hover .project-tile-video {
-  display: block;
-} */
 
 /* ==========================================
    ABOUT SECTION
@@ -814,8 +804,6 @@ ul {
   overflow: hidden;
 }
 
-/* Placeholder for future video/image content */
-
 .project-media-image {
   width: 100%;
   height: 100%;
@@ -843,6 +831,22 @@ ul {
   color: var(--color-text-secondary);
   line-height: 1.8;
   max-width: 900px;
+}
+
+.project-feature-list {
+  list-style: none;
+  padding-left: 0;
+}
+.project-feature-list li {
+  margin-bottom: var(--spacing-md);
+  padding-left: 1.5rem;
+  position: relative;
+}
+.project-feature-list li::before {
+  content: '●';
+  color: var(--color-accent);
+  position: absolute;
+  left: 0;
 }
 
 .project-tech-stack {
@@ -1097,9 +1101,9 @@ section[id] {
 }
 
 /* ==========================================
-   VIDEO BACKGROUND STYLES
+   HERO BACKGROUND STYLES
    ========================================== */
-.video-bg-container {
+.hero-bg-container {
   position: fixed;
   top: 0;
   left: 0;
@@ -1110,19 +1114,25 @@ section[id] {
   pointer-events: none;
 }
 
-.video-bg {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  min-width: 100vw;
-  min-height: 100vh;
-  width: auto;
-  height: auto;
-  transform: translate(-50%, -50%);
-  object-fit: cover;
+.hero-bg-shader {
+  background: #060a12;
 }
 
-.video-overlay {
+.hero-bg-container:not(.hero-bg-shader) {
+  background: radial-gradient(ellipse 100% 80% at 50% 30%, rgba(0, 80, 120, 0.4) 0%, rgba(0, 40, 70, 0.25) 50%, transparent 70%),
+              linear-gradient(180deg, #060a12 0%, #0a1525 25%, #081520 75%, #060a12 100%);
+}
+
+.shader-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.hero-bg-overlay {
   position: absolute;
   top: 0;
   left: 0;
@@ -1130,14 +1140,15 @@ section[id] {
   height: 100%;
   background: linear-gradient(
     to bottom,
-    rgba(0, 0, 0, 0.5) 0%,
-    rgba(0, 0, 0, 0.3) 30%,
-    rgba(0, 0, 0, 0.3) 70%,
-    rgba(0, 0, 0, 0.7) 100%
+    rgba(0, 0, 0, 0.25) 0%,
+    rgba(0, 0, 0, 0.15) 30%,
+    rgba(0, 0, 0, 0.15) 70%,
+    rgba(0, 0, 0, 0.4) 100%
   );
+  pointer-events: none;
 }
 
-.video-hero {
+.hero-with-bg {
   position: relative;
   min-height: 100vh;
   display: flex;
@@ -1146,24 +1157,18 @@ section[id] {
   background: transparent !important;
 }
 
-.video-hero .project-hero-content,
-.video-hero .hero-content {
+.hero-with-bg .project-hero-content,
+.hero-with-bg .hero-content {
   position: relative;
   z-index: 2;
   text-align: center;
 }
 
-/* Override hero default background when video is present */
-.hero.video-hero {
-  background: transparent !important;
-}
-
-.hero.video-hero::before {
+.hero.hero-with-bg::before {
   display: none;
 }
 
-/* Make content layers sit above video */
-.video-hero,
+.hero-with-bg,
 .about,
 .projects,
 .team,
@@ -1174,24 +1179,22 @@ section[id] {
   z-index: 1;
 }
 
-/* Make content sections have solid background when video is present */
-body.has-video .project-details,
-body.has-video .footer {
+body.has-hero-bg .project-details,
+body.has-hero-bg .footer {
   background-color: var(--color-primary);
 }
 
-/* Homepage sections need solid backgrounds over video */
-body.has-home-video .about,
-body.has-home-video .projects,
-body.has-home-video .team,
-body.has-home-video .contact,
-body.has-home-video .footer {
+body.has-home-shader .about,
+body.has-home-shader .projects,
+body.has-home-shader .team,
+body.has-home-shader .contact,
+body.has-home-shader .footer {
   position: relative;
   z-index: 1;
 }
 
-body.has-home-video .projects,
-body.has-home-video .contact {
+body.has-home-shader .projects,
+body.has-home-shader .contact {
   background-color: transparent;
 }
 
@@ -1207,24 +1210,13 @@ body.has-home-video .contact {
   transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
-/* Mobile/tablet: use gradient fallback (videos often don't autoplay on phones) */
-@media (max-width: 900px) {
-  .video-bg {
+@media (max-width: 600px) {
+  .shader-canvas {
     display: none;
   }
-  
-  /* Project pages - visible cyan-tinted gradient */
-  .video-bg-container {
-    background: linear-gradient(135deg, #060a10 0%, #0c1828 20%, #0f2035 40%, #0a1828 60%, #060a10 100%);
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-  }
-  
-  /* Homepage - cyan accent glow so it's not flat black */
-  .video-bg-container.home-video {
-    background: radial-gradient(ellipse 100% 80% at 50% 30%, rgba(0, 80, 120, 0.35) 0%, rgba(0, 40, 70, 0.2) 50%, transparent 70%),
-                linear-gradient(180deg, #060a10 0%, #0a1525 30%, #081520 70%, #060a10 100%);
+  .hero-bg-shader {
+    background: radial-gradient(ellipse 100% 80% at 50% 30%, rgba(0, 80, 120, 0.4) 0%, rgba(0, 40, 70, 0.25) 50%, transparent 70%),
+                linear-gradient(180deg, #060a12 0%, #0a1525 25%, #081520 75%, #060a12 100%);
   }
 }
 

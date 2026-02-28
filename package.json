@@ -5,5 +5,8 @@
   "description": "AIRMEIZ static portfolio - deploy to Cloudflare Pages",
   "scripts": {
     "build": "echo Static site - no build required"
+  },
+  "devDependencies": {
+    "@21st-extension/toolbar": "^0.5.14"
   }
 }

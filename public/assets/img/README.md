@@ -12,23 +12,20 @@ This directory is ready for your project images.
 ### Projects
 - `alphaflow-preview.jpg` - Project tile preview image
 - `alphaflow-hero.jpg` - Project detail page hero image
-- `alphaflow-poster.jpg` - Video poster frame
+- `alphaflow-hero.jpg` - Project detail hero (optional)
 
 - `pulsegate-preview.jpg`
 - `pulsegate-hero.jpg`
-- `pulsegate-poster.jpg`
+- `pulsegate-hero.jpg`
 
 - `swapex-preview.jpg`
 - `swapex-hero.jpg`
-- `swapex-poster.jpg`
 
 - `erevshabbat-preview.jpg`
 - `erevshabbat-hero.jpg`
-- `erevshabbat-poster.jpg`
 
 - `novapay-preview.jpg`
 - `novapay-hero.jpg`
-- `novapay-poster.jpg`
 
 ### Team (create team/ subdirectory)
 - `team/member-1.jpg`

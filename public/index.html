@@ -20,6 +20,8 @@
   
   <!-- Stylesheet -->
   <link rel="stylesheet" href="/css/main.css?v=6">
+  <!-- Three.js for shader background -->
+  <script src="https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.min.js"></script>
 </head>
 <body>
 
@@ -51,22 +53,19 @@
     </div>
   </header>
 
-  <!-- VIDEO BACKGROUND FOR HOMEPAGE -->
-  <div class="video-bg-container home-video">
-    <video autoplay muted loop playsinline class="video-bg">
-      <source src="/assets/video/home-bg.mp4" type="video/mp4">
-    </video>
-    <div class="video-overlay"></div>
+  <!-- SHADER BACKGROUND FOR HOMEPAGE -->
+  <div class="hero-bg-container hero-bg-shader" id="shader-bg-container">
+    <div class="hero-bg-overlay"></div>
   </div>
 
   <!-- ==========================================
        HERO SECTION
        ========================================== -->
-  <section id="home" class="hero video-hero">
+  <section id="home" class="hero hero-with-bg">
     <div class="container">
       <div class="hero-content">
         <img src="/assets/img/airmeiz-logo.png" alt="AIRMEIZ" class="hero-logo">
-        <p class="hero-title">Building Tomorrow's Technology Today</p>
+        <p class="hero-title">you want, we make.</p>
         <p class="hero-subtitle">
           We create innovative digital solutions that transform ideas into powerful, user-centric experiences. 
           From cutting-edge mobile applications to intelligent platforms, we're shaping the future of technology.
@@ -121,7 +120,6 @@
         
         <!-- Project 1: ALPHAFLOW -->
         <article class="project-tile" data-project-url="/projects/alphaflow.html">
-          <!-- Placeholder for future image/video -->
           <img src="/assets/img/alphaflow-preview.png" alt="ALPHAFLOW Project" class="project-tile-image">
           
           <div class="project-tile-content">
@@ -140,7 +138,6 @@
         
         <!-- Project 2: PULSEGATE -->
         <article class="project-tile" data-project-url="/projects/pulsegate.html">
-          <!-- Placeholder for future image/video -->
           <img src="/assets/img/pulsegate-preview.png" alt="PULSEGATE Project" class="project-tile-image">
           
           <div class="project-tile-content">
@@ -159,7 +156,6 @@
         
         <!-- Project 3: SWAPEX -->
         <article class="project-tile" data-project-url="/projects/swapex.html">
-          <!-- Placeholder for future image/video -->
           <img src="/assets/img/swapex-preview.png" alt="SWAPEX Project" class="project-tile-image">
           
           <div class="project-tile-content">
@@ -178,7 +174,6 @@
         
         <!-- Project 4: EREVSHABBAT -->
         <article class="project-tile" data-project-url="/projects/erevshabbat.html">
-          <!-- Placeholder for future image/video -->
           <img src="/assets/img/erevshabbat-preview.png" alt="EREVSHABBAT Project" class="project-tile-image">
           
           <div class="project-tile-content">
@@ -189,7 +184,7 @@
           <div class="project-tile-overlay">
             <div class="project-tile-overlay-content">
               <h3 class="project-tile-overlay-title">EREVSHABBAT</h3>
-              <p class="project-tile-overlay-text">Oral & jaw cancer research and awareness platform</p>
+              <p class="project-tile-overlay-text">Ending late-stage oral cancer through AI-powered early detection</p>
               <span class="btn btn-primary">View Details</span>
             </div>
           </div>
@@ -197,7 +192,6 @@
         
         <!-- Project 5: Novapay -->
         <article class="project-tile" data-project-url="/projects/novapay.html">
-          <!-- Placeholder for future image/video -->
           <img src="/assets/img/novapay-preview.png" alt="Novapay Project" class="project-tile-image">
           
           <div class="project-tile-content">
@@ -253,15 +247,6 @@
           <h3 class="team-member-name">Sagi Mutas</h3>
           <p class="team-member-role">CFO + CHRO</p>
           <p class="team-member-bio">Financial strategist and human resources expert driving team excellence.</p>
-        </div>
-        
-        <!-- Team Member 4 -->
-        <div class="team-member">
-          <!-- Team photo - place john-smith.jpg in /assets/img/ -->
-          <img src="/assets/img/john-smith.png" alt="John Smith" class="team-member-image">
-          <h3 class="team-member-name">John Smith</h3>
-          <p class="team-member-role">CISO + CIO</p>
-          <p class="team-member-bio">Security and information systems specialist ensuring robust infrastructure.</p>
         </div>
         
       </div>
@@ -398,7 +383,8 @@
   </footer>
 
   <!-- JavaScript -->
+  <script src="/js/shader-bg.js"></script>
   <script src="/js/main.js?v=6"></script>
-  
+  <script type="module" src="/js/toolbar-dev.js"></script>
 </body>
 </html>

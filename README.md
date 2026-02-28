@@ -24,10 +24,22 @@ A modern, elegant portfolio website built with pure HTML, CSS, and JavaScript. D
 - **Custom schemes**: `airmeiz-alphaflow://`, `airmeiz-pulsegate://`, etc.
 - **Web fallback**: App-specific landing page with platform detection (iOS/Android), "Open in App" button, and store placeholders
 
+## ⚛️ React App (Optional)
+
+A React + TypeScript + Tailwind demo with an animated shader background component lives in `react-app/`:
+
+```bash
+cd react-app && npm install && npm run dev
+```
+
+See [react-app/README.md](react-app/README.md) for details. Uses shadcn-style `components/ui` structure.
+
 ## 📁 Project Structure
 
 ```
 AirMeiZ site/
+├── react-app/                  # React + Vite + TypeScript + Tailwind
+│   └── src/components/ui/      # shadcn-style components
 ├── public/
 │   ├── index.html              # Homepage
 │   ├── privacy.html            # Privacy Policy
@@ -44,7 +56,7 @@ AirMeiZ site/
 │   └── main.js                 # JavaScript functionality
 ├── assets/
 │   ├── img/                    # Image placeholders (empty for now)
-│   └── video/                  # Video placeholders (empty for now)
+│   └── video/                  # (unused - hero uses shader/gradient)
 │   └── links/                  # Deep link landing pages
 │       ├── alphaflow/, pulsegate/, swapex/, erevshabbat/, novapay/
 │       ├── css/deeplink.css
@@ -144,15 +156,6 @@ Edit [css/main.css](css/main.css) and modify CSS variables:
    <img src="/assets/img/project-name.jpg" alt="Description">
    ```
 
-#### Videos
-1. Add videos to `assets/video/`
-2. Uncomment video elements in HTML:
-   ```html
-   <video controls>
-     <source src="/assets/video/demo.mp4" type="video/mp4">
-   </video>
-   ```
-
 #### Team Photos
 Replace placeholder divs in [public/index.html](public/index.html):
 ```html
@@ -221,24 +224,20 @@ To enable RTL (Right-to-Left) language support:
 
 ### Planned Features (Not Yet Implemented)
 
-1. **Video Hover Previews**: 
-   - Uncomment video elements and related JavaScript
-   - Add video files to `assets/video/`
-
-2. **Lead Collection**:
+1. **Lead Collection**:
    - Implement contact form backend
    - Add email notification system
    - Integrate with CRM
 
-3. **Analytics**:
+2. **Analytics**:
    - Add Google Analytics or Cloudflare Web Analytics
    - Uncomment analytics code in `js/main.js`
 
-4. **Image Optimization**:
+3. **Image Optimization**:
    - Add lazy loading for images
    - Implement responsive images with srcset
 
-5. **Content Management**:
+4. **Content Management**:
    - Consider adding a headless CMS (optional)
 
 ## 📄 License
@@ -288,7 +287,7 @@ Then visit `http://localhost:8000/public/`
 ## ✅ Pre-Deployment Checklist
 
 - [ ] Update placeholder text with real content
-- [ ] Add actual images and videos
+- [ ] Add actual images
 - [ ] Update contact email addresses
 - [ ] Test all links
 - [ ] Verify responsive design on multiple devices
