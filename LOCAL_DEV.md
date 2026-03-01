@@ -19,15 +19,14 @@ Quick guide for viewing and testing the AIRMEIZ website on your local machine.
 ### Option A: Python (Pre-installed on Mac/Linux)
 
 ```powershell
-# Navigate to project root
-cd "c:\Users\talha\Downloads\AirMeiZ site"
+# From project root - serve the public folder so paths work correctly
+cd public
+python -m http.server 8080
 
-# Start Python web server
-python -m http.server 8000
-
-# Visit in browser:
-# http://localhost:8000/public/
+# Visit in browser: http://localhost:8080/
 ```
+
+Or use the npm script: `npm run preview` (from project root).
 
 ### Option B: Node.js http-server
 

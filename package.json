@@ -4,7 +4,9 @@
   "private": true,
   "description": "AIRMEIZ static portfolio - deploy to Cloudflare Pages",
   "scripts": {
-    "build": "echo Static site - no build required"
+    "build": "echo Static site - no build required",
+    "serve": "npx --yes http-server public -p 8080 -o",
+    "preview": "cd public && python -m http.server 8080"
   },
   "devDependencies": {
     "@21st-extension/toolbar": "^0.5.14"

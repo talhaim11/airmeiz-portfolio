@@ -1,6 +1,16 @@
-# Image Assets Placeholder
+# Image Assets
 
-This directory is ready for your project images.
+## ⚠️ Two Different AIRMEIZ Logos (Do Not Confuse)
+
+| File | Usage | Location |
+|------|-------|----------|
+| **site-logo.png** | **Site logo** – small logo in the **header/navigation bar** on every page | Header (top-left) |
+| **airmeiz-logo.png** | **AIRMEIZ logo** – large logo in the **hero section** on the homepage only | Homepage hero (centered) |
+
+- **Site logo** = Header only. Change `site-logo.png` when modifying the nav bar logo.
+- **AIRMEIZ logo** = Hero only. Change `airmeiz-logo.png` when modifying the main homepage logo.
+
+---
 
 ## Recommended Image Files
 

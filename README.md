@@ -56,7 +56,6 @@ AirMeiZ site/
 │   └── main.js                 # JavaScript functionality
 ├── assets/
 │   ├── img/                    # Image placeholders (empty for now)
-│   └── video/                  # (unused - hero uses shader/gradient)
 │   └── links/                  # Deep link landing pages
 │       ├── alphaflow/, pulsegate/, swapex/, erevshabbat/, novapay/
 │       ├── css/deeplink.css

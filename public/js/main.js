@@ -172,18 +172,6 @@
   }
 
   // ==========================================
-  // HERO BACKGROUND BODY CLASSES
-  // ==========================================
-  function initHeroBodyClasses() {
-    if (document.querySelector('.hero-bg-container')) {
-      document.body.classList.add('has-hero-bg');
-    }
-    if (document.querySelector('.hero-bg-shader')) {
-      document.body.classList.add('has-home-shader');
-    }
-  }
-
-  // ==========================================
   // PROJECT TILE CLICK HANDLER
   // ==========================================
   function initProjectTiles() {
@@ -293,7 +281,6 @@
   }
 
   function runInit() {
-    initHeroBodyClasses();
     initMobileMenu();
     initSmoothScrolling();
     initHeaderScrollEffect();

@@ -55,8 +55,6 @@ AirMeiZ site/
 └── 📂 assets/                      # Media assets
     ├── 📂 img/                     # Images (ready for content)
     │   └── 📄 README.md            # Image guidelines
-    └── 📂 video/                   # Videos (ready for content)
-        └── 📄 README.md            # Video guidelines
 ```
 
 ---
@@ -305,8 +303,6 @@ Also compatible with:
 | `QUICKSTART.html` | Visual quick start guide (open in browser) |
 | `PROJECT_OVERVIEW.md` | This file - project summary |
 | `assets/img/README.md` | Image guidelines and requirements |
-| `assets/video/README.md` | Video guidelines and implementation |
-
 ---
 
 ## 🎓 How to Use This Project
@@ -376,7 +372,7 @@ The AIRMEIZ portfolio website is **production-ready** and can be deployed immedi
 - **Technical Questions:** Review `README.md` for detailed documentation
 - **Deployment Help:** See `DEPLOYMENT.md` for step-by-step guide
 - **Quick Start:** Open `QUICKSTART.html` in browser for visual guide
-- **Content Guidelines:** Check `assets/img/README.md` and `assets/video/README.md`
+- **Content Guidelines:** Check `assets/img/README.md`
 
 ---
 
