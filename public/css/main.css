@@ -813,14 +813,116 @@ ul {
   margin-bottom: var(--spacing-xl);
 }
 
-.project-section-title {
+/* Collapsible accordion */
+.project-accordion .project-section-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: var(--spacing-sm) 0;
+  font-size: var(--font-size-xl);
+  font-weight: 700;
+  color: var(--color-text-primary);
+  background: none;
+  border: none;
+  border-bottom: 1px solid var(--color-border);
+  cursor: pointer;
+  text-align: left;
+  font-family: inherit;
+  transition: color var(--transition-fast);
+}
+
+.project-accordion .project-section-title:hover {
+  color: var(--color-accent);
+}
+
+.project-accordion .accordion-icon {
+  flex-shrink: 0;
+  margin-left: var(--spacing-sm);
+  font-size: 0.75em;
+  transition: transform var(--transition-normal);
+}
+
+.project-accordion .project-section-title[aria-expanded="false"] .accordion-icon {
+  transform: rotate(-90deg);
+}
+
+.project-accordion .project-section-content {
+  overflow: hidden;
+  max-height: 2000px;
+  transition: max-height 0.3s ease;
+}
+
+.project-accordion .project-section-content.collapsed {
+  max-height: 0;
+  margin-bottom: 0;
+}
+
+.project-accordion .project-section-body {
+  padding-top: var(--spacing-md);
+  padding-bottom: var(--spacing-md);
+}
+
+.project-section-sub {
+  margin-top: var(--spacing-md);
+  padding-top: var(--spacing-md);
+  border-top: 1px solid var(--color-border);
+}
+
+/* Subcontent area - "More details" always visible for collapse option */
+
+.project-section-sub-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: var(--spacing-xs) 0;
+  font-size: var(--font-size-sm);
+  color: var(--color-accent);
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  font-family: inherit;
+}
+
+.project-section-sub-trigger:hover {
+  text-decoration: underline;
+}
+
+.project-section-sub-trigger .accordion-icon {
+  transition: transform var(--transition-normal);
+}
+
+.project-section-sub-trigger[aria-expanded="true"] .accordion-icon {
+  transform: rotate(90deg);
+}
+
+.project-section-subcontent {
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height 0.3s ease;
+}
+
+.project-section-subcontent.expanded {
+  max-height: 2000px;
+}
+
+.project-section-subcontent-inner {
+  padding-top: var(--spacing-sm);
+  padding-bottom: var(--spacing-md);
+}
+
+/* Base styles when not in accordion */
+.project-section:not(.project-accordion) .project-section-title {
   font-size: var(--font-size-xl);
   font-weight: 700;
   margin-bottom: var(--spacing-md);
   color: var(--color-text-primary);
 }
 
-.project-section-content {
+.project-section-content,
+.project-accordion .project-section-body {
   font-size: var(--font-size-md);
   color: var(--color-text-secondary);
   line-height: 1.8;

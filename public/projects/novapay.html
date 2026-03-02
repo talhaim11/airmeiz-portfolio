@@ -58,50 +58,82 @@
     <div class="container">
       
       <!-- Overview Section -->
-      <div class="project-section">
-        <h2 class="project-section-title">Overview</h2>
+      <div class="project-section project-accordion">
+        <button type="button" class="project-section-title" aria-expanded="true">
+          <span>Overview</span>
+          <span class="accordion-icon" aria-hidden="true">▼</span>
+        </button>
         <div class="project-section-content">
-          <p>
-            Novapay unifies credit cards, loans, and payments in one dashboard, helping users track obligations, automate key actions, and improve financial control.
-          </p>
+          <div class="project-section-body">
+            <p>
+              Novapay unifies credit cards, loans, and payments in one dashboard, helping users track obligations, automate key actions, and improve financial control.
+            </p>
+          </div>
+          <div class="project-section-sub">
+            <button type="button" class="project-section-sub-trigger" aria-expanded="false">
+              <span>More details</span>
+              <span class="accordion-icon" aria-hidden="true">›</span>
+            </button>
+            <div class="project-section-subcontent">
+              <div class="project-section-subcontent-inner"></div>
+            </div>
+          </div>
         </div>
       </div>
 
       <!-- Technology Section -->
-      <div class="project-section">
-        <h2 class="project-section-title">Technology Stack</h2>
+      <div class="project-section project-accordion">
+        <button type="button" class="project-section-title" aria-expanded="true">
+          <span>Technology Stack</span>
+          <span class="accordion-icon" aria-hidden="true">▼</span>
+        </button>
         <div class="project-section-content">
-          <p>
-            Built on a secure fintech architecture with encrypted data handling, compliant payment flows, and scalable APIs.
-          </p>
-          
-          <div class="project-tech-stack">
-            <span class="tech-tag">React</span>
-            <span class="tech-tag">Next.js</span>
-            <span class="tech-tag">TypeScript</span>
-            <span class="tech-tag">Python</span>
-            <span class="tech-tag">FastAPI</span>
-            <span class="tech-tag">PostgreSQL</span>
-            <span class="tech-tag">Redis</span>
-            <span class="tech-tag">Plaid API</span>
-            <span class="tech-tag">Stripe</span>
-            <span class="tech-tag">AWS</span>
-            <span class="tech-tag">Machine Learning</span>
-            <span class="tech-tag">Encryption</span>
-            <span class="tech-tag">PCI DSS</span>
-            <span class="tech-tag">OAuth 2.0</span>
+          <div class="project-section-body">
+            <p>
+              Built on a secure fintech architecture with encrypted data handling, compliant payment flows, and scalable APIs.
+            </p>
+            
+            <div class="project-tech-stack">
+              <span class="tech-tag">React</span>
+              <span class="tech-tag">Next.js</span>
+              <span class="tech-tag">TypeScript</span>
+              <span class="tech-tag">Python</span>
+              <span class="tech-tag">FastAPI</span>
+              <span class="tech-tag">PostgreSQL</span>
+              <span class="tech-tag">Redis</span>
+              <span class="tech-tag">Plaid API</span>
+              <span class="tech-tag">Stripe</span>
+              <span class="tech-tag">AWS</span>
+              <span class="tech-tag">Machine Learning</span>
+              <span class="tech-tag">Encryption</span>
+              <span class="tech-tag">PCI DSS</span>
+              <span class="tech-tag">OAuth 2.0</span>
+            </div>
+            
+            <p style="margin-top: 2rem;">
+              The platform integrates account aggregation, analytics services, and automation logic while maintaining strict security and performance standards.
+            </p>
           </div>
-          
-          <p style="margin-top: 2rem;">
-            The platform integrates account aggregation, analytics services, and automation logic while maintaining strict security and performance standards.
-          </p>
+          <div class="project-section-sub">
+            <button type="button" class="project-section-sub-trigger" aria-expanded="false">
+              <span>More details</span>
+              <span class="accordion-icon" aria-hidden="true">›</span>
+            </button>
+            <div class="project-section-subcontent">
+              <div class="project-section-subcontent-inner"></div>
+            </div>
+          </div>
         </div>
       </div>
 
       <!-- Vision & Impact Section -->
-      <div class="project-section">
-        <h2 class="project-section-title">Vision & Impact</h2>
+      <div class="project-section project-accordion">
+        <button type="button" class="project-section-title" aria-expanded="true">
+          <span>Vision & Impact</span>
+          <span class="accordion-icon" aria-hidden="true">▼</span>
+        </button>
         <div class="project-section-content">
+          <div class="project-section-body">
           <p>
             Novapay’s mission is to make credit and payment management simpler, clearer, and more proactive.
           </p>
@@ -120,6 +152,16 @@
             <li>Financial goal setting and progress tracking</li>
             <li>Payment reminders to avoid late fees</li>
           </ul>
+          </div>
+          <div class="project-section-sub">
+            <button type="button" class="project-section-sub-trigger" aria-expanded="false">
+              <span>More details</span>
+              <span class="accordion-icon" aria-hidden="true">›</span>
+            </button>
+            <div class="project-section-subcontent">
+              <div class="project-section-subcontent-inner"></div>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -201,7 +243,7 @@
     </div>
   </footer>
 
-  <script src="/js/main.js?v=6"></script>
+  <script src="/js/main.js?v=7"></script>
   <script type="module" src="/js/toolbar-dev.js"></script>
 </body>
 </html>

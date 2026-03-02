@@ -172,6 +172,39 @@
   }
 
   // ==========================================
+  // PROJECT ACCORDION (collapsible titles & content)
+  // ==========================================
+  function initProjectAccordion() {
+    // Use event delegation so clicks are always captured
+    document.addEventListener('click', function(e) {
+      const section = e.target.closest('.project-accordion');
+      if (!section) return;
+
+      const titleBtn = section.querySelector('.project-section-title');
+      const content = section.querySelector('.project-section-content');
+      const subTrigger = section.querySelector('.project-section-sub-trigger');
+      const subcontent = section.querySelector('.project-section-subcontent');
+
+      // Title toggle: expand/collapse main content
+      if (titleBtn && content && titleBtn.contains(e.target)) {
+        e.preventDefault();
+        const expanded = titleBtn.getAttribute('aria-expanded') === 'true';
+        titleBtn.setAttribute('aria-expanded', !expanded);
+        content.classList.toggle('collapsed', expanded);
+        return;
+      }
+
+      // Subcontent toggle: expand/collapse "More details"
+      if (subTrigger && subcontent && subTrigger.contains(e.target)) {
+        e.preventDefault();
+        const expanded = subTrigger.getAttribute('aria-expanded') === 'true';
+        subTrigger.setAttribute('aria-expanded', !expanded);
+        subcontent.classList.toggle('expanded', !expanded);
+      }
+    });
+  }
+
+  // ==========================================
   // PROJECT TILE CLICK HANDLER
   // ==========================================
   function initProjectTiles() {
@@ -286,6 +319,7 @@
     initHeaderScrollEffect();
     initActiveNavLink();
     initScrollAnimations();
+    initProjectAccordion();
     initProjectTiles();
     initContactForm();
     

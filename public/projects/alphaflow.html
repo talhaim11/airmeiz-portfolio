@@ -58,61 +58,103 @@
     <div class="container">
       
       <!-- Overview Section -->
-      <div class="project-section">
-        <h2 class="project-section-title">Overview</h2>
+      <div class="project-section project-accordion">
+        <button type="button" class="project-section-title" aria-expanded="true">
+          <span>Overview</span>
+          <span class="accordion-icon" aria-hidden="true">▼</span>
+        </button>
         <div class="project-section-content">
-          <p>
-            ALPHAFLOW helps athletes and coaches monitor workouts, compare performance over time, and make better training decisions from clear, structured data.
-          </p>
+          <div class="project-section-body">
+            <p>
+              ALPHAFLOW helps athletes and coaches monitor workouts, compare performance over time, and make better training decisions from clear, structured data.
+            </p>
+          </div>
+          <div class="project-section-sub">
+            <button type="button" class="project-section-sub-trigger" aria-expanded="false">
+              <span>More details</span>
+              <span class="accordion-icon" aria-hidden="true">›</span>
+            </button>
+            <div class="project-section-subcontent">
+              <div class="project-section-subcontent-inner"></div>
+            </div>
+          </div>
         </div>
       </div>
 
       <!-- Technology Section -->
-      <div class="project-section">
-        <h2 class="project-section-title">Technology Stack</h2>
+      <div class="project-section project-accordion">
+        <button type="button" class="project-section-title" aria-expanded="true">
+          <span>Technology Stack</span>
+          <span class="accordion-icon" aria-hidden="true">▼</span>
+        </button>
         <div class="project-section-content">
-          <p>
-            Built with a mobile-first architecture, real-time data sync, and a cloud backend designed for fast performance analytics.
-          </p>
-          
-          <div class="project-tech-stack">
-            <span class="tech-tag">React Native</span>
-            <span class="tech-tag">TypeScript</span>
-            <span class="tech-tag">Node.js</span>
-            <span class="tech-tag">GraphQL</span>
-            <span class="tech-tag">PostgreSQL</span>
-            <span class="tech-tag">Redis</span>
-            <span class="tech-tag">AWS</span>
-            <span class="tech-tag">Machine Learning</span>
-            <span class="tech-tag">Real-time Analytics</span>
-            <span class="tech-tag">IoT Integration</span>
-            <span class="tech-tag">WebSockets</span>
-            <span class="tech-tag">Docker</span>
+          <div class="project-section-body">
+            <p>
+              Built with a mobile-first architecture, real-time data sync, and a cloud backend designed for fast performance analytics.
+            </p>
+            
+            <div class="project-tech-stack">
+              <span class="tech-tag">React Native</span>
+              <span class="tech-tag">TypeScript</span>
+              <span class="tech-tag">Node.js</span>
+              <span class="tech-tag">GraphQL</span>
+              <span class="tech-tag">PostgreSQL</span>
+              <span class="tech-tag">Redis</span>
+              <span class="tech-tag">AWS</span>
+              <span class="tech-tag">Machine Learning</span>
+              <span class="tech-tag">Real-time Analytics</span>
+              <span class="tech-tag">IoT Integration</span>
+              <span class="tech-tag">WebSockets</span>
+              <span class="tech-tag">Docker</span>
+            </div>
+            
+            <p style="margin-top: 2rem;">
+              The stack supports cross-platform delivery, wearable integrations, and scalable analytics pipelines for continuous training insights.
+            </p>
           </div>
-          
-          <p style="margin-top: 2rem;">
-            The stack supports cross-platform delivery, wearable integrations, and scalable analytics pipelines for continuous training insights.
-          </p>
+          <div class="project-section-sub">
+            <button type="button" class="project-section-sub-trigger" aria-expanded="false">
+              <span>More details</span>
+              <span class="accordion-icon" aria-hidden="true">›</span>
+            </button>
+            <div class="project-section-subcontent">
+              <div class="project-section-subcontent-inner"></div>
+            </div>
+          </div>
         </div>
       </div>
 
       <!-- Vision & Impact Section -->
-      <div class="project-section">
-        <h2 class="project-section-title">Vision & Impact</h2>
+      <div class="project-section project-accordion">
+        <button type="button" class="project-section-title" aria-expanded="true">
+          <span>Vision & Impact</span>
+          <span class="accordion-icon" aria-hidden="true">▼</span>
+        </button>
         <div class="project-section-content">
-          <p>
-            ALPHAFLOW focuses on one goal: turn training data into practical actions that improve performance and consistency.
-          </p>
-          <p>
-            <strong>Key Features & Benefits:</strong>
-          </p>
-          <ul style="list-style: disc; margin-left: 2rem; margin-top: 1rem; line-height: 2;">
-            <li>Real-time performance monitoring with instant feedback</li>
-            <li>Training insights based on workout history</li>
-            <li>Comprehensive analytics dashboard with customizable metrics</li>
-            <li>Integration with major wearable devices and fitness equipment</li>
-            <li>Progress visualization and goal tracking</li>
-          </ul>
+          <div class="project-section-body">
+            <p>
+              ALPHAFLOW focuses on one goal: turn training data into practical actions that improve performance and consistency.
+            </p>
+            <p>
+              <strong>Key Features & Benefits:</strong>
+            </p>
+            <ul style="list-style: disc; margin-left: 2rem; margin-top: 1rem; line-height: 2;">
+              <li>Real-time performance monitoring with instant feedback</li>
+              <li>Training insights based on workout history</li>
+              <li>Comprehensive analytics dashboard with customizable metrics</li>
+              <li>Integration with major wearable devices and fitness equipment</li>
+              <li>Progress visualization and goal tracking</li>
+            </ul>
+          </div>
+          <div class="project-section-sub">
+            <button type="button" class="project-section-sub-trigger" aria-expanded="false">
+              <span>More details</span>
+              <span class="accordion-icon" aria-hidden="true">›</span>
+            </button>
+            <div class="project-section-subcontent">
+              <div class="project-section-subcontent-inner"></div>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -194,7 +236,7 @@
     </div>
   </footer>
 
-  <script src="/js/main.js?v=6"></script>
+  <script src="/js/main.js?v=7"></script>
   <script type="module" src="/js/toolbar-dev.js"></script>
 </body>
 </html>
