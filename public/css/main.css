@@ -771,6 +771,13 @@ ul {
   margin-bottom: var(--spacing-md);
 }
 
+.project-hero-title-logo {
+  width: min(520px, 78vw);
+  height: auto;
+  margin: 0 auto var(--spacing-md);
+  mix-blend-mode: screen;
+}
+
 .project-hero-subtitle {
   font-size: var(--font-size-lg);
   color: var(--color-text-secondary);

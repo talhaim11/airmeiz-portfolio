@@ -18,6 +18,12 @@
   margin-bottom: 1rem;
 }
 .deeplink-title { font-size: 1.75rem; font-weight: 700; margin-bottom: 0.5rem; }
+.deeplink-title-logo {
+  width: min(440px, 78vw);
+  height: auto;
+  margin: 0 auto 0.75rem;
+  mix-blend-mode: screen;
+}
 .deeplink-subtitle { font-size: 1rem; color: #b0b0b0; margin-bottom: 1.5rem; }
 .deeplink-context { font-size: 0.9rem; color: #00d4ff; margin-bottom: 2rem; }
 .deeplink-expired {
