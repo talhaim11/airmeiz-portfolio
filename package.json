@@ -2,11 +2,11 @@
   "name": "airmeiz-site",
   "version": "1.0.0",
   "private": true,
-  "description": "AIRMEIZ static portfolio - deploy to Cloudflare Pages",
+  "description": "AIRMEIZ React-driven portfolio - deploy the react-app build output",
   "scripts": {
-    "build": "echo Static site - no build required",
-    "serve": "npx --yes http-server public -p 8080 -o",
-    "preview": "cd public && python -m http.server 8080"
+    "build": "npm --prefix react-app run build",
+    "serve": "npx --yes serve react-app/dist -p 8080",
+    "preview": "npm --prefix react-app run preview"
   },
   "devDependencies": {
     "@21st-extension/toolbar": "^0.5.14"

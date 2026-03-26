@@ -7,6 +7,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 
 export default defineConfig({
   plugins: [react()],
+  publicDir: resolve(__dirname, '../public'),
   resolve: {
     alias: {
       '@': resolve(__dirname, './src'),

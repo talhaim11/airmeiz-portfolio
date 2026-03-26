@@ -14,6 +14,20 @@
 /links/erevshabbat  /links/erevshabbat/index.html 200
 /links/erevshabbat/ /links/erevshabbat/index.html 200
 /links/erevshabbat/* /links/erevshabbat/index.html 200
+/projects/erevshabbat.html /projects/erevshabbat 301
+/privacy.html /privacy 301
+/terms.html /terms 301
+/projects/alphaflow.html /projects/alphaflow 301
+/projects/pulsegate.html /projects/pulsegate 301
+/projects/swapex.html /projects/swapex 301
+/projects/novapay.html /projects/novapay 301
+/privacy /index.html 200
+/terms /index.html 200
+/projects/alphaflow /index.html 200
+/projects/pulsegate /index.html 200
+/projects/swapex /index.html 200
+/projects/novapay /index.html 200
+/projects/erevshabbat /index.html 200
 
 /links/novapay      /links/novapay/index.html     200
 /links/novapay/     /links/novapay/index.html     200
