@@ -28,8 +28,8 @@
 - `pulsegate-hero.jpg`
 - `pulsegate-hero.jpg`
 
-- `swapex-preview.jpg`
-- `swapex-hero.jpg`
+- `swappex-preview.jpg` or `swapex-preview.jpg`
+- `swappex-hero.jpg` or `swapex-hero.jpg`
 
 - `erevshabbat-preview.jpg`
 - `erevshabbat-hero.jpg`

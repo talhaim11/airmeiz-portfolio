@@ -24,11 +24,17 @@ export default {
         input: 'hsl(var(--input) / <alpha-value>)',
         ring: 'hsl(var(--ring) / <alpha-value>)',
         glow: 'hsl(var(--glow) / <alpha-value>)',
+        surface: 'hsl(var(--surface) / <alpha-value>)',
+        'surface-hover': 'hsl(var(--surface-hover) / <alpha-value>)',
+        green: 'hsl(var(--green) / <alpha-value>)',
+        'green-foreground': 'hsl(var(--green-foreground) / <alpha-value>)',
         'text-dim': 'hsl(var(--text-dim) / <alpha-value>)',
         'text-secondary': 'hsl(var(--text-secondary) / <alpha-value>)',
       },
       fontFamily: {
         sans: ['Inter', 'sans-serif'],
+        body: ['Inter', 'sans-serif'],
+        heading: ['General Sans', 'sans-serif'],
         display: ['Space Grotesk', 'sans-serif'],
       },
       keyframes: {

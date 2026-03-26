@@ -9,7 +9,7 @@ public/assets/img/
 ├── preview/                    # Images WITH background (dark)
 │   ├── alphaflow-preview.png   # For homepage project cards
 │   ├── pulsegate-preview.png
-│   ├── swapex-preview.png
+│   ├── swappex-preview.png or swapex-preview.png
 │   ├── erevshabbat-preview.png
 │   └── novapay-preview.png
 │
@@ -35,7 +35,7 @@ public/assets/img/
 - **Files:** 
   - `alphaflow.html`
   - `pulsegate.html`
-  - `swapex.html`
+  - `swappex` React route, with `swapex.html` kept as a legacy alias
   - `erevshabbat.html`
   - `novapay.html`
 - **Images used:** `/assets/img/logos/` (transparent/no background)
@@ -46,7 +46,7 @@ public/assets/img/
 - **Files:**
   - `links/alphaflow/index.html`
   - `links/pulsegate/index.html`
-  - `links/swapex/index.html`
+  - `links/swappex/index.html` and `links/swapex/index.html`
   - `links/erevshabbat/index.html`
   - `links/novapay/index.html`
 - **Images used:** `/assets/img/logos/` (transparent/no background)
@@ -61,7 +61,7 @@ public/assets/img/
 You need to create **transparent versions** of the company logos (without the dark background) and save them as:
 - `alphaflow-logo.png` → transparent AF logo
 - `pulsegate-logo.png` → transparent PG logo
-- `swapex-logo.png` → transparent SWX logo
+- `swapex-logo.png` → transparent SWAPPEX logo
 - `erevshabbat-logo.png` → transparent E:S logo
 - `novapay-logo.png` → transparent Novapay logo
 

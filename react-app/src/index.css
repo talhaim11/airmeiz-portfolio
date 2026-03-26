@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+@import url('https://cdn.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -52,6 +53,97 @@
   h5,
   h6 {
     font-family: 'Space Grotesk', sans-serif;
+  }
+
+  .swappex-page {
+    --background: 220 20% 4%;
+    --foreground: 210 20% 95%;
+    --card: 220 18% 8%;
+    --card-foreground: 210 20% 95%;
+    --popover: 220 18% 8%;
+    --popover-foreground: 210 20% 95%;
+    --primary: 175 80% 50%;
+    --primary-foreground: 220 20% 4%;
+    --secondary: 220 15% 14%;
+    --secondary-foreground: 210 20% 85%;
+    --muted: 220 15% 12%;
+    --muted-foreground: 215 15% 55%;
+    --accent: 175 60% 40%;
+    --accent-foreground: 220 20% 4%;
+    --border: 220 15% 16%;
+    --input: 220 15% 16%;
+    --ring: 175 80% 50%;
+    --radius: 0.75rem;
+    --glow: 175 80% 50%;
+    --surface: 220 18% 7%;
+    --surface-hover: 220 16% 11%;
+    --text-dim: 215 15% 45%;
+    --green: 150 60% 45%;
+    --green-foreground: 150 60% 95%;
+    font-family: 'Inter', sans-serif;
+  }
+
+  .airmeiz-core-page {
+    --background: 220 20% 4%;
+    --foreground: 210 20% 90%;
+    --card: 220 18% 8%;
+    --card-foreground: 210 20% 90%;
+    --popover: 220 18% 8%;
+    --popover-foreground: 210 20% 90%;
+    --primary: 185 90% 50%;
+    --primary-foreground: 220 20% 4%;
+    --secondary: 220 15% 12%;
+    --secondary-foreground: 210 20% 85%;
+    --muted: 220 15% 15%;
+    --muted-foreground: 215 15% 55%;
+    --accent: 185 70% 40%;
+    --accent-foreground: 210 20% 95%;
+    --border: 220 15% 15%;
+    --input: 220 15% 15%;
+    --ring: 185 90% 50%;
+    --radius: 0.75rem;
+    --font-heading: 'General Sans', sans-serif;
+    --font-body: 'General Sans', sans-serif;
+    font-family: var(--font-body);
+  }
+
+  .airmeiz-core-page h1,
+  .airmeiz-core-page h2,
+  .airmeiz-core-page h3 {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+  }
+
+  .airmeiz-core-page h4,
+  .airmeiz-core-page h5,
+  .airmeiz-core-page h6 {
+    font-family: var(--font-heading);
+    font-weight: 500;
+    line-height: 1.2;
+    letter-spacing: -0.015em;
+  }
+
+  .airmeiz-core-page p,
+  .airmeiz-core-page span,
+  .airmeiz-core-page a,
+  .airmeiz-core-page li,
+  .airmeiz-core-page label {
+    letter-spacing: -0.005em;
+    line-height: 1.45;
+  }
+
+  .snap-container {
+    height: 100vh;
+    overflow-y: auto;
+    scroll-snap-type: y mandatory;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .snap-section {
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
   }
 }
 
@@ -151,4 +243,106 @@
     transform: translateY(-20px);
     filter: blur(8px);
   }
+}
+
+@keyframes nodePulse {
+  0%,
+  100% {
+    opacity: 0.4;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.3);
+  }
+}
+
+@keyframes lineDraw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.text-glow {
+  text-shadow: 0 0 30px hsl(var(--primary) / 0.4), 0 0 60px hsl(var(--primary) / 0.15);
+}
+
+.box-glow {
+  box-shadow: 0 0 20px hsl(var(--primary) / 0.15), 0 0 40px hsl(var(--primary) / 0.05);
+}
+
+.gradient-text {
+  background-image: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--foreground)));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.gradient-border {
+  border: 1px solid transparent;
+  background-clip: padding-box;
+  position: relative;
+}
+
+.gradient-border::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(135deg, hsl(var(--primary) / 0.5), hsl(var(--border)));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+}
+
+.node-pulse {
+  animation: nodePulse 3s ease-in-out infinite;
+}
+
+.line-draw {
+  animation: lineDraw 2s ease-out forwards;
+  stroke-dasharray: 300;
+  stroke-dashoffset: 300;
+}
+
+.counter-glow {
+  text-shadow: 0 0 40px hsl(var(--primary) / 0.6);
+}
+
+.glow-primary {
+  box-shadow: 0 0 30px hsl(var(--primary) / 0.3);
+}
+
+.glow-soft {
+  box-shadow: 0 0 60px hsl(var(--primary) / 0.1);
+}
+
+.border-glow {
+  border-color: hsl(var(--primary) / 0.3);
+}
+
+.bg-gradient-dark {
+  background: linear-gradient(180deg, hsl(var(--background)) 0%, hsl(220 20% 6%) 50%, hsl(var(--background)) 100%);
+}
+
+.bg-gradient-card {
+  background: linear-gradient(135deg, hsl(220 18% 10%) 0%, hsl(220 18% 6%) 100%);
+}
+
+@keyframes pulse-glow {
+  0%,
+  100% {
+    opacity: 0.5;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
 }

@@ -121,7 +121,7 @@ Border:                #2a2a2a (Dark Border)
 **Projects:**
 1. **ALPHAFLOW** - Sports tracking application
 2. **PULSEGATE** - Class registration platform
-3. **SWAPEX** - Logistics and moving app
+3. **SWAPPEX** - Logistics and moving app
 4. **EREVSHABBAT** - Medical research platform
 5. **Novapay** - Credit/payment management
 

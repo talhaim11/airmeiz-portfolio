@@ -7,14 +7,14 @@ A modern, elegant portfolio website built with pure HTML, CSS, and JavaScript. D
 - **Pure Static Site**: No frameworks, no build process required
 - **Dark Elegant Theme**: Black-based design with cyan accents
 - **Fully Responsive**: Optimized for desktop, tablet, and mobile
-- **5 Project Showcases**: Detailed pages for ALPHAFLOW, PULSEGATE, SWAPEX, EREVSHABBAT, and Novapay
+- **5 Project Showcases**: Detailed pages for ALPHAFLOW, PULSEGATE, SWAPPEX, EREVSHABBAT, and Novapay
 - **RTL-Ready**: Structure prepared for right-to-left language support
 - **SEO Optimized**: Semantic HTML with proper meta tags
 - **Smooth Animations**: CSS-based entrance effects and transitions
 - **Mobile Navigation**: Hamburger menu for mobile devices
 - **Contact Form UI**: Ready for future API integration
 - **Legal Pages**: Privacy Policy and Terms of Service included
-- **Deep Links**: App landing pages and "Open in App" smart links for ALPHAFLOW, PULSEGATE, SWAPEX, EREVSHABBAT, Novapay
+- **Deep Links**: App landing pages and "Open in App" smart links for ALPHAFLOW, PULSEGATE, SWAPPEX, EREVSHABBAT, Novapay
 
 ## 🔗 Deep Links
 

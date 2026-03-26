@@ -110,7 +110,7 @@ Once the site is running locally:
 Visit each project page:
 - [ ] ALPHAFLOW (`/public/projects/alphaflow.html`)
 - [ ] PULSEGATE (`/public/projects/pulsegate.html`)
-- [ ] SWAPEX (`/public/projects/swapex.html`)
+- [ ] SWAPPEX (`/public/projects/swapex.html`)
 - [ ] EREVSHABBAT (`/public/projects/erevshabbat.html`)
 - [ ] Novapay (`/public/projects/novapay.html`)
 

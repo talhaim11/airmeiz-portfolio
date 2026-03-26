@@ -11,7 +11,7 @@
     apps: {
       alphaflow: { scheme: 'airmeiz-alphaflow', name: 'ALPHAFLOW', pathLabel: { screens: 'Screen', content: 'Content', auth: 'Sign in' } },
       pulsegate: { scheme: 'airmeiz-pulsegate', name: 'PULSEGATE', pathLabel: { screens: 'Screen', content: 'Content', auth: 'Sign in' } },
-      swapex: { scheme: 'airmeiz-swapex', name: 'SWAPEX', pathLabel: { screens: 'Screen', content: 'Content', auth: 'Sign in' } },
+      swapex: { scheme: 'airmeiz-swapex', name: 'SWAPPEX', pathLabel: { screens: 'Screen', content: 'Content', auth: 'Sign in' } },
       erevshabbat: { scheme: 'airmeiz-erevshabbat', name: 'EREVSHABBAT', pathLabel: { screens: 'Screen', content: 'Content', auth: 'Sign in' } },
       novapay: { scheme: 'airmeiz-novapay', name: 'Novapay', pathLabel: { screens: 'Screen', content: 'Content', auth: 'Sign in' } }
     },

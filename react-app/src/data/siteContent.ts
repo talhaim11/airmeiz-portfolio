@@ -19,12 +19,12 @@ export const homePageData = {
       href: '/projects/pulsegate',
     },
     {
-      slug: 'swapex',
-      title: 'SWAPEX',
+      slug: 'swappex',
+      title: 'SWAPPEX',
       subtitle: 'Logistics & Moving Application',
       overlayText: 'Smart logistics solution for seamless moving experiences',
       imageSrc: '/assets/img/preview/swapex-preview.png?v=2',
-      href: '/projects/swapex',
+      href: '/projects/swappex',
     },
     {
       slug: 'erevshabbat',
@@ -74,12 +74,12 @@ export const homePageData = {
 export const footerProjectLinks = [
   { label: 'ALPHAFLOW', href: '/projects/alphaflow' },
   { label: 'PULSEGATE', href: '/projects/pulsegate' },
-  { label: 'SWAPEX', href: '/projects/swapex' },
+  { label: 'SWAPPEX', href: '/projects/swappex' },
   { label: 'EREVSHABBAT', href: '/projects/erevshabbat' },
   { label: 'Novapay', href: '/projects/novapay' },
 ];
 
-export type ProjectSlug = 'alphaflow' | 'pulsegate' | 'swapex' | 'novapay';
+export type ProjectSlug = 'alphaflow' | 'pulsegate' | 'novapay';
 export type LegalPageKey = 'privacy' | 'terms';
 
 export const projectPages = {
@@ -164,43 +164,6 @@ export const projectPages = {
         title: 'The Goal',
         paragraphs: [
           'To become the standard gateway for activity registration, allowing anyone to join from any platform, in the way that feels most natural to them.',
-        ],
-      },
-    ],
-  },
-  swapex: {
-    title: 'SWAPEX',
-    logoSrc: '/assets/img/logos/swapex-logo.png',
-    subtitle: 'Logistics and moving platform that simplifies planning, booking, and move-day tracking.',
-    appHref: '/links/swapex',
-    ctaTitle: 'Want to build a platform like SWAPEX?',
-    sections: [
-      {
-        title: 'Overview',
-        paragraphs: [
-          'Swapex is a peer-to-peer logistics platform connecting people, stores, and casual drivers to move physical goods efficiently. It enables simple, flexible delivery of products and community-based item transfers.',
-        ],
-      },
-      {
-        title: 'Vision & Impact',
-        paragraphs: [
-          'To make physical goods movement accessible, affordable, and sustainable. Swapex reduces waste by enabling reuse, empowers communities to share resources, and turns unused transportation capacity into value.',
-        ],
-      },
-      {
-        title: 'Platform Capabilities',
-        listItems: [
-          'Connects senders, receivers, stores, and drivers',
-          'On-demand and community-driven deliveries',
-          'Support for commercial and non-commercial item transfers',
-          'Matching based on location, timing, and vehicle suitability',
-          'Simple coordination and transparent handoff flow',
-        ],
-      },
-      {
-        title: 'The Goal',
-        paragraphs: [
-          'To become the universal infrastructure for transferring physical items, making giving, receiving, and delivering as easy as a digital message.',
         ],
       },
     ],
