@@ -1,3 +1,12 @@
+import alphaflowLogo from '@/assets/airmeizcore/alphaflow-logo.png';
+import pulsegateLogo from '@/assets/airmeizcore/pulsegate-logo.png';
+import swappexLogo from '@/assets/airmeizcore/swappex-logo.png';
+import erevshabbatLogo from '@/assets/airmeizcore/erevshabbat-logo.png';
+import novapayLogo from '@/assets/airmeizcore/novapay-logo.png';
+import yoavImg from '@/assets/airmeizcore/yoav-shriker.jpg';
+import talImg from '@/assets/airmeizcore/tal-haim.jpg';
+import sagiImg from '@/assets/airmeizcore/sagi-mutas.jpg';
+
 export const homePageData = {
   heroSubtitle:
     "We create innovative digital solutions that transform ideas into powerful, user-centric experiences. From cutting-edge mobile applications to intelligent platforms, we're shaping the future of technology.",
@@ -7,7 +16,7 @@ export const homePageData = {
       title: 'ALPHAFLOW',
       subtitle: 'Sports Application',
       overlayText: 'Revolutionary sports tracking and performance analytics platform',
-      imageSrc: '/assets/img/preview/alphaflow-preview.png?v=2',
+      imageSrc: alphaflowLogo,
       href: '/projects/alphaflow',
     },
     {
@@ -15,7 +24,7 @@ export const homePageData = {
       title: 'PULSEGATE',
       subtitle: 'Class & Activity Registration Platform',
       overlayText: 'Streamlined registration system for classes and activities',
-      imageSrc: '/assets/img/preview/pulsegate-preview.png?v=2',
+      imageSrc: pulsegateLogo,
       href: '/projects/pulsegate',
     },
     {
@@ -23,7 +32,7 @@ export const homePageData = {
       title: 'SWAPPEX',
       subtitle: 'Logistics & Moving Application',
       overlayText: 'Smart logistics solution for seamless moving experiences',
-      imageSrc: '/assets/img/preview/swapex-preview.png?v=2',
+      imageSrc: swappexLogo,
       href: '/projects/swappex',
     },
     {
@@ -31,7 +40,7 @@ export const homePageData = {
       title: 'EREVSHABBAT',
       subtitle: 'Medical Research Project',
       overlayText: 'Ending late-stage oral cancer through AI-powered early detection',
-      imageSrc: '/assets/img/preview/erevshabbat-preview.png?v=3',
+      imageSrc: erevshabbatLogo,
       href: '/projects/erevshabbat',
     },
     {
@@ -39,7 +48,7 @@ export const homePageData = {
       title: 'Novapay',
       subtitle: 'Smart Credit & Payment Management',
       overlayText: 'Intelligent credit and payment management system',
-      imageSrc: '/assets/img/preview/novapay-preview.png?v=2',
+      imageSrc: novapayLogo,
       href: '/projects/novapay',
     },
   ],
@@ -54,19 +63,19 @@ export const homePageData = {
       name: 'Yoav Shriker',
       role: 'CEO + COO',
       bio: 'Visionary leader driving company operations and strategic growth.',
-      imageSrc: '/assets/img/yoav-shriker.jpg',
+      imageSrc: yoavImg,
     },
     {
       name: 'Tal Haim',
       role: 'CTO + CMO',
       bio: 'Expert in technology architecture and marketing strategy.',
-      imageSrc: '/assets/img/tal-haim.jpg',
+      imageSrc: talImg,
     },
     {
       name: 'Sagi Mutas',
       role: 'CFO + CHRO',
       bio: 'Financial strategist and human resources expert driving team excellence.',
-      imageSrc: '/assets/img/sagi-mutas.jpg',
+      imageSrc: sagiImg,
     },
   ],
 };
@@ -85,9 +94,9 @@ export type LegalPageKey = 'privacy' | 'terms';
 export const projectPages = {
   alphaflow: {
     title: 'ALPHAFLOW',
-    logoSrc: '/assets/img/logos/alphaflow-logo.png',
+    logoSrc: alphaflowLogo,
     subtitle: 'Sports performance platform for tracking training data and progress.',
-    appHref: '/links/alphaflow',
+    appHref: '/projects/alphaflow',
     ctaTitle: 'Interested in learning more about ALPHAFLOW?',
     sections: [
       {
@@ -132,10 +141,10 @@ export const projectPages = {
   },
   pulsegate: {
     title: 'PULSEGATE',
-    logoSrc: '/assets/img/logos/pulsegate-logo.png',
+    logoSrc: pulsegateLogo,
     subtitle:
       'A smart registration platform for classes and activities, simplifying sign-ups through flexible, multi-channel access.',
-    appHref: '/links/pulsegate',
+    appHref: '/projects/pulsegate',
     ctaTitle: 'Ready to transform your registration process?',
     sections: [
       {
@@ -170,10 +179,10 @@ export const projectPages = {
   },
   novapay: {
     title: 'Novapay',
-    logoSrc: '/assets/img/logos/novapay-logo.png',
+    logoSrc: novapayLogo,
     subtitle:
       'Credit and payment management platform focused on visibility, automation, and smarter financial decisions.',
-    appHref: '/links/novapay',
+    appHref: '/projects/novapay',
     ctaTitle: 'Interested in fintech solutions?',
     sections: [
       {
@@ -438,3 +447,4 @@ export const legalPages = {
     ],
   },
 } as const;
+

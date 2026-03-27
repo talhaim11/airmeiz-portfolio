@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PULSEGATE - Open in App | AIRMEIZ</title>
+  <title>Novapay - Open in App | AIRMEIZ</title>
   <link rel="stylesheet" href="/links/css/deeplink.css?v=2">
   <style>
-    .deeplink-page { background: linear-gradient(135deg, #0a0a0a 0%, #1a0a2e 50%, #0a0a0a 100%); }
-    .deeplink-page a, .deeplink-context { color: #b366ff; }
-    .deeplink-btn { background: #b366ff; color: #fff; }
-    .deeplink-btn.secondary { border-color: #b366ff; color: #b366ff; }
+    .deeplink-page { background: linear-gradient(135deg, #0a0a0a 0%, #2e2a0a 50%, #0a0a0a 100%); }
+    .deeplink-page a, .deeplink-context { color: #ffd54f; }
+    .deeplink-btn { background: #ffd54f; color: #000; }
+    .deeplink-btn.secondary { border-color: #ffd54f; color: #ffd54f; }
   </style>
 </head>
 <body>
@@ -20,33 +20,36 @@
       <a href="/" class="deeplink-btn">Back to AIRMEIZ</a>
     </div>
     <div id="deeplink-main" class="deeplink-main">
-      <img src="/assets/img/logos/pulsegate-logo.png" alt="PULSEGATE" class="deeplink-title-logo">
-      <img src="/assets/img/preview/pulsegate-preview.png?v=2" alt="PULSEGATE" class="deeplink-title-logo">
-      <p class="deeplink-subtitle">Class & activity registration platform</p>
+      <img src="/assets/img/logos/novapay-logo.png" alt="Novapay" class="deeplink-title-logo">
+      <p class="deeplink-subtitle">Smart credit & payment management</p>
       <p id="deeplink-context" class="deeplink-context"></p>
       <button id="open-app" class="deeplink-btn">Open in App</button>
       <div class="deeplink-stores">
         <span class="deeplink-store coming ios">Coming to App Store</span>
         <span class="deeplink-store coming android">Coming to Google Play</span>
       </div>
-      <a href="/projects/pulsegate.html" class="deeplink-back">View project details</a>
+      <a href="/projects/novapay.html" class="deeplink-back">View project details</a>
     </div>
   </div>
   <script src="/links/js/deeplink.js"></script>
   <script>
     (function(){
-      var s = window.DEELINK.init({ app: 'pulsegate' });
+      var s = window.DEELINK.init({ app: 'novapay' });
       if (s.expired) return;
       var ctx = document.getElementById('deeplink-context');
       if (ctx && s.context) ctx.textContent = s.context;
       document.getElementById('open-app').onclick = function() {
-        window.DEELINK.openApp('pulsegate', s.path);
+        window.DEELINK.openApp('novapay', s.path);
       };
       if (s.platform === 'ios' || s.platform === 'android') {
-        setTimeout(function(){ window.DEELINK.openApp('pulsegate', s.path); }, 500);
+        setTimeout(function(){ window.DEELINK.openApp('novapay', s.path); }, 500);
       }
     })();
   </script>
   <script type="module" src="/js/toolbar-dev.js"></script>
 </body>
 </html>
+
+
+
+

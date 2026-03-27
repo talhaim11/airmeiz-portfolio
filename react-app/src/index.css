@@ -1,4 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
 @import url('https://cdn.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&display=swap');
 
 @tailwind base;
@@ -43,16 +42,37 @@
 
   body {
     @apply bg-background text-foreground antialiased;
-    font-family: 'Inter', sans-serif;
+    font-family: 'General Sans', sans-serif;
+    font-weight: 400;
+    line-height: 1.45;
+    letter-spacing: -0.005em;
   }
 
   h1,
   h2,
-  h3,
+  h3 {
+    font-family: 'General Sans', sans-serif;
+    font-weight: 600;
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+  }
+
   h4,
   h5,
   h6 {
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: 'General Sans', sans-serif;
+    font-weight: 500;
+    line-height: 1.2;
+    letter-spacing: -0.015em;
+  }
+
+  p,
+  li,
+  label,
+  a {
+    font-weight: 400;
+    line-height: 1.45;
+    letter-spacing: -0.005em;
   }
 
   .swappex-page {
@@ -330,6 +350,52 @@
 
 .bg-gradient-card {
   background: linear-gradient(135deg, hsl(220 18% 10%) 0%, hsl(220 18% 6%) 100%);
+}
+
+.alphaflow-lovable-page {
+  --background: 220 25% 6%;
+  --foreground: 210 20% 92%;
+  --card: 220 22% 10%;
+  --card-foreground: 210 20% 92%;
+  --popover: 220 22% 10%;
+  --popover-foreground: 210 20% 92%;
+  --primary: 168 64% 52%;
+  --primary-foreground: 220 25% 6%;
+  --secondary: 220 20% 16%;
+  --secondary-foreground: 210 20% 85%;
+  --muted: 220 18% 14%;
+  --muted-foreground: 215 15% 55%;
+  --accent: 168 64% 52%;
+  --accent-foreground: 220 25% 6%;
+  --border: 220 18% 18%;
+  --ring: 168 64% 52%;
+  --font-display: 'General Sans', sans-serif;
+  --font-body: 'General Sans', sans-serif;
+  --gradient-hero: linear-gradient(135deg, hsl(168 64% 52% / 0.15), hsl(200 80% 50% / 0.08), transparent);
+  --gradient-card: linear-gradient(180deg, hsl(220 22% 12%), hsl(220 22% 8%));
+  --gradient-accent: linear-gradient(135deg, hsl(168 64% 52%), hsl(190 70% 50%));
+  --shadow-glow: 0 0 40px hsl(168 64% 52% / 0.15);
+  --shadow-card: 0 4px 24px hsl(220 25% 4% / 0.5);
+  font-family: var(--font-body);
+}
+
+.section-container {
+  @apply max-w-6xl mx-auto px-6 lg:px-8;
+}
+
+.section-padding {
+  @apply py-24 lg:py-32;
+}
+
+.glass-card {
+  @apply rounded-2xl border border-border/50;
+  background: var(--gradient-card);
+  box-shadow: var(--shadow-card);
+}
+
+.glow-border {
+  @apply relative;
+  box-shadow: var(--shadow-glow);
 }
 
 @keyframes pulse-glow {

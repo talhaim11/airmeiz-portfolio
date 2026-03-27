@@ -25,33 +25,25 @@ public/assets/img/
 
 ## Where Each Image Is Used
 
-### 1. **Homepage Project Cards** (`public/index.html`)
-- **Location:** "Our Projects" section with the 5 project tiles
-- **Images used:** `/assets/img/preview/` (with dark background)
-- **Status:** Already in place ✅
-- **Naming:** `{project}-preview.png`
+### 1. **Homepage Project Cards** (`react-app/src/components/airmeizcore/RobotScene.tsx`)
+- **Location:** React homepage nodes in the hero section
+- **Images used:** `/assets/img/logos/` (transparent/no background)
+- **Status:** Active app uses logos only ✅
+- **Naming:** `{project}-logo.png`
 
-### 2. **Project Detail Pages** (`public/projects/*.html`)
+### 2. **Project Detail Pages** (`react-app/src/pages/*`)
 - **Files:** 
-  - `alphaflow.html`
-  - `pulsegate.html`
-  - `swappex` React route, with `swapex.html` kept as a legacy alias
-  - `erevshabbat.html`
-  - `novapay.html`
+  - `AlphaflowLovablePage.tsx`
+  - `ProjectPage.tsx` (pulsegate + novapay)
+  - `SwappexPage.tsx`
+  - `ErevShabbatPage.tsx`
 - **Images used:** `/assets/img/logos/` (transparent/no background)
 - **Status:** Code updated ✅ (images ready for upload)
 - **Naming:** `{project}-logo.png`
 
-### 3. **Deeplink Pages** (`public/links/{project}/index.html`)
-- **Files:**
-  - `links/alphaflow/index.html`
-  - `links/pulsegate/index.html`
-  - `links/swappex/index.html` and `links/swapex/index.html`
-  - `links/erevshabbat/index.html`
-  - `links/novapay/index.html`
-- **Images used:** `/assets/img/logos/` (transparent/no background)
-- **Status:** Code updated ✅ (images ready for upload)
-- **Naming:** `{project}-logo.png`
+### 3. **Legacy Deeplink Pages**
+- Previous deeplink HTML pages were moved to `legacy-static/public-legacy/links/`
+- They are no longer part of the active website runtime
 
 ---
 

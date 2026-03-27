@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SWAPPEX - Open in App | AIRMEIZ</title>
+  <title>PULSEGATE - Open in App | AIRMEIZ</title>
   <link rel="stylesheet" href="/links/css/deeplink.css?v=2">
   <style>
-    .deeplink-page { background: linear-gradient(135deg, #0a0a0a 0%, #2e1a0a 50%, #0a0a0a 100%); }
-    .deeplink-page a, .deeplink-context { color: #ff9944; }
-    .deeplink-btn { background: #ff9944; color: #000; }
-    .deeplink-btn.secondary { border-color: #ff9944; color: #ff9944; }
+    .deeplink-page { background: linear-gradient(135deg, #0a0a0a 0%, #1a0a2e 50%, #0a0a0a 100%); }
+    .deeplink-page a, .deeplink-context { color: #b366ff; }
+    .deeplink-btn { background: #b366ff; color: #fff; }
+    .deeplink-btn.secondary { border-color: #b366ff; color: #b366ff; }
   </style>
 </head>
 <body>
@@ -20,33 +20,36 @@
       <a href="/" class="deeplink-btn">Back to AIRMEIZ</a>
     </div>
     <div id="deeplink-main" class="deeplink-main">
-      <img src="/assets/img/logos/swapex-logo.png" alt="SWAPPEX" class="deeplink-title-logo">
-      <img src="/assets/img/preview/swapex-preview.png?v=2" alt="SWAPPEX" class="deeplink-title-logo">
-      <p class="deeplink-subtitle">Logistics & moving application</p>
+      <img src="/assets/img/logos/pulsegate-logo.png" alt="PULSEGATE" class="deeplink-title-logo">
+      <p class="deeplink-subtitle">Class & activity registration platform</p>
       <p id="deeplink-context" class="deeplink-context"></p>
       <button id="open-app" class="deeplink-btn">Open in App</button>
       <div class="deeplink-stores">
         <span class="deeplink-store coming ios">Coming to App Store</span>
         <span class="deeplink-store coming android">Coming to Google Play</span>
       </div>
-      <a href="/projects/swappex" class="deeplink-back">View project details</a>
+      <a href="/projects/pulsegate.html" class="deeplink-back">View project details</a>
     </div>
   </div>
   <script src="/links/js/deeplink.js"></script>
   <script>
     (function(){
-      var s = window.DEELINK.init({ app: 'swapex' });
+      var s = window.DEELINK.init({ app: 'pulsegate' });
       if (s.expired) return;
       var ctx = document.getElementById('deeplink-context');
       if (ctx && s.context) ctx.textContent = s.context;
       document.getElementById('open-app').onclick = function() {
-        window.DEELINK.openApp('swapex', s.path);
+        window.DEELINK.openApp('pulsegate', s.path);
       };
       if (s.platform === 'ios' || s.platform === 'android') {
-        setTimeout(function(){ window.DEELINK.openApp('swapex', s.path); }, 500);
+        setTimeout(function(){ window.DEELINK.openApp('pulsegate', s.path); }, 500);
       }
     })();
   </script>
   <script type="module" src="/js/toolbar-dev.js"></script>
 </body>
 </html>
+
+
+
+

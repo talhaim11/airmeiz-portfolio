@@ -1,22 +1,4 @@
-# Deep link SPA-style routing - serve app landing page for all paths under /links/{app}
-/links/alphaflow    /links/alphaflow/index.html   200
-/links/alphaflow/   /links/alphaflow/index.html   200
-/links/alphaflow/*  /links/alphaflow/index.html   200
-
-/links/pulsegate    /links/pulsegate/index.html   200
-/links/pulsegate/   /links/pulsegate/index.html   200
-/links/pulsegate/*  /links/pulsegate/index.html   200
-
-/links/swapex       /links/swapex/index.html      200
-/links/swapex/      /links/swapex/index.html      200
-/links/swapex/*     /links/swapex/index.html      200
-/links/swappex      /links/swappex/index.html     200
-/links/swappex/     /links/swappex/index.html     200
-/links/swappex/*    /links/swappex/index.html     200
-
-/links/erevshabbat  /links/erevshabbat/index.html 200
-/links/erevshabbat/ /links/erevshabbat/index.html 200
-/links/erevshabbat/* /links/erevshabbat/index.html 200
+# Legacy static URL redirects to React routes
 /projects/erevshabbat.html /projects/erevshabbat 301
 /privacy.html /privacy 301
 /terms.html /terms 301
@@ -25,15 +7,6 @@
 /projects/swappex.html /projects/swappex 301
 /projects/swapex.html /projects/swappex 301
 /projects/novapay.html /projects/novapay 301
-/privacy /index.html 200
-/terms /index.html 200
-/projects/alphaflow /index.html 200
-/projects/pulsegate /index.html 200
-/projects/swappex /index.html 200
-/projects/swapex /projects/swappex 301
-/projects/novapay /index.html 200
-/projects/erevshabbat /index.html 200
 
-/links/novapay      /links/novapay/index.html     200
-/links/novapay/     /links/novapay/index.html     200
-/links/novapay/*    /links/novapay/index.html     200
+# React SPA fallback
+/* /index.html 200

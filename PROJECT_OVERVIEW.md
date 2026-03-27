@@ -28,7 +28,7 @@ AirMeiZ site/
 │
 ├── 📄 README.md                    # Main documentation
 ├── 📄 DEPLOYMENT.md                # Cloudflare Pages deployment guide
-├── 📄 QUICKSTART.html              # Quick start guide (open in browser)
+├── 📄 QUICKSTART.html              # Legacy quick start guide (moved under legacy-static/)
 ├── 📄 PROJECT_OVERVIEW.md          # This file
 ├── 📄 .gitignore                   # Git ignore rules
 │
@@ -300,7 +300,7 @@ Also compatible with:
 |------|---------|
 | `README.md` | Complete technical documentation |
 | `DEPLOYMENT.md` | Step-by-step Cloudflare Pages guide |
-| `QUICKSTART.html` | Visual quick start guide (open in browser) |
+| `legacy-static/QUICKSTART.html` | Legacy quick start guide (static site archive) |
 | `PROJECT_OVERVIEW.md` | This file - project summary |
 | `assets/img/README.md` | Image guidelines and requirements |
 ---
@@ -314,7 +314,7 @@ Also compatible with:
 4. Customize as needed for client requirements
 
 ### For Content Managers
-1. Open `QUICKSTART.html` in browser for visual guide
+1. Run React app with `npm run dev` (repo root) for local review
 2. Edit HTML files directly (no technical skills needed)
 3. Replace placeholder text with real content
 4. Add images to `assets/img/` folder
@@ -360,9 +360,9 @@ All original requirements satisfied:
 The AIRMEIZ portfolio website is **production-ready** and can be deployed immediately to Cloudflare Pages. All core functionality is implemented, tested, and documented.
 
 ### Next Steps:
-1. **Review** the site locally (open `public/index.html`)
-2. **Deploy** to Cloudflare Pages (see `DEPLOYMENT.md`)
-3. **Customize** with real content when ready
+1. **Run React locally** (`npm run dev` from repository root)
+2. **Deploy** the React build output (see `DEPLOYMENT.md`)
+3. **Customize** content/components in `react-app/src`
 4. **Launch** and share with the world!
 
 ---
@@ -371,7 +371,7 @@ The AIRMEIZ portfolio website is **production-ready** and can be deployed immedi
 
 - **Technical Questions:** Review `README.md` for detailed documentation
 - **Deployment Help:** See `DEPLOYMENT.md` for step-by-step guide
-- **Quick Start:** Open `QUICKSTART.html` in browser for visual guide
+- **Quick Start:** Use `README.md` (React-only run instructions)
 - **Content Guidelines:** Check `assets/img/README.md`
 
 ---

@@ -18,7 +18,7 @@ const HeroSection = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="font-heading text-5xl font-semibold tracking-[-0.04em] text-foreground md:text-7xl"
+          className="font-heading text-5xl font-semibold tracking-[-0.02em] text-foreground md:text-7xl"
         >
           your vision,
           <br />

@@ -4,6 +4,7 @@ import ErevShabbatPage from './pages/ErevShabbatPage';
 import SwappexPage from './pages/SwappexPage';
 import ProjectPage from './pages/ProjectPage';
 import LegalPage from './pages/LegalPage';
+import AlphaflowLovablePage from './pages/AlphaflowLovablePage';
 
 const App = () => {
   return (
@@ -13,7 +14,7 @@ const App = () => {
       <Route path="/privacy.html" element={<Navigate to="/privacy" replace />} />
       <Route path="/terms" element={<LegalPage page="terms" />} />
       <Route path="/terms.html" element={<Navigate to="/terms" replace />} />
-      <Route path="/projects/alphaflow" element={<ProjectPage project="alphaflow" />} />
+      <Route path="/projects/alphaflow" element={<AlphaflowLovablePage />} />
       <Route path="/projects/alphaflow.html" element={<Navigate to="/projects/alphaflow" replace />} />
       <Route path="/projects/pulsegate" element={<ProjectPage project="pulsegate" />} />
       <Route path="/projects/pulsegate.html" element={<Navigate to="/projects/pulsegate" replace />} />

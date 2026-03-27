@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ALPHAFLOW - Open in App | AIRMEIZ</title>
+  <title>SWAPPEX - Open in App | AIRMEIZ</title>
   <link rel="stylesheet" href="/links/css/deeplink.css?v=2">
   <style>
-    .deeplink-page { background: linear-gradient(135deg, #0a0a0a 0%, #0d2818 50%, #0a0a0a 100%); }
-    .deeplink-page a, .deeplink-context { color: #00ff88; }
-    .deeplink-btn { background: #00ff88; color: #000; }
-    .deeplink-btn.secondary { border-color: #00ff88; color: #00ff88; }
+    .deeplink-page { background: linear-gradient(135deg, #0a0a0a 0%, #2e1a0a 50%, #0a0a0a 100%); }
+    .deeplink-page a, .deeplink-context { color: #ff9944; }
+    .deeplink-btn { background: #ff9944; color: #000; }
+    .deeplink-btn.secondary { border-color: #ff9944; color: #ff9944; }
   </style>
 </head>
 <body>
@@ -20,33 +20,36 @@
       <a href="/" class="deeplink-btn">Back to AIRMEIZ</a>
     </div>
     <div id="deeplink-main" class="deeplink-main">
-      <img src="/assets/img/logos/alphaflow-logo.png" alt="ALPHAFLOW" class="deeplink-title-logo">
-      <img src="/assets/img/preview/alphaflow-preview.png?v=2" alt="ALPHAFLOW" class="deeplink-title-logo">
-      <p class="deeplink-subtitle">Sports performance tracking & analytics</p>
+      <img src="/assets/img/logos/swapex-logo.png" alt="SWAPPEX" class="deeplink-title-logo">
+      <p class="deeplink-subtitle">Logistics & moving application</p>
       <p id="deeplink-context" class="deeplink-context"></p>
       <button id="open-app" class="deeplink-btn">Open in App</button>
       <div class="deeplink-stores">
         <span class="deeplink-store coming ios">Coming to App Store</span>
         <span class="deeplink-store coming android">Coming to Google Play</span>
       </div>
-      <a href="/projects/alphaflow.html" class="deeplink-back">View project details</a>
+      <a href="/projects/swapex.html" class="deeplink-back">View project details</a>
     </div>
   </div>
   <script src="/links/js/deeplink.js"></script>
   <script>
     (function(){
-      var s = window.DEELINK.init({ app: 'alphaflow' });
+      var s = window.DEELINK.init({ app: 'swapex' });
       if (s.expired) return;
       var ctx = document.getElementById('deeplink-context');
       if (ctx && s.context) ctx.textContent = s.context;
       document.getElementById('open-app').onclick = function() {
-        window.DEELINK.openApp('alphaflow', s.path);
+        window.DEELINK.openApp('swapex', s.path);
       };
       if (s.platform === 'ios' || s.platform === 'android') {
-        setTimeout(function(){ window.DEELINK.openApp('alphaflow', s.path); }, 500);
+        setTimeout(function(){ window.DEELINK.openApp('swapex', s.path); }, 500);
       }
     })();
   </script>
   <script type="module" src="/js/toolbar-dev.js"></script>
 </body>
 </html>
+
+
+
+
