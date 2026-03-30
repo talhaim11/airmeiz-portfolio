@@ -5,6 +5,7 @@ import alphaflowLogo from '@/assets/airmeizcore/alphaflow-logo.png';
 import pulsegateLogo from '@/assets/airmeizcore/pulsegate-logo.png';
 import swappexLogo from '@/assets/airmeizcore/swappex-logo.png';
 import erevshabbatLogo from '@/assets/airmeizcore/erevshabbat-logo.png';
+import airmeizLogo from '@/assets/airmeizcore/airmeiz-logo.png';
 import RobotCore3D from './RobotCore3D';
 
 const novapayLogo = '/assets/img/logos/novapay-logo.png';
@@ -154,7 +155,7 @@ const NodeButton = ({
 
 const RobotScene = () => {
   const desktopRootRef = useRef<HTMLDivElement | null>(null);
-  const robotRef = useRef<HTMLDivElement | null>(null);
+  const anchorLogoRef = useRef<HTMLImageElement | null>(null);
   const nodeRefs = useRef<Record<string, HTMLButtonElement | null>>({});
   const animFrameRef = useRef<number | null>(null);
   const targetPointRef = useRef<Point | null>(null);
@@ -173,15 +174,18 @@ const RobotScene = () => {
 
   const recalcLineGeometry = useCallback(() => {
     const container = desktopRootRef.current;
-    const robot = robotRef.current;
+    const anchorLogo = anchorLogoRef.current;
     const target = targetPointRef.current;
-    if (!container || !robot || !target) {
+    if (!container || !anchorLogo || !target) {
       return;
     }
 
     const containerRect = container.getBoundingClientRect();
-    const robotRect = robot.getBoundingClientRect();
-    const origin = calcCenter(containerRect, robotRect);
+    const anchorRect = anchorLogo.getBoundingClientRect();
+    const origin = {
+      x: anchorRect.left - containerRect.left + anchorRect.width * 0.5,
+      y: anchorRect.top - containerRect.top + anchorRect.height * 0.36,
+    };
     setLineGeometry({ origin, target });
   }, [calcCenter]);
 
@@ -340,12 +344,21 @@ const RobotScene = () => {
           </div>
 
           <RobotCore3D 
-            ref={robotRef}
             pointerX={pointerX}
             pointerY={pointerY}
             hoveredBiasX={hoveredBiasX}
             hoveredBiasY={hoveredBiasY}
           />
+
+          <div className="pointer-events-none absolute left-1/2 top-[59%] z-20 -translate-x-1/2 -translate-y-1/2">
+            <img
+              ref={anchorLogoRef}
+              src={airmeizLogo}
+              alt="AIRMEIZ mark"
+              className="h-[86px] w-auto object-contain opacity-95 md:h-[96px] lg:h-[108px]"
+              style={{ filter: 'drop-shadow(0 0 18px hsl(185 95% 55% / 0.28)) drop-shadow(0 0 32px hsl(185 95% 55% / 0.12))' }}
+            />
+          </div>
         </div>
       </div>
 

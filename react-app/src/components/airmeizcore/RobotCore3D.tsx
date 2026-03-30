@@ -68,23 +68,6 @@ function makePixelSmileTex(): THREE.CanvasTexture {
   return t;
 }
 
-function makeLogoTex(): THREE.CanvasTexture {
-  const W = 200, H = 30;
-  const c = document.createElement("canvas");
-  c.width = W; c.height = H;
-  const g = c.getContext("2d")!;
-  g.clearRect(0, 0, W, H);
-  g.font = "bold 13px 'Courier New', Courier, monospace";
-  g.textAlign = "center";
-  g.textBaseline = "middle";
-  g.shadowBlur = 10;
-  g.shadowColor = "#00ccff";
-  g.fillStyle = "#00ccff";
-  g.fillText("A I R M E I Z", W / 2, H / 2);
-  const t = new THREE.CanvasTexture(c);
-  return t;
-}
-
 /* ── Robot ─────────────────────────────────────────────────────────────── */
 
 function RobotHead({ pointerX, pointerY, hoveredBiasX, hoveredBiasY }: RobotCore3DProps) {
@@ -92,7 +75,6 @@ function RobotHead({ pointerX, pointerY, hoveredBiasX, hoveredBiasY }: RobotCore
   const gazeRef = useRef<THREE.Group>(null);
   const eyeTex   = useMemo(() => makePixelEyeTex(),   []);
   const smileTex = useMemo(() => makePixelSmileTex(), []);
-  const logoTex  = useMemo(() => makeLogoTex(),        []);
 
   useFrame((_, dt) => {
     if (!rootRef.current) return;
@@ -150,12 +132,6 @@ function RobotHead({ pointerX, pointerY, hoveredBiasX, hoveredBiasY }: RobotCore
       <mesh position={[0, -0.08, 0.41]}>
         <planeGeometry args={[0.40, 0.17]} />
         <meshBasicMaterial map={smileTex} transparent depthWrite={false} />
-      </mesh>
-
-      {/* ── AIRMEIZ badge ────────────────────────────────────────── */}
-      <mesh position={[0, -0.29, 0.41]}>
-        <planeGeometry args={[0.40, 0.065]} />
-        <meshBasicMaterial map={logoTex} transparent depthWrite={false} />
       </mesh>
 
       {/* ── Ear pods ─────────────────────────────────────────────── */}
