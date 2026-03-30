@@ -1,6 +1,8 @@
 import { motion } from 'framer-motion';
 import { Activity, MessageSquare, TrendingUp, FileHeart, BarChart3, Users, User, Stethoscope } from 'lucide-react';
 import heroVisual from '@/assets/airmeizcore/alphaflow-lovable-hero.png';
+import SiteHeader from '../components/site/SiteHeader';
+import SiteFooter from '../components/site/SiteFooter';
 
 const features = [
   { icon: Activity, title: 'Daily readiness tracking', description: 'Monitor sleep, stress, mood, energy, and soreness each day.' },
@@ -37,29 +39,9 @@ const audienceBlocks = [
 const AlphaflowLovablePage = () => {
   return (
     <div className="alphaflow-lovable-page min-h-screen bg-background text-foreground">
-      <motion.nav
-        initial={{ opacity: 0, y: -10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-        className="fixed top-0 left-0 right-0 z-50 border-b border-border/50 backdrop-blur-xl bg-background/80"
-      >
-        <div className="section-container flex items-center justify-between h-16">
-          <a href="/" className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ background: 'var(--gradient-accent)' }}>
-              <span className="text-sm font-bold text-primary-foreground">A</span>
-            </div>
-            <span className="text-lg font-display font-bold text-foreground">AlphaFlow</span>
-          </a>
-          <div className="hidden md:flex items-center gap-8 text-sm text-muted-foreground">
-            <a href="#problem" className="hover:text-foreground transition-colors">Problem</a>
-            <a href="#solution" className="hover:text-foreground transition-colors">Solution</a>
-            <a href="#features" className="hover:text-foreground transition-colors">Features</a>
-            <a href="#vision" className="hover:text-foreground transition-colors">Vision</a>
-          </div>
-        </div>
-      </motion.nav>
+      <SiteHeader page="project" />
 
-      <section className="relative min-h-screen flex items-center overflow-hidden pt-20">
+      <section className="relative min-h-screen flex items-center overflow-hidden pt-24">
         <div className="absolute inset-0" style={{ background: 'var(--gradient-hero)' }} />
         <div className="absolute top-0 right-0 w-1/2 h-full opacity-20 blur-3xl bg-primary/10" />
         <div className="section-container relative z-10 w-full">
@@ -186,6 +168,7 @@ const AlphaflowLovablePage = () => {
           </div>
         </div>
       </section>
+      <SiteFooter />
     </div>
   );
 };

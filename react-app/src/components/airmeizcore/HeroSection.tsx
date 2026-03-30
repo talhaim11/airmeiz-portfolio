@@ -3,7 +3,7 @@ import RobotScene from './RobotScene';
 
 const HeroSection = () => {
   return (
-    <section id="home" className="relative overflow-hidden">
+    <section id="home" className="snap-section relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-dark" />
       <div
         className="absolute inset-0 opacity-40"

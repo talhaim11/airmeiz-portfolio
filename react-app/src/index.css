@@ -38,14 +38,22 @@
 
   html {
     scroll-behavior: smooth;
+    height: 100%;
   }
 
   body {
     @apply bg-background text-foreground antialiased;
+    min-height: 100%;
+    overflow-y: auto;
+    scroll-snap-type: y mandatory;
     font-family: 'General Sans', sans-serif;
     font-weight: 400;
     line-height: 1.45;
     letter-spacing: -0.005em;
+  }
+
+  #root {
+    min-height: 100%;
   }
 
   h1,
@@ -162,6 +170,21 @@
   }
 
   .snap-section {
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+  }
+
+  .airmeiz-core-line {
+    fill: none;
+    stroke: url(#airmeiz-node-line-gradient);
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    filter: drop-shadow(0 0 10px hsl(185 95% 55% / 0.55));
+    transition: opacity 180ms ease-out;
+    will-change: stroke-dashoffset, opacity;
+  }
+
+  main > section {
     scroll-snap-align: start;
     scroll-snap-stop: always;
   }

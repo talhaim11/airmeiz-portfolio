@@ -1,4 +1,6 @@
 import { useCallback, useState } from 'react';
+import SiteHeader from '../components/site/SiteHeader';
+import SiteFooter from '../components/site/SiteFooter';
 import LoadingScreen from '../components/erevshabbat/LoadingScreen';
 import HeroSection from '../components/erevshabbat/HeroSection';
 import HistoricalTimeline from '../components/erevshabbat/HistoricalTimeline';
@@ -15,6 +17,7 @@ const ErevShabbatPage = () => {
   return (
     <div className="min-h-screen bg-background">
       <LoadingScreen onComplete={handleLoadComplete} />
+      <SiteHeader page="project" />
 
       {loaded && (
         <main>
@@ -27,6 +30,7 @@ const ErevShabbatPage = () => {
           <FadingFacts />
         </main>
       )}
+      {loaded && <SiteFooter />}
     </div>
   );
 };

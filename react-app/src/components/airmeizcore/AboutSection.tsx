@@ -6,7 +6,7 @@ const AboutSection = () => {
   const inView = useInView(ref, { once: true, margin: '-100px' });
 
   return (
-    <section id="about" className="py-32 relative">
+    <section id="about" className="snap-section py-32 relative">
       <div className="container mx-auto px-6 max-w-4xl" ref={ref}>
         <motion.div
           initial={{ opacity: 0, y: 40 }}

@@ -12,7 +12,7 @@ const ContactSection = () => {
   };
 
   return (
-    <section id="contact" className="py-32 relative">
+    <section id="contact" className="snap-section py-32 relative">
       <div className="container mx-auto px-6 max-w-2xl" ref={ref}>
         <motion.div
           initial={{ opacity: 0, y: 40 }}

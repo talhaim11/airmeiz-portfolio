@@ -28,10 +28,12 @@ const HomePage = () => {
   return (
     <div className="airmeiz-core-page min-h-screen bg-background">
       <Header />
-      <HeroSection />
-      <AboutSection />
-      <TeamSection />
-      <ContactSection />
+      <main>
+        <HeroSection />
+        <AboutSection />
+        <TeamSection />
+        <ContactSection />
+      </main>
       <FooterSection />
     </div>
   );

@@ -1,13 +1,25 @@
-import { useMemo, useState } from 'react';
-import { motion, useMotionTemplate, useMotionValue, useSpring } from 'framer-motion';
+import { motion } from 'framer-motion';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import airmeizLogo from '@/assets/airmeizcore/airmeiz-logo.png';
 import alphaflowLogo from '@/assets/airmeizcore/alphaflow-logo.png';
 import pulsegateLogo from '@/assets/airmeizcore/pulsegate-logo.png';
 import swappexLogo from '@/assets/airmeizcore/swappex-logo.png';
 import erevshabbatLogo from '@/assets/airmeizcore/erevshabbat-logo.png';
+import RobotCore3D from './RobotCore3D';
 
 const novapayLogo = '/assets/img/logos/novapay-logo.png';
+
+type Point = {
+  x: number;
+  y: number;
+};
+
+type LineModel = {
+  d: string;
+  opacity: number;
+  strokeDasharray: string;
+  strokeDashoffset: number;
+};
 
 const projects = [
   {
@@ -52,19 +64,51 @@ const projects = [
   },
 ];
 
+const LINE_STROKE_WIDTH = 3;
+
+function createAnimatedBezierLine(origin: Point, target: Point, progress: number): LineModel {
+  const dx = target.x - origin.x;
+  const dy = target.y - origin.y;
+  const curveLift = Math.min(140, Math.abs(dx) * 0.22 + 40);
+
+  const cp1x = origin.x + dx * 0.28;
+  const cp1y = origin.y + dy * 0.12 - curveLift;
+  const cp2x = origin.x + dx * 0.72;
+  const cp2y = origin.y + dy * 0.88 + curveLift * 0.14;
+
+  const d = `M ${origin.x.toFixed(2)} ${origin.y.toFixed(2)} C ${cp1x.toFixed(2)} ${cp1y.toFixed(2)}, ${cp2x.toFixed(2)} ${cp2y.toFixed(2)}, ${target.x.toFixed(2)} ${target.y.toFixed(2)}`;
+
+  // Estimate Bezier curve length for dash animation
+  const straightDist = Math.sqrt(dx * dx + dy * dy);
+  const curveLength = straightDist * 1.35; // Bezier curves are ~35% longer than straight line
+
+  return {
+    d,
+    opacity: Math.max(0, Math.min(1, progress)),
+    strokeDasharray: `${curveLength}`,
+    strokeDashoffset: curveLength * (1 - progress),
+  };
+}
+
 const NodeButton = ({
+  id,
   name,
   description,
   logo,
   href,
   accent,
+  onHover,
+  buttonRef,
   className = '',
 }: {
+  id: string;
   name: string;
   description: string;
   logo: string;
   href: string;
   accent: string;
+  onHover: (id: string, hovered: boolean) => void;
+  buttonRef?: (el: HTMLButtonElement | null) => void;
   className?: string;
 }) => {
   const navigate = useNavigate();
@@ -72,7 +116,12 @@ const NodeButton = ({
   return (
     <motion.button
       type="button"
+      ref={buttonRef}
       onClick={() => navigate(href)}
+      onMouseEnter={() => onHover(id, true)}
+      onMouseLeave={() => onHover(id, false)}
+      onFocus={() => onHover(id, true)}
+      onBlur={() => onHover(id, false)}
       whileHover={{ scale: 1.05, y: -4 }}
       whileTap={{ scale: 0.98 }}
       className={`group flex flex-col items-center text-center ${className}`}
@@ -103,125 +152,216 @@ const NodeButton = ({
   );
 };
 
-const RobotFigure = () => {
-  const pointerX = useMotionValue(0);
-  const pointerY = useMotionValue(0);
-  const rotateX = useSpring(useMotionTemplate`${pointerY}deg`, { stiffness: 110, damping: 20, mass: 0.9 });
-  const rotateY = useSpring(useMotionTemplate`${pointerX}deg`, { stiffness: 110, damping: 20, mass: 0.9 });
-  const [isActive, setIsActive] = useState(false);
-
-  const auraStyle = useMemo(
-    () => ({
-      background:
-        'radial-gradient(circle, hsl(185 90% 55% / 0.16) 0%, hsl(185 90% 55% / 0.08) 28%, transparent 70%)',
-    }),
-    [],
-  );
-
-  const handlePointerMove = (event: React.PointerEvent<HTMLDivElement>) => {
-    const bounds = event.currentTarget.getBoundingClientRect();
-    const relativeX = (event.clientX - bounds.left) / bounds.width - 0.5;
-    const relativeY = (event.clientY - bounds.top) / bounds.height - 0.5;
-
-    // Keep robot anchored and only tilt/rotate toward cursor.
-    // Rotate toward cursor (no translation/drift): right cursor => right look.
-    pointerX.set(relativeX * -12);
-    pointerY.set(relativeY * 10);
-    setIsActive(true);
-  };
-
-  const handlePointerLeave = () => {
-    pointerX.set(0);
-    pointerY.set(0);
-    setIsActive(false);
-  };
-
-  return (
-    <div className="relative mx-auto flex h-[340px] w-[340px] items-center justify-center md:h-[540px] md:w-[540px]">
-      <div className="absolute inset-0 rounded-full blur-3xl" style={auraStyle} />
-
-      <motion.div
-        onPointerMove={handlePointerMove}
-        onPointerLeave={handlePointerLeave}
-        animate={{ scale: isActive ? 1.015 : 1 }}
-        transition={{ duration: 0.45, ease: 'easeOut' }}
-        style={{
-          rotateX,
-          rotateY,
-          transformPerspective: 1200,
-          transformOrigin: '50% 50%',
-        }}
-        className="relative flex h-full w-full items-center justify-center"
-      >
-        <svg
-          viewBox="0 0 560 560"
-          className="absolute inset-0 h-full w-full"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <defs>
-            <filter id="airmeiz-robot-soft-glow" x="-50%" y="-50%" width="200%" height="200%">
-              <feGaussianBlur stdDeviation="7" result="blur" />
-              <feMerge>
-                <feMergeNode in="blur" />
-                <feMergeNode in="SourceGraphic" />
-              </feMerge>
-            </filter>
-          </defs>
-
-          <g filter="url(#airmeiz-robot-soft-glow)" stroke="hsl(185 90% 64%)" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M196 184C196 122 234 88 280 88C326 88 364 122 364 184V306C364 380 324 436 280 436C236 436 196 380 196 306V184Z" strokeWidth="3.2" opacity="0.96" />
-            <path d="M212 194C212 146 242 118 280 118C318 118 348 146 348 194V300C348 350 318 384 280 384C242 384 212 350 212 300V194Z" strokeWidth="2" opacity="0.5" />
-            <path d="M226 206C226 188 244 174 280 174C316 174 334 188 334 206V252C334 280 316 300 280 300C244 300 226 280 226 252V206Z" strokeWidth="2.7" opacity="0.9" />
-            <path d="M238 205C249 193 262 188 280 188C298 188 311 193 322 205" strokeWidth="1.7" opacity="0.58" />
-            <path d="M238 264C250 274 263 279 280 279C297 279 310 274 322 264" strokeWidth="1.7" opacity="0.56" />
-            <path d="M232 326C246 339 261 346 280 346C299 346 314 339 328 326" strokeWidth="2.2" opacity="0.64" />
-            <path d="M244 357C255 365 266 369 280 369C294 369 305 365 316 357" strokeWidth="1.4" opacity="0.42" />
-            <path d="M242 102L280 68L318 102" strokeWidth="2" opacity="0.48" />
-            <path d="M208 250C198 242 194 228 194 212C194 178 212 150 244 136" strokeWidth="1.5" opacity="0.35" />
-            <path d="M352 250C362 242 366 228 366 212C366 178 348 150 316 136" strokeWidth="1.5" opacity="0.35" />
-          </g>
-        </svg>
-
-        <div className="relative z-10 flex h-[118px] w-[118px] items-center justify-center rounded-full border border-primary/35 bg-[hsl(220_22%_6%_/0.25)] shadow-[0_0_38px_hsl(185_90%_55%/0.12)] backdrop-blur-md md:h-[160px] md:w-[160px]">
-          <div className="absolute inset-[10px] rounded-full border border-primary/16" />
-          <img
-            src={airmeizLogo}
-            alt="AIRMEIZ"
-            className="relative z-10 h-[56%] w-[56%] object-contain"
-            style={{ mixBlendMode: 'screen', filter: 'drop-shadow(0 0 10px hsl(185 90% 55% / 0.35))' }}
-          />
-        </div>
-      </motion.div>
-    </div>
-  );
-};
-
 const RobotScene = () => {
+  const desktopRootRef = useRef<HTMLDivElement | null>(null);
+  const robotRef = useRef<HTMLDivElement | null>(null);
+  const nodeRefs = useRef<Record<string, HTMLButtonElement | null>>({});
+  const animFrameRef = useRef<number | null>(null);
+  const targetPointRef = useRef<Point | null>(null);
+  const [lineProgress, setLineProgress] = useState(0);
+  const [lineGeometry, setLineGeometry] = useState<{ origin: Point; target: Point } | null>(null);
+  const [pointerX, setPointerX] = useState(0);
+  const [pointerY, setPointerY] = useState(0);
+  const [hoveredId, setHoveredId] = useState<string | null>(null);
+
+  const calcCenter = useCallback((container: DOMRect, node: DOMRect): Point => {
+    return {
+      x: node.left - container.left + node.width * 0.5,
+      y: node.top - container.top + node.height * 0.5,
+    };
+  }, []);
+
+  const recalcLineGeometry = useCallback(() => {
+    const container = desktopRootRef.current;
+    const robot = robotRef.current;
+    const target = targetPointRef.current;
+    if (!container || !robot || !target) {
+      return;
+    }
+
+    const containerRect = container.getBoundingClientRect();
+    const robotRect = robot.getBoundingClientRect();
+    const origin = calcCenter(containerRect, robotRect);
+    setLineGeometry({ origin, target });
+  }, [calcCenter]);
+
+  const animateProgress = useCallback((to: number) => {
+    if (animFrameRef.current) {
+      cancelAnimationFrame(animFrameRef.current);
+    }
+
+    const start = performance.now();
+    const from = lineProgress;
+    const duration = to > from ? 260 : 220;
+
+    const tick = (now: number) => {
+      const t = Math.min(1, (now - start) / duration);
+      const eased = 1 - Math.pow(1 - t, 3);
+      const next = from + (to - from) * eased;
+      setLineProgress(next);
+      if (t < 1) {
+        animFrameRef.current = requestAnimationFrame(tick);
+      }
+    };
+
+    animFrameRef.current = requestAnimationFrame(tick);
+  }, [lineProgress]);
+
+  const updateTargetFromNode = useCallback((id: string) => {
+    const container = desktopRootRef.current;
+    const node = nodeRefs.current[id];
+    if (!container || !node) {
+      return;
+    }
+
+    const containerRect = container.getBoundingClientRect();
+    const nodeRect = node.getBoundingClientRect();
+    targetPointRef.current = calcCenter(containerRect, nodeRect);
+    recalcLineGeometry();
+  }, [calcCenter, recalcLineGeometry]);
+
+  const handleHover = useCallback((id: string, hovered: boolean) => {
+    setHoveredId(hovered ? id : null);
+    if (hovered) {
+      updateTargetFromNode(id);
+      animateProgress(1);
+      return;
+    }
+    animateProgress(0);
+  }, [animateProgress, updateTargetFromNode]);
+
+  // Track pointer position for robot animation
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      const container = desktopRootRef.current;
+      if (!container) return;
+      const bounds = container.getBoundingClientRect();
+      const relX = (e.clientX - bounds.left) / bounds.width - 0.5;
+      const relY = (e.clientY - bounds.top) / bounds.height - 0.44;
+      setPointerX(relX * 2.4);
+      setPointerY(relY * 2.4);
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, []);
+
+  useEffect(() => {
+    const onViewportChange = () => {
+      recalcLineGeometry();
+    };
+
+    window.addEventListener('resize', onViewportChange);
+    window.addEventListener('scroll', onViewportChange, { passive: true });
+    return () => {
+      window.removeEventListener('resize', onViewportChange);
+      window.removeEventListener('scroll', onViewportChange);
+      if (animFrameRef.current) {
+        cancelAnimationFrame(animFrameRef.current);
+      }
+    };
+  }, [recalcLineGeometry]);
+
+  const line = useMemo(() => {
+    if (!lineGeometry || lineProgress <= 0.01) {
+      return null;
+    }
+    return createAnimatedBezierLine(lineGeometry.origin, lineGeometry.target, lineProgress);
+  }, [lineGeometry, lineProgress]);
+
+  // Calculate hovered node bias for robot animation
+  const hoveredProject = useMemo(() => {
+    if (!hoveredId) return null;
+    return projects.find(p => p.name === hoveredId);
+  }, [hoveredId]);
+
+  const hoveredBiasX = useMemo(() => {
+    if (!hoveredProject || !desktopRootRef.current) return 0;
+    const container = desktopRootRef.current;
+    const node = nodeRefs.current[hoveredProject.name];
+    if (!node) return 0;
+    const containerRect = container.getBoundingClientRect();
+    const nodeRect = node.getBoundingClientRect();
+    const centerX = containerRect.width * 0.5;
+    const nodeX = nodeRect.left - containerRect.left + nodeRect.width * 0.5;
+    return (nodeX - centerX) / containerRect.width * 1.2;
+  }, [hoveredProject]);
+
+  const hoveredBiasY = useMemo(() => {
+    if (!hoveredProject || !desktopRootRef.current) return 0;
+    const container = desktopRootRef.current;
+    const node = nodeRefs.current[hoveredProject.name];
+    if (!node) return 0;
+    const containerRect = container.getBoundingClientRect();
+    const nodeRect = node.getBoundingClientRect();
+    const centerY = containerRect.height * 0.44;
+    const nodeY = nodeRect.top - containerRect.top + nodeRect.height * 0.5;
+    return (nodeY - centerY) / containerRect.height * 1.0;
+  }, [hoveredProject]);
+
   return (
     <div className="mx-auto w-full max-w-6xl">
       <div className="hidden md:block">
-        <div className="relative mx-auto h-[940px] w-full max-w-[1260px]">
+        <div ref={desktopRootRef} className="relative mx-auto h-[940px] w-full max-w-[1260px]">
+          <svg className="pointer-events-none absolute inset-0 z-10 h-full w-full overflow-visible" aria-hidden="true">
+            <defs>
+              <linearGradient id="airmeiz-node-line-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="hsl(185 95% 58%)" stopOpacity="0.95" />
+                <stop offset="100%" stopColor="hsl(193 100% 62%)" stopOpacity="0.8" />
+              </linearGradient>
+            </defs>
+            {line && (
+              <path
+                className="airmeiz-core-line"
+                d={line.d}
+                strokeWidth={LINE_STROKE_WIDTH}
+                style={{
+                  opacity: line.opacity,
+                  strokeDasharray: line.strokeDasharray,
+                  strokeDashoffset: line.strokeDashoffset,
+                }}
+              />
+            )}
+          </svg>
+
           <div className="absolute inset-0">
             {projects.map((project) => (
               <div key={project.name} className={`absolute ${project.desktopPosition}`}>
-                <NodeButton {...project} />
+                <NodeButton
+                  id={project.name}
+                  {...project}
+                  onHover={handleHover}
+                  buttonRef={(el) => {
+                    nodeRefs.current[project.name] = el;
+                  }}
+                />
               </div>
             ))}
           </div>
 
-          <div className="absolute left-1/2 top-[46%] -translate-x-1/2 -translate-y-1/2">
-            <RobotFigure />
-          </div>
+          <RobotCore3D 
+            ref={robotRef}
+            pointerX={pointerX}
+            pointerY={pointerY}
+            hoveredBiasX={hoveredBiasX}
+            hoveredBiasY={hoveredBiasY}
+          />
         </div>
       </div>
 
       <div className="md:hidden">
         <div className="flex flex-col items-center">
-          <RobotFigure />
+          <div className="h-[220px] w-[270px]">
+            <RobotCore3D 
+              pointerX={0}
+              pointerY={0}
+              hoveredBiasX={0}
+              hoveredBiasY={0}
+            />
+          </div>
           <div className="mt-8 grid w-full max-w-xl grid-cols-2 gap-5">
             {projects.map((project) => (
-              <NodeButton key={project.name} {...project} />
+              <NodeButton key={project.name} id={project.name} {...project} onHover={handleHover} />
             ))}
           </div>
         </div>

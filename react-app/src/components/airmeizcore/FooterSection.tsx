@@ -2,7 +2,7 @@ import airmeizLogo from '@/assets/airmeizcore/airmeiz-logo.png';
 
 const FooterSection = () => {
   return (
-    <footer className="border-t border-border py-12">
+    <footer className="snap-section border-t border-border py-12">
       <div className="container mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-6">
         <div className="flex items-center gap-3">
           <img src={airmeizLogo} alt="AIRMEIZ" className="h-8 w-auto" />
