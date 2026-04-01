@@ -11,7 +11,7 @@ import CtaSection from '@/components/swappex/CtaSection';
 const SwappexPage = () => (
   <div className="swappex-page bg-background">
     <SiteHeader page="project" />
-    <main className="snap-container pt-16">
+    <main className="snap-container pt-20">
       <HeroSection />
       <ProblemScene />
       <MapScene />

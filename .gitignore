@@ -52,3 +52,10 @@ vendor/
 # assets/video/*.mov
 # assets/img/*.psd
 # assets/img/*.ai
+
+# Playwright
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+/playwright/.auth/

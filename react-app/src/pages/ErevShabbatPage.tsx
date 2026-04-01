@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import SiteHeader from '../components/site/SiteHeader';
 import SiteFooter from '../components/site/SiteFooter';
 import LoadingScreen from '../components/erevshabbat/LoadingScreen';
@@ -12,18 +12,36 @@ import FadingFacts from '../components/erevshabbat/FadingFacts';
 
 const ErevShabbatPage = () => {
   const [loaded, setLoaded] = useState(false);
+  const [timelineOwnsScroll, setTimelineOwnsScroll] = useState(false);
+  const snapContainerRef = useRef<HTMLElement | null>(null);
   const handleLoadComplete = useCallback(() => setLoaded(true), []);
 
+  useEffect(() => {
+    if (!loaded) return;
+    const snapContainer = snapContainerRef.current;
+    if (!snapContainer) return;
+    console.log('[TIMELINE_DEBUG] EREV snap container:', snapContainer);
+  }, [loaded]);
+
+  useEffect(() => {
+    if (!loaded) return;
+    console.log('[TIMELINE_DEBUG] timeline owns scroll:', timelineOwnsScroll);
+  }, [timelineOwnsScroll, loaded]);
+
   return (
-    <div className="min-h-screen bg-background">
+    <div id="erev-page-root" className="min-h-screen bg-background">
       <LoadingScreen onComplete={handleLoadComplete} />
       <SiteHeader page="project" />
 
       {loaded && (
-        <main>
+        <main
+          id="erev-snap-container"
+          ref={snapContainerRef}
+          className="snap-container pt-20"
+        >
           <HeroSection />
           <WhatIsSection />
-          <HistoricalTimeline />
+          <HistoricalTimeline onTimelineOwnershipChange={setTimelineOwnsScroll} />
           <ProblemBlock />
           <InteractiveTimeline />
           <AIBlock />

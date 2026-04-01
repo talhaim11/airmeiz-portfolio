@@ -8,6 +8,7 @@ type RobotCore3DProps = {
   pointerY: number;
   hoveredBiasX: number;
   hoveredBiasY: number;
+  className?: string;
 };
 
 function clamp(v: number, lo: number, hi: number) {
@@ -153,11 +154,11 @@ function RobotHead({ pointerX, pointerY, hoveredBiasX, hoveredBiasY }: RobotCore
 }
 
 const RobotCore3D = forwardRef<HTMLDivElement, RobotCore3DProps>((
-  { pointerX, pointerY, hoveredBiasX, hoveredBiasY }, 
+  { pointerX, pointerY, hoveredBiasX, hoveredBiasY, className = '' }, 
   ref
 ) => {
   return (
-    <div ref={ref} className="pointer-events-none absolute left-1/2 top-[44%] z-20 h-[220px] w-[270px] -translate-x-1/2 -translate-y-1/2 md:h-[310px] md:w-[380px] lg:h-[380px] lg:w-[460px]">
+    <div ref={ref} className={`pointer-events-none h-[220px] w-[270px] md:h-[310px] md:w-[380px] lg:h-[380px] lg:w-[460px] ${className}`}>
       <Canvas dpr={[1, 1.7]} camera={{ position: [0, 0, 3.6], fov: 30 }} gl={{ antialias: true, alpha: true }}>
         <ambientLight intensity={0.32} />
         <directionalLight position={[2.5, 3.4, 4.0]} intensity={1.2} color="#f2feff" />

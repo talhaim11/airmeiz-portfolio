@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { AnimatePresence, motion, useScroll } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import timeline1896 from '../../assets/erevshabbat/timeline-1896.png';
 import timeline1933 from '../../assets/erevshabbat/timeline-1933.jpg';
 import timeline1942 from '../../assets/erevshabbat/timeline-1942.png';
@@ -16,6 +16,10 @@ interface TimelineEvent {
   backgroundImage?: string;
   overlayImage?: string;
 }
+
+type HistoricalTimelineProps = {
+  onTimelineOwnershipChange?: (active: boolean) => void;
+};
 
 const events: TimelineEvent[] = [
   {
@@ -70,30 +74,144 @@ const events: TimelineEvent[] = [
   },
 ];
 
-const HistoricalTimeline = () => {
-  const containerRef = useRef<HTMLElement>(null);
+const HistoricalTimeline = ({ onTimelineOwnershipChange }: HistoricalTimelineProps) => {
+  const sectionRef = useRef<HTMLElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
-
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ['start start', 'end end'],
-  });
+  const activeIndexRef = useRef(0);
+  const timelineModeRef = useRef(false);
+  const wheelLockRef = useRef(false);
+  // Tracks which direction we last exited: 1 = scrolled forward (down), -1 = scrolled backward (up).
+  // Used to determine the correct starting slide when re-entering the section.
+  const lastExitDirectionRef = useRef<number>(-1);
 
   useEffect(() => {
-    const unsubscribe = scrollYProgress.on('change', (value) => {
-      const index = Math.min(Math.floor(value * events.length), events.length - 1);
-      setActiveIndex(index);
-    });
+    const section = sectionRef.current;
+    if (!section) return;
 
-    return unsubscribe;
-  }, [scrollYProgress]);
+    const scrollContainer = section.closest('.snap-container') as HTMLElement | null;
+    if (!scrollContainer) return;
+
+    console.log('[TIMELINE_DEBUG] timeline mounted');
+    console.log('[TIMELINE_DEBUG] section:', section);
+    console.log('[TIMELINE_DEBUG] scrollContainer:', scrollContainer);
+
+    const COOLDOWN_MS = 450;
+
+    const enterTimelineMode = () => {
+      if (timelineModeRef.current) return;
+
+      // If we last exited by scrolling forward (down past the last slide), the user
+      // is now entering from below — show the last slide. Otherwise show the first.
+      const startIndex = lastExitDirectionRef.current === 1 ? events.length - 1 : 0;
+      activeIndexRef.current = startIndex;
+      setActiveIndex(startIndex);
+
+      timelineModeRef.current = true;
+      onTimelineOwnershipChange?.(true);
+      console.log('[TIMELINE_DEBUG] entered viewport, start slide', startIndex);
+    };
+
+    const releaseTimelineMode = (exitDirection: number) => {
+      if (!timelineModeRef.current) return;
+
+      timelineModeRef.current = false;
+      lastExitDirectionRef.current = exitDirection;
+      onTimelineOwnershipChange?.(false);
+      console.log('[TIMELINE_DEBUG] release triggered, exit direction', exitDirection);
+
+      // Programmatically advance the snap container to the correct sibling section.
+      const sibling =
+        exitDirection > 0 ? section.nextElementSibling : section.previousElementSibling;
+      if (sibling instanceof HTMLElement) {
+        window.requestAnimationFrame(() => {
+          sibling.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+      }
+    };
+
+    const wheelHandler = (event: WheelEvent) => {
+      if (!timelineModeRef.current) return;
+
+      event.preventDefault();
+      event.stopPropagation();
+      console.log('[TIMELINE_DEBUG] wheel captured', {
+        deltaY: event.deltaY,
+        currentSlide: activeIndexRef.current,
+      });
+
+      if (wheelLockRef.current) return;
+
+      const direction = event.deltaY > 0 ? 1 : -1;
+      const current = activeIndexRef.current;
+      const next = current + direction;
+
+      // Boundary: exit timeline and hand control back to the snap container.
+      if (next < 0 || next >= events.length) {
+        releaseTimelineMode(direction);
+        return;
+      }
+
+      // Advance slide directly via React state — no DOM scrolling needed.
+      activeIndexRef.current = next;
+      setActiveIndex(next);
+      console.log('[TIMELINE_DEBUG] internal slide index', next);
+
+      wheelLockRef.current = true;
+      window.setTimeout(() => {
+        wheelLockRef.current = false;
+      }, COOLDOWN_MS);
+    };
+
+    window.addEventListener('wheel', wheelHandler, { passive: false, capture: true });
+
+    // Observe the section itself (now 100vh — same size as the snap container viewport).
+    // Ratio approaches 1.0 when the snap container has snapped to this section.
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const entry = entries[0];
+        if (!entry) return;
+
+        console.log('[TIMELINE_DEBUG] observer', {
+          isIntersecting: entry.isIntersecting,
+          ratio: Number(entry.intersectionRatio.toFixed(2)),
+        });
+
+        if (entry.isIntersecting && entry.intersectionRatio >= 0.85) {
+          enterTimelineMode();
+        } else if (!entry.isIntersecting && timelineModeRef.current) {
+          // Section left viewport without our explicit release (e.g. programmatic scroll).
+          timelineModeRef.current = false;
+          onTimelineOwnershipChange?.(false);
+        }
+      },
+      { root: scrollContainer, threshold: [0, 0.85, 1] },
+    );
+
+    observer.observe(section);
+
+    return () => {
+      observer.disconnect();
+      window.removeEventListener('wheel', wheelHandler, { capture: true } as AddEventListenerOptions);
+      console.log('[TIMELINE_DEBUG] timeline cleanup');
+    };
+  }, [onTimelineOwnershipChange]);
 
   const currentEvent = events[activeIndex];
   const currentBg = currentEvent?.backgroundImage;
 
   return (
-    <section ref={containerRef} className="relative" style={{ height: `${events.length * 100}vh` }}>
-      <div className="sticky top-0 flex h-screen flex-col items-center justify-center overflow-hidden">
+    <section
+      id="erev-historical-timeline"
+      ref={sectionRef}
+      className="relative"
+      style={{ outline: '2px dashed #f97316' }}
+    >
+      {/* DEBUG marker: orange dashed outline confirms section boundaries in the DOM */}
+
+      <div
+        data-debug="timeline-sticky-viewport"
+        className="sticky top-0 flex h-screen flex-col items-center justify-center overflow-hidden"
+      >
         <AnimatePresence mode="wait">
           {currentBg && (
             <motion.div

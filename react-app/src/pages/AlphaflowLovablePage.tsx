@@ -41,6 +41,8 @@ const AlphaflowLovablePage = () => {
     <div className="alphaflow-lovable-page min-h-screen bg-background text-foreground">
       <SiteHeader page="project" />
 
+      <main className="snap-container pt-20">
+
       <section className="relative min-h-screen flex items-center overflow-hidden pt-24">
         <div className="absolute inset-0" style={{ background: 'var(--gradient-hero)' }} />
         <div className="absolute top-0 right-0 w-1/2 h-full opacity-20 blur-3xl bg-primary/10" />
@@ -168,6 +170,7 @@ const AlphaflowLovablePage = () => {
           </div>
         </div>
       </section>
+      </main>
       <SiteFooter />
     </div>
   );

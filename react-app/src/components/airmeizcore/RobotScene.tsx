@@ -344,6 +344,7 @@ const RobotScene = () => {
           </div>
 
           <RobotCore3D 
+            className="absolute left-1/2 top-[44%] z-20 -translate-x-1/2 -translate-y-1/2"
             pointerX={pointerX}
             pointerY={pointerY}
             hoveredBiasX={hoveredBiasX}
@@ -364,15 +365,16 @@ const RobotScene = () => {
 
       <div className="md:hidden">
         <div className="flex flex-col items-center">
-          <div className="h-[220px] w-[270px]">
+          <div className="robot-container h-[180px] w-full">
             <RobotCore3D 
+              className="mx-auto"
               pointerX={0}
               pointerY={0}
               hoveredBiasX={0}
               hoveredBiasY={0}
             />
           </div>
-          <div className="mt-8 grid w-full max-w-xl grid-cols-2 gap-5">
+          <div className="bubbles-container grid w-full max-w-xl grid-cols-2 gap-5">
             {projects.map((project) => (
               <NodeButton key={project.name} id={project.name} {...project} onHover={handleHover} />
             ))}

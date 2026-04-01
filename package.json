@@ -10,6 +10,8 @@
     "serve": "npm run dev"
   },
   "devDependencies": {
-    "@21st-extension/toolbar": "^0.5.14"
+    "@21st-extension/toolbar": "^0.5.14",
+    "@playwright/test": "^1.58.2",
+    "@types/node": "^25.5.0"
   }
 }
