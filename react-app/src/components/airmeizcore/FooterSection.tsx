@@ -1,11 +1,21 @@
-import airmeizLogo from '@/assets/airmeizcore/airmeiz-logo.png';
+import airmeizLogo128 from '@/assets/airmeizcore/airmeiz-logo-128.webp';
+import airmeizLogo256 from '@/assets/airmeizcore/airmeiz-logo-256.webp';
 
 const FooterSection = () => {
   return (
     <footer className="snap-section border-t border-border py-12">
       <div className="container mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-6">
         <div className="flex items-center gap-3">
-          <img src={airmeizLogo} alt="AIRMEIZ" className="h-8 w-auto" />
+          <img
+            src={airmeizLogo128}
+            srcSet={`${airmeizLogo128} 1x, ${airmeizLogo256} 2x`}
+            alt="AIRMEIZ"
+            className="h-8 w-auto"
+            width={48}
+            height={32}
+            loading="lazy"
+            decoding="async"
+          />
           <span className="font-heading text-sm font-semibold text-foreground tracking-wider">AIRMEIZ</span>
         </div>
 

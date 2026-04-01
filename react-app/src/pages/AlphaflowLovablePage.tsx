@@ -36,6 +36,49 @@ const audienceBlocks = [
   },
 ];
 
+const howItWorksSteps = [
+  {
+    step: 'Step 01',
+    title: 'Daily readiness input',
+    description:
+      'Each day begins with a short readiness check including five metrics: sleep, stress, mood, energy, and muscle soreness (DOMS).',
+    imageSrc: 'https://context-driven-sport.lovable.app/assets/readiness-mobile-C_RFMTbE.jpg',
+    imageAlt: 'Mobile readiness check interface',
+  },
+  {
+    step: 'Step 02',
+    title: 'Workout logging via AI chat',
+    description:
+      'Athletes log training in natural language. The system turns free text into structured training load data.',
+    imageSrc: 'https://context-driven-sport.lovable.app/assets/chat-interface-CYi6blCU.jpg',
+    imageAlt: 'AI chat workout logging interface',
+  },
+  {
+    step: 'Step 03',
+    title: 'Optional injury or pain note',
+    description:
+      'Athletes can attach a short pain or injury note to each workout to reveal relationships between load and symptoms.',
+    imageSrc: 'https://context-driven-sport.lovable.app/assets/body-map-CIsW8tCL.jpg',
+    imageAlt: 'Body area selection for injury documentation',
+  },
+  {
+    step: 'Step 04',
+    title: 'Readiness and load trends',
+    description:
+      'The platform visualizes readiness across days and weeks so athletes can understand how training affects their state over time.',
+    imageSrc: 'https://context-driven-sport.lovable.app/assets/trend-graph-B7ooloF6.jpg',
+    imageAlt: 'Readiness and training load trend visualization',
+  },
+  {
+    step: 'Step 05',
+    title: 'Coach and physiotherapist dashboard',
+    description:
+      'Professionals monitor readiness, training load, and injury signals in one unified dashboard for better decisions.',
+    imageSrc: 'https://context-driven-sport.lovable.app/assets/coach-dashboard-COSAEx_Q.jpg',
+    imageAlt: 'Professional monitoring dashboard',
+  },
+];
+
 const AlphaflowLovablePage = () => {
   return (
     <div className="alphaflow-lovable-page min-h-screen bg-background text-foreground">
@@ -107,6 +150,35 @@ const AlphaflowLovablePage = () => {
         </div>
       </section>
 
+      <section className="section-padding">
+        <div className="section-container">
+          <div className="max-w-3xl mx-auto text-center mb-14">
+            <p className="text-sm font-medium uppercase tracking-widest text-primary mb-4">How It Works</p>
+            <h2 className="text-3xl lg:text-5xl font-display font-bold mb-5">From input to insight</h2>
+            <p className="text-lg text-muted-foreground">
+              AlphaFlow transforms daily athlete input into longitudinal context that supports smarter training choices.
+            </p>
+          </div>
+
+          <div className="space-y-8">
+            {howItWorksSteps.map((step) => (
+              <div key={step.step} className="glass-card p-6 lg:p-8">
+                <div className="grid lg:grid-cols-2 gap-8 items-center">
+                  <div>
+                    <p className="text-xs uppercase tracking-[0.2em] text-primary mb-3">{step.step}</p>
+                    <h3 className="text-2xl lg:text-3xl font-display font-bold mb-4">{step.title}</h3>
+                    <p className="text-muted-foreground leading-relaxed text-lg">{step.description}</p>
+                  </div>
+                  <div className="rounded-2xl overflow-hidden border border-border/60 bg-black/30">
+                    <img src={step.imageSrc} alt={step.imageAlt} className="w-full h-full object-cover" loading="lazy" />
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <section id="features" className="section-padding">
         <div className="section-container">
           <div className="text-center mb-16">
@@ -164,8 +236,8 @@ const AlphaflowLovablePage = () => {
           <div className="glass-card glow-border p-16 text-center">
             <h2 className="text-3xl lg:text-5xl font-display font-bold mb-4">A smarter way to understand training</h2>
             <p className="text-xl text-muted-foreground mb-10">Performance improves when context is clear.</p>
-            <a href="/#contact" className="inline-flex items-center gap-2 rounded-xl px-8 py-4 text-base font-medium text-primary-foreground transition-all" style={{ background: 'var(--gradient-accent)' }}>
-              Contact AIRMEIZ
+            <a href="#problem" className="inline-flex items-center gap-2 rounded-xl px-8 py-4 text-base font-medium text-primary-foreground transition-all" style={{ background: 'var(--gradient-accent)' }}>
+              View concept
             </a>
           </div>
         </div>

@@ -1,14 +1,20 @@
 import { motion } from 'framer-motion';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import alphaflowLogo from '@/assets/airmeizcore/alphaflow-logo.png';
-import pulsegateLogo from '@/assets/airmeizcore/pulsegate-logo.png';
-import swappexLogo from '@/assets/airmeizcore/swappex-logo.png';
-import erevshabbatLogo from '@/assets/airmeizcore/erevshabbat-logo.png';
-import airmeizLogo from '@/assets/airmeizcore/airmeiz-logo.png';
+import alphaflowLogo from '@/assets/airmeizcore/alphaflow-logo-128.webp';
+import alphaflowLogo2x from '@/assets/airmeizcore/alphaflow-logo-256.webp';
+import pulsegateLogo from '@/assets/airmeizcore/pulsegate-logo-128.webp';
+import pulsegateLogo2x from '@/assets/airmeizcore/pulsegate-logo-256.webp';
+import swappexLogo from '@/assets/airmeizcore/swappex-logo-128.webp';
+import swappexLogo2x from '@/assets/airmeizcore/swappex-logo-256.webp';
+import erevshabbatLogo from '@/assets/airmeizcore/erevshabbat-logo-128.webp';
+import erevshabbatLogo2x from '@/assets/airmeizcore/erevshabbat-logo-256.webp';
+import airmeizLogo128 from '@/assets/airmeizcore/airmeiz-logo-128.webp';
+import airmeizLogo256 from '@/assets/airmeizcore/airmeiz-logo-256.webp';
 import RobotCore3D from './RobotCore3D';
 
-const novapayLogo = '/assets/img/logos/novapay-logo.png';
+const novapayLogo = '/assets/img/logos/novapay-logo-128.webp';
+const novapayLogo2x = '/assets/img/logos/novapay-logo-256.webp';
 
 type Point = {
   x: number;
@@ -27,6 +33,7 @@ const projects = [
     name: 'EREVSHABBAT',
     description: 'Oral cancer early detection',
     logo: erevshabbatLogo,
+    logo2x: erevshabbatLogo2x,
     href: '/projects/erevshabbat',
     accent: 'hsl(170 85% 68%)',
     desktopPosition: 'left-[2.5%] top-[3%]',
@@ -35,6 +42,7 @@ const projects = [
     name: 'SWAPPEX',
     description: 'Commerce and logistics platform',
     logo: swappexLogo,
+    logo2x: swappexLogo2x,
     href: '/projects/swappex',
     accent: 'hsl(188 95% 60%)',
     desktopPosition: 'right-[2.5%] top-[3%]',
@@ -43,6 +51,7 @@ const projects = [
     name: 'Novapay',
     description: 'Credit and payment management',
     logo: novapayLogo,
+    logo2x: novapayLogo2x,
     href: '/projects/novapay',
     accent: 'hsl(205 95% 72%)',
     desktopPosition: 'left-[-3%] top-[44%]',
@@ -51,6 +60,7 @@ const projects = [
     name: 'PULSEGATE',
     description: 'Smart class and activity registration',
     logo: pulsegateLogo,
+    logo2x: pulsegateLogo2x,
     href: '/projects/pulsegate',
     accent: 'hsl(180 90% 65%)',
     desktopPosition: 'right-[-3%] top-[44%]',
@@ -59,6 +69,7 @@ const projects = [
     name: 'ALPHAFLOW',
     description: 'Athlete monitoring and injury prevention',
     logo: alphaflowLogo,
+    logo2x: alphaflowLogo2x,
     href: '/projects/alphaflow',
     accent: 'hsl(195 100% 70%)',
     desktopPosition: 'left-1/2 top-[84%] -translate-x-1/2',
@@ -96,6 +107,7 @@ const NodeButton = ({
   name,
   description,
   logo,
+  logo2x,
   href,
   accent,
   onHover,
@@ -106,6 +118,7 @@ const NodeButton = ({
   name: string;
   description: string;
   logo: string;
+  logo2x: string;
   href: string;
   accent: string;
   onHover: (id: string, hovered: boolean) => void;
@@ -142,7 +155,16 @@ const NodeButton = ({
             boxShadow: `inset 0 0 26px ${accent}16`,
           }}
         />
-        <img src={logo} alt={name} className="relative z-10 h-[82%] w-[82%] object-contain" />
+        <img
+          src={logo}
+          srcSet={`${logo} 1x, ${logo2x} 2x`}
+          alt={name}
+          className="relative z-10 h-[82%] w-[82%] object-contain"
+          width={121}
+          height={121}
+          loading="lazy"
+          decoding="async"
+        />
       </div>
 
       <p className="mt-4 font-heading text-sm uppercase tracking-[0.18em] text-foreground transition-colors duration-300 group-hover:text-primary md:text-[15px]">
@@ -354,9 +376,13 @@ const RobotScene = () => {
           <div className="pointer-events-none absolute left-1/2 top-[59%] z-20 -translate-x-1/2 -translate-y-1/2">
             <img
               ref={anchorLogoRef}
-              src={airmeizLogo}
+              src={airmeizLogo128}
+              srcSet={`${airmeizLogo128} 1x, ${airmeizLogo256} 2x`}
               alt="AIRMEIZ mark"
               className="h-[86px] w-auto object-contain opacity-95 md:h-[96px] lg:h-[108px]"
+              width={162}
+              height={108}
+              decoding="async"
               style={{ filter: 'drop-shadow(0 0 18px hsl(185 95% 55% / 0.28)) drop-shadow(0 0 32px hsl(185 95% 55% / 0.12))' }}
             />
           </div>

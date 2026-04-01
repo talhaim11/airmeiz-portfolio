@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import airmeizLogo from '@/assets/airmeizcore/airmeiz-logo.png';
+import airmeizLogo128 from '@/assets/airmeizcore/airmeiz-logo-128.webp';
+import airmeizLogo256 from '@/assets/airmeizcore/airmeiz-logo-256.webp';
 
 const navLinks = [
   { label: 'About', href: '#about' },
@@ -29,7 +30,15 @@ const Header = () => {
     >
       <div className="container mx-auto flex items-center justify-between py-4 px-6">
         <a href="#" className="flex items-center gap-3">
-          <img src={airmeizLogo} alt="AIRMEIZ" className="h-10 w-auto" />
+          <img
+            src={airmeizLogo128}
+            srcSet={`${airmeizLogo128} 1x, ${airmeizLogo256} 2x`}
+            alt="AIRMEIZ"
+            className="h-10 w-auto"
+            width={60}
+            height={40}
+            decoding="async"
+          />
           <span className="font-heading text-xl font-semibold text-foreground tracking-wider">AIRMEIZ</span>
         </a>
 

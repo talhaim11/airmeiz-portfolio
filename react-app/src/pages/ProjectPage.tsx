@@ -21,7 +21,14 @@ const ProjectPage = ({ project }: ProjectPageProps) => {
       <section className="project-hero hero-with-bg">
         <div className="container">
           <div className="project-hero-content">
-            <img src={data.logoSrc} alt={data.title} className="project-hero-title-logo" />
+            <img
+              src={data.logoSrc}
+              srcSet={`${data.logoSrc} 1x, ${data.logoSrc2x} 2x`}
+              alt={data.title}
+              className="project-hero-title-logo"
+              loading="lazy"
+              decoding="async"
+            />
             <p className="project-hero-subtitle">{data.subtitle}</p>
             <a href={data.appHref} className="btn btn-primary" style={{ marginTop: '1rem' }}>
               Open in App

@@ -1,6 +1,7 @@
 import { useMemo } from 'react';
 import { motion, useMotionTemplate, useMotionValue, useSpring } from 'framer-motion';
-import airmeizLogo from '@/assets/airmeizcore/airmeiz-logo.png';
+import airmeizLogo128 from '@/assets/airmeizcore/airmeiz-logo-128.webp';
+import airmeizLogo256 from '@/assets/airmeizcore/airmeiz-logo-256.webp';
 
 const springConfig = { stiffness: 120, damping: 18, mass: 0.9 };
 
@@ -131,9 +132,14 @@ const InteractiveCoreLogo = ({ logoImageRef }: InteractiveCoreLogoProps) => {
           <div className="absolute h-[72%] w-[72%] rounded-[28px] bg-[radial-gradient(circle_at_50%_45%,hsl(185_90%_55%_/0.12),transparent_68%)] blur-2xl" />
           <img
             ref={logoImageRef}
-            src={airmeizLogo}
+            src={airmeizLogo128}
+            srcSet={`${airmeizLogo128} 1x, ${airmeizLogo256} 2x`}
             alt="AIRMEIZ"
             className="relative z-10 h-[42%] w-[42%] object-contain"
+            width={70}
+            height={47}
+            loading="lazy"
+            decoding="async"
             style={{ mixBlendMode: 'screen', filter: 'drop-shadow(0 0 10px hsl(185 90% 55% / 0.28))' }}
           />
         </motion.div>

@@ -37,7 +37,15 @@ const SiteHeader = ({ page }: SiteHeaderProps) => {
     <header className={navClass}>
       <div className="container">
         <a href="/" className="logo">
-          <img src="/assets/img/site-logo.png" alt="AIRMEIZ" className="site-logo" />
+          <img
+            src="/assets/img/site-logo-128.webp"
+            srcSet="/assets/img/site-logo-128.webp 1x, /assets/img/site-logo-256.webp 2x"
+            alt="AIRMEIZ"
+            className="site-logo"
+            width={60}
+            height={40}
+            decoding="async"
+          />
         </a>
 
         <nav>

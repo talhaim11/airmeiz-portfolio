@@ -13,6 +13,7 @@ import FadingFacts from '../components/erevshabbat/FadingFacts';
 const ErevShabbatPage = () => {
   const [loaded, setLoaded] = useState(false);
   const [timelineOwnsScroll, setTimelineOwnsScroll] = useState(false);
+  const [fadingFactsOwnsScroll, setFadingFactsOwnsScroll] = useState(false);
   const snapContainerRef = useRef<HTMLElement | null>(null);
   const handleLoadComplete = useCallback(() => setLoaded(true), []);
 
@@ -27,6 +28,11 @@ const ErevShabbatPage = () => {
     if (!loaded) return;
     console.log('[TIMELINE_DEBUG] timeline owns scroll:', timelineOwnsScroll);
   }, [timelineOwnsScroll, loaded]);
+
+  useEffect(() => {
+    if (!loaded) return;
+    console.log('[FADING_FACTS_DEBUG] final section owns scroll:', fadingFactsOwnsScroll);
+  }, [fadingFactsOwnsScroll, loaded]);
 
   return (
     <div id="erev-page-root" className="min-h-screen bg-background">
@@ -45,7 +51,7 @@ const ErevShabbatPage = () => {
           <ProblemBlock />
           <InteractiveTimeline />
           <AIBlock />
-          <FadingFacts />
+          <FadingFacts onFactsOwnershipChange={setFadingFactsOwnsScroll} />
         </main>
       )}
       {loaded && <SiteFooter />}

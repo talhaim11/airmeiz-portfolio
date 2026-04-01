@@ -9,12 +9,14 @@ const pageContent = {
   pulsegate: {
     title: 'PULSEGATE',
     subtitle: 'Class & Activity Registration Platform',
-    logoSrc: '/assets/img/logos/pulsegate-logo.png',
+    logoSrc: '/assets/img/logos/pulsegate-logo-128.webp',
+    logoSrc2x: '/assets/img/logos/pulsegate-logo-256.webp',
   },
   novapay: {
     title: 'Novapay',
     subtitle: 'Smart Credit & Payment Management',
-    logoSrc: '/assets/img/logos/novapay-logo.png',
+    logoSrc: '/assets/img/logos/novapay-logo-128.webp',
+    logoSrc2x: '/assets/img/logos/novapay-logo-256.webp',
   },
 } as const;
 
@@ -44,7 +46,16 @@ const InProgressProjectPage = ({ project }: InProgressProjectPageProps) => {
               </div>
 
               <div className="mx-auto mb-8 flex h-28 w-28 items-center justify-center rounded-full border border-cyan-300/30 bg-[rgba(10,18,28,0.55)] shadow-[0_0_38px_rgba(34,211,238,0.12)]">
-                <img src={data.logoSrc} alt={data.title} className="h-16 w-16 object-contain" />
+                <img
+                  src={data.logoSrc}
+                  srcSet={`${data.logoSrc} 1x, ${data.logoSrc2x} 2x`}
+                  alt={data.title}
+                  className="h-16 w-16 object-contain"
+                  width={64}
+                  height={64}
+                  loading="lazy"
+                  decoding="async"
+                />
               </div>
 
               <h1 className="font-display text-4xl font-semibold tracking-[-0.03em] text-white md:text-6xl">{data.title}</h1>

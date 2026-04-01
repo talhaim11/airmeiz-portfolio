@@ -1,8 +1,13 @@
-import alphaflowLogo from '@/assets/airmeizcore/alphaflow-logo.png';
-import pulsegateLogo from '@/assets/airmeizcore/pulsegate-logo.png';
-import swappexLogo from '@/assets/airmeizcore/swappex-logo.png';
-import erevshabbatLogo from '@/assets/airmeizcore/erevshabbat-logo.png';
-import novapayLogo from '@/assets/airmeizcore/novapay-logo.png';
+import alphaflowLogo from '@/assets/airmeizcore/alphaflow-logo-128.webp';
+import alphaflowLogo2x from '@/assets/airmeizcore/alphaflow-logo-256.webp';
+import pulsegateLogo from '@/assets/airmeizcore/pulsegate-logo-128.webp';
+import pulsegateLogo2x from '@/assets/airmeizcore/pulsegate-logo-256.webp';
+import swappexLogo from '@/assets/airmeizcore/swappex-logo-128.webp';
+import swappexLogo2x from '@/assets/airmeizcore/swappex-logo-256.webp';
+import erevshabbatLogo from '@/assets/airmeizcore/erevshabbat-logo-128.webp';
+import erevshabbatLogo2x from '@/assets/airmeizcore/erevshabbat-logo-256.webp';
+import novapayLogo from '@/assets/airmeizcore/novapay-logo-128.webp';
+import novapayLogo2x from '@/assets/airmeizcore/novapay-logo-256.webp';
 import yoavImg from '@/assets/airmeizcore/yoav-shriker.jpg';
 import talImg from '@/assets/airmeizcore/tal-haim.jpg';
 import sagiImg from '@/assets/airmeizcore/sagi-mutas.jpg';
@@ -17,6 +22,7 @@ export const homePageData = {
       subtitle: 'Sports Application',
       overlayText: 'Revolutionary sports tracking and performance analytics platform',
       imageSrc: alphaflowLogo,
+      imageSrc2x: alphaflowLogo2x,
       href: '/projects/alphaflow',
     },
     {
@@ -25,6 +31,7 @@ export const homePageData = {
       subtitle: 'Class & Activity Registration Platform',
       overlayText: 'Streamlined registration system for classes and activities',
       imageSrc: pulsegateLogo,
+      imageSrc2x: pulsegateLogo2x,
       href: '/projects/pulsegate',
     },
     {
@@ -33,6 +40,7 @@ export const homePageData = {
       subtitle: 'Logistics & Moving Application',
       overlayText: 'Smart logistics solution for seamless moving experiences',
       imageSrc: swappexLogo,
+      imageSrc2x: swappexLogo2x,
       href: '/projects/swappex',
     },
     {
@@ -41,6 +49,7 @@ export const homePageData = {
       subtitle: 'Medical Research Project',
       overlayText: 'Ending late-stage oral cancer through AI-powered early detection',
       imageSrc: erevshabbatLogo,
+      imageSrc2x: erevshabbatLogo2x,
       href: '/projects/erevshabbat',
     },
     {
@@ -49,6 +58,7 @@ export const homePageData = {
       subtitle: 'Smart Credit & Payment Management',
       overlayText: 'Intelligent credit and payment management system',
       imageSrc: novapayLogo,
+      imageSrc2x: novapayLogo2x,
       href: '/projects/novapay',
     },
   ],
@@ -95,6 +105,7 @@ export const projectPages = {
   alphaflow: {
     title: 'ALPHAFLOW',
     logoSrc: alphaflowLogo,
+    logoSrc2x: alphaflowLogo2x,
     subtitle: 'Sports performance platform for tracking training data and progress.',
     appHref: '/projects/alphaflow',
     ctaTitle: 'Interested in learning more about ALPHAFLOW?',
@@ -142,6 +153,7 @@ export const projectPages = {
   pulsegate: {
     title: 'PULSEGATE',
     logoSrc: pulsegateLogo,
+    logoSrc2x: pulsegateLogo2x,
     subtitle:
       'A smart registration platform for classes and activities, simplifying sign-ups through flexible, multi-channel access.',
     appHref: '/projects/pulsegate',
@@ -180,6 +192,7 @@ export const projectPages = {
   novapay: {
     title: 'Novapay',
     logoSrc: novapayLogo,
+    logoSrc2x: novapayLogo2x,
     subtitle:
       'Credit and payment management platform focused on visibility, automation, and smarter financial decisions.',
     appHref: '/projects/novapay',
