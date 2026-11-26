@@ -9,6 +9,13 @@ export default defineConfig({
   base: '/',
   plugins: [react()],
   publicDir: resolve(__dirname, '../public'),
+  build: {
+    rollupOptions: {
+      output: {
+        entryFileNames: 'assets/app-[hash].js',
+      },
+    },
+  },
   resolve: {
     alias: {
       '@': resolve(__dirname, './src'),
