@@ -8,9 +8,7 @@ import erevshabbatLogo from '@/assets/airmeizcore/erevshabbat-logo-128.webp';
 import erevshabbatLogo2x from '@/assets/airmeizcore/erevshabbat-logo-256.webp';
 import novapayLogo from '@/assets/airmeizcore/novapay-logo-128.webp';
 import novapayLogo2x from '@/assets/airmeizcore/novapay-logo-256.webp';
-import yoavImg from '@/assets/airmeizcore/yoav-shriker.jpg';
 import talImg from '@/assets/airmeizcore/tal-haim.jpg';
-import sagiImg from '@/assets/airmeizcore/sagi-mutas.jpg';
 
 export const homePageData = {
   heroSubtitle:
@@ -70,22 +68,16 @@ export const homePageData = {
   ],
   team: [
     {
-      name: 'Yoav Shriker',
-      role: 'CEO + COO',
-      bio: 'Visionary leader driving company operations and strategic growth.',
-      imageSrc: yoavImg,
+      name: 'Itay Shriker',
+      role: 'Co-Founder & CEO',
+      bio: '',
+      imageSrc: undefined,
     },
     {
       name: 'Tal Haim',
-      role: 'CTO + CMO',
+      role: 'Co-Founder & CTO',
       bio: 'Expert in technology architecture and marketing strategy.',
       imageSrc: talImg,
-    },
-    {
-      name: 'Sagi Mutas',
-      role: 'CFO + CHRO',
-      bio: 'Financial strategist and human resources expert driving team excellence.',
-      imageSrc: sagiImg,
     },
   ],
 };

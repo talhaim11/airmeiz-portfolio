@@ -193,6 +193,21 @@
     scroll-snap-stop: always;
     min-height: 100vh;
   }
+
+  /* Homepage on phones: mandatory full-screen snapping fights the tall project grid,
+     so let the document scroll naturally below the md breakpoint. */
+  @media (max-width: 767.98px) {
+    .snap-container.home-scroll {
+      height: auto;
+      overflow: visible;
+      scroll-snap-type: none;
+    }
+
+    .snap-container.home-scroll > section,
+    .snap-container.home-scroll > footer {
+      scroll-snap-stop: normal;
+    }
+  }
 }
 
 @keyframes float {

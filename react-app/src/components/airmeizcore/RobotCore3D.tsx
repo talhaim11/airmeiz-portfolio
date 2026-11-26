@@ -9,7 +9,17 @@ type RobotCore3DProps = {
   hoveredBiasX: number;
   hoveredBiasY: number;
   className?: string;
+  /** Tailwind size classes for the canvas wrapper. */
+  sizeClassName?: string;
+  /** Adds a slow, subtle idle sway on top of the gaze target. */
+  idle?: boolean;
+  /** Head turn responsiveness (higher = snappier). */
+  ease?: number;
+  /** R3F render loop: 'never' pauses rendering (e.g. offscreen), 'demand' renders a static frame. */
+  frameloop?: 'always' | 'demand' | 'never';
 };
+
+type RobotHeadProps = Pick<RobotCore3DProps, 'pointerX' | 'pointerY' | 'hoveredBiasX' | 'hoveredBiasY' | 'idle' | 'ease'>;
 
 function clamp(v: number, lo: number, hi: number) {
   return Math.min(Math.max(v, lo), hi);
@@ -71,18 +81,22 @@ function makePixelSmileTex(): THREE.CanvasTexture {
 
 /* ── Robot ─────────────────────────────────────────────────────────────── */
 
-function RobotHead({ pointerX, pointerY, hoveredBiasX, hoveredBiasY }: RobotCore3DProps) {
+function RobotHead({ pointerX, pointerY, hoveredBiasX, hoveredBiasY, idle = false, ease = 8 }: RobotHeadProps) {
   const rootRef = useRef<THREE.Group>(null);
   const gazeRef = useRef<THREE.Group>(null);
   const eyeTex   = useMemo(() => makePixelEyeTex(),   []);
   const smileTex = useMemo(() => makePixelSmileTex(), []);
 
-  useFrame((_, dt) => {
+  useFrame((state, dt) => {
     if (!rootRef.current) return;
-    const tx = clamp(pointerX * 0.82 + hoveredBiasX * 1.15, -1, 1);
+    // Idle sway: two slow, incommensurate sines so the motion never looks looped.
+    const t = state.clock.elapsedTime;
+    const idleX = idle ? Math.sin(t * 0.55) * 0.32 + Math.sin(t * 0.21) * 0.12 : 0;
+    const idleY = idle ? Math.sin(t * 0.43 + 1.3) * 0.18 : 0;
+    const tx = clamp(pointerX * 0.82 + hoveredBiasX * 1.15 + idleX, -1, 1);
     // positive ty = mouse/node is BELOW centre → robot tilts down (positive rotation.x in three.js)
-    const ty = clamp(pointerY * 0.72 + hoveredBiasY * 0.94, -0.82, 0.82);
-    const k = 1 - Math.exp(-dt * 8);
+    const ty = clamp(pointerY * 0.72 + hoveredBiasY * 0.94 + idleY, -0.82, 0.82);
+    const k = 1 - Math.exp(-dt * ease);
     rootRef.current.rotation.y += (clamp(tx * 0.2, -0.26, 0.26) - rootRef.current.rotation.y) * k;
     rootRef.current.rotation.x += (clamp(ty * 0.30, -0.28, 0.28) - rootRef.current.rotation.x) * k;
     if (gazeRef.current) {
@@ -154,16 +168,38 @@ function RobotHead({ pointerX, pointerY, hoveredBiasX, hoveredBiasY }: RobotCore
 }
 
 const RobotCore3D = forwardRef<HTMLDivElement, RobotCore3DProps>((
-  { pointerX, pointerY, hoveredBiasX, hoveredBiasY, className = '' }, 
+  {
+    pointerX,
+    pointerY,
+    hoveredBiasX,
+    hoveredBiasY,
+    className = '',
+    sizeClassName = 'h-[220px] w-[270px] md:h-[310px] md:w-[380px] lg:h-[380px] lg:w-[460px]',
+    idle = false,
+    ease = 8,
+    frameloop = 'always',
+  },
   ref
 ) => {
   return (
-    <div ref={ref} className={`pointer-events-none h-[220px] w-[270px] md:h-[310px] md:w-[380px] lg:h-[380px] lg:w-[460px] ${className}`}>
-      <Canvas dpr={[1, 1.7]} camera={{ position: [0, 0, 3.6], fov: 30 }} gl={{ antialias: true, alpha: true }}>
+    <div ref={ref} className={`pointer-events-none ${sizeClassName} ${className}`}>
+      <Canvas
+        dpr={[1, 1.7]}
+        frameloop={frameloop}
+        camera={{ position: [0, 0, 3.6], fov: 30 }}
+        gl={{ antialias: true, alpha: true }}
+      >
         <ambientLight intensity={0.32} />
         <directionalLight position={[2.5, 3.4, 4.0]} intensity={1.2} color="#f2feff" />
         <pointLight position={[-2.0, -0.8, 2.8]} intensity={0.5} color="#54ecff" />
-        <RobotHead pointerX={pointerX} pointerY={pointerY} hoveredBiasX={hoveredBiasX} hoveredBiasY={hoveredBiasY} />
+        <RobotHead
+          pointerX={pointerX}
+          pointerY={pointerY}
+          hoveredBiasX={hoveredBiasX}
+          hoveredBiasY={hoveredBiasY}
+          idle={idle}
+          ease={ease}
+        />
       </Canvas>
     </div>
   );

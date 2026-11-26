@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { MotionConfig, motion, useReducedMotion } from 'framer-motion';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import alphaflowLogo from '@/assets/airmeizcore/alphaflow-logo-128.webp';
@@ -175,7 +175,7 @@ const NodeButton = ({
   );
 };
 
-const RobotScene = () => {
+const DesktopRobotScene = () => {
   const desktopRootRef = useRef<HTMLDivElement | null>(null);
   const anchorLogoRef = useRef<HTMLImageElement | null>(null);
   const nodeRefs = useRef<Record<string, HTMLButtonElement | null>>({});
@@ -326,8 +326,7 @@ const RobotScene = () => {
   }, [hoveredProject]);
 
   return (
-    <div className="mx-auto w-full max-w-6xl">
-      <div className="hidden md:block">
+    <div className="hidden md:block">
         <div ref={desktopRootRef} className="relative mx-auto h-[940px] w-full max-w-[1260px]">
           <svg className="pointer-events-none absolute inset-0 z-10 h-full w-full overflow-visible" aria-hidden="true">
             <defs>
@@ -389,25 +388,212 @@ const RobotScene = () => {
         </div>
       </div>
 
-      <div className="md:hidden">
-        <div className="flex flex-col items-center">
-          <div className="robot-container h-[180px] w-full">
-            <RobotCore3D 
-              className="mx-auto"
-              pointerX={0}
-              pointerY={0}
-              hoveredBiasX={0}
-              hoveredBiasY={0}
-            />
-          </div>
-          <div className="bubbles-container grid w-full max-w-xl grid-cols-2 gap-5">
-            {projects.map((project) => (
-              <NodeButton key={project.name} id={project.name} {...project} onHover={handleHover} />
-            ))}
-          </div>
-        </div>
+  );
+};
+
+const clampUnit = (v: number) => Math.min(1, Math.max(-1, v));
+
+function useMediaQuery(query: string) {
+  const [matches, setMatches] = useState(() =>
+    typeof window !== 'undefined' && typeof window.matchMedia === 'function' ? window.matchMedia(query).matches : false,
+  );
+
+  useEffect(() => {
+    const mql = window.matchMedia(query);
+    const onChange = () => setMatches(mql.matches);
+    onChange();
+    mql.addEventListener('change', onChange);
+    return () => mql.removeEventListener('change', onChange);
+  }, [query]);
+
+  return matches;
+}
+
+const MobileProjectNode = ({
+  project,
+  onSelect,
+  buttonRef,
+}: {
+  project: (typeof projects)[number];
+  onSelect: (el: HTMLButtonElement, href: string) => void;
+  buttonRef: (el: HTMLButtonElement | null) => void;
+}) => (
+  <button
+    type="button"
+    ref={buttonRef}
+    data-project={project.name}
+    onClick={(e) => onSelect(e.currentTarget, project.href)}
+    className="group flex w-full touch-manipulation flex-col items-center rounded-2xl text-center outline-none transition-transform duration-150 focus-visible:ring-2 focus-visible:ring-primary/70 active:scale-[0.97] motion-reduce:transition-none motion-reduce:active:scale-100"
+    style={{ WebkitTapHighlightColor: 'transparent' }}
+  >
+    <span
+      className="relative flex h-[96px] w-[96px] items-center justify-center rounded-full border backdrop-blur-md min-[380px]:h-[104px] min-[380px]:w-[104px]"
+      style={{
+        borderColor: project.accent,
+        background: 'linear-gradient(180deg, hsl(220 18% 10% / 0.96), hsl(220 20% 6% / 0.92))',
+        boxShadow: `0 0 0 1px hsl(220 18% 22% / 0.72), 0 0 24px ${project.accent}22`,
+      }}
+    >
+      <span
+        aria-hidden="true"
+        className="absolute inset-[6px] rounded-full"
+        style={{ border: `1px solid ${project.accent}55`, boxShadow: `inset 0 0 20px ${project.accent}16` }}
+      />
+      <img
+        src={project.logo}
+        srcSet={`${project.logo} 1x, ${project.logo2x} 2x`}
+        alt=""
+        className="relative z-10 h-[82%] w-[82%] object-contain"
+        width={86}
+        height={86}
+        decoding="async"
+      />
+    </span>
+    <span className="mt-2.5 font-heading text-[13px] uppercase tracking-[0.16em] text-foreground">{project.name}</span>
+    <span className="mt-0.5 max-w-[11rem] text-[11px] leading-snug text-muted-foreground">{project.description}</span>
+  </button>
+);
+
+/**
+ * Mobile layout: the robot sits centred above a two-column project grid. The first row is
+ * pulled up under the robot and tied together by a shallow arc so it reads as one scene.
+ * The robot idles, glances at projects as they scroll into view, and looks at a tapped
+ * project while navigation happens immediately.
+ */
+const MobileRobotScene = () => {
+  const navigate = useNavigate();
+  const reduceMotion = useReducedMotion() ?? false;
+  const robotRef = useRef<HTMLDivElement | null>(null);
+  const itemRefs = useRef<Record<string, HTMLButtonElement | null>>({});
+  const robotVisibleRef = useRef(true);
+  const [robotVisible, setRobotVisible] = useState(true);
+  const [gaze, setGaze] = useState<Point>({ x: 0, y: 0 });
+  const releaseTimer = useRef<number | undefined>(undefined);
+  const pendingTimer = useRef<number | undefined>(undefined);
+  const lastLookAt = useRef(0);
+
+  const lookAt = useCallback((el: Element, holdMs: number) => {
+    const robot = robotRef.current;
+    if (!robot) return;
+    const r = robot.getBoundingClientRect();
+    const t = el.getBoundingClientRect();
+    const dx = t.left + t.width / 2 - (r.left + r.width / 2);
+    const dy = t.top + t.height * 0.35 - (r.top + r.height / 2);
+    setGaze({
+      x: clampUnit(dx / (window.innerWidth * 0.45)) * 0.85,
+      y: clampUnit(dy / (window.innerHeight * 0.55)) * 0.8,
+    });
+    window.clearTimeout(releaseTimer.current);
+    releaseTimer.current = window.setTimeout(() => setGaze({ x: 0, y: 0 }), holdMs);
+  }, []);
+
+  // Pause rendering when the robot is offscreen; it only "watches" while visible.
+  useEffect(() => {
+    const robot = robotRef.current;
+    if (!robot) return;
+    const io = new IntersectionObserver(([entry]) => {
+      robotVisibleRef.current = entry.isIntersecting;
+      setRobotVisible(entry.isIntersecting);
+      if (!entry.isIntersecting) setGaze({ x: 0, y: 0 });
+    });
+    io.observe(robot);
+    return () => io.disconnect();
+  }, []);
+
+  // Glance at each project as it scrolls into view, spacing glances out so they don't jitter.
+  useEffect(() => {
+    if (reduceMotion) return;
+    const io = new IntersectionObserver(
+      (entries) => {
+        const entering = entries.filter((e) => e.isIntersecting);
+        const latest = entering[entering.length - 1];
+        if (!latest || !robotVisibleRef.current) return;
+        const wait = Math.max(0, lastLookAt.current + 900 - performance.now());
+        window.clearTimeout(pendingTimer.current);
+        pendingTimer.current = window.setTimeout(() => {
+          if (!robotVisibleRef.current) return;
+          lastLookAt.current = performance.now();
+          lookAt(latest.target, 1300);
+        }, wait);
+      },
+      { threshold: 0.6 },
+    );
+    Object.values(itemRefs.current).forEach((el) => el && io.observe(el));
+    return () => {
+      io.disconnect();
+      window.clearTimeout(pendingTimer.current);
+    };
+  }, [lookAt, reduceMotion]);
+
+  useEffect(() => () => window.clearTimeout(releaseTimer.current), []);
+
+  const handleSelect = useCallback(
+    (el: HTMLButtonElement, href: string) => {
+      if (!reduceMotion && robotVisibleRef.current) lookAt(el, 600);
+      navigate(href);
+    },
+    [lookAt, navigate, reduceMotion],
+  );
+
+  return (
+    <div className="flex flex-col items-center">
+      <div ref={robotRef} className="relative z-20 -mb-7">
+        <RobotCore3D
+          sizeClassName="h-[128px] w-[170px] min-[380px]:h-[140px] min-[380px]:w-[186px]"
+          pointerX={0}
+          pointerY={0}
+          hoveredBiasX={reduceMotion ? 0 : gaze.x}
+          hoveredBiasY={reduceMotion ? 0 : gaze.y}
+          idle={!reduceMotion}
+          ease={4}
+          frameloop={reduceMotion ? 'demand' : robotVisible ? 'always' : 'never'}
+        />
       </div>
+
+      <ul className="relative grid w-full max-w-sm grid-cols-2 gap-x-4 gap-y-7" aria-label="Projects">
+        <svg
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-x-0 top-[28px] h-[44px] w-full min-[380px]:top-[32px]"
+          viewBox="0 0 100 44"
+          preserveAspectRatio="none"
+        >
+          <path
+            d="M 25 20 Q 50 46 75 20"
+            fill="none"
+            stroke="hsl(185 95% 58% / 0.35)"
+            strokeWidth="1.5"
+            strokeDasharray="3 5"
+            strokeLinecap="round"
+            vectorEffect="non-scaling-stroke"
+          />
+        </svg>
+        {projects.map((project, index) => (
+          <li
+            key={project.name}
+            className={`relative flex justify-center ${
+              index === projects.length - 1 && projects.length % 2 === 1 ? 'col-span-2 w-1/2 justify-self-center' : ''
+            }`}
+          >
+            <MobileProjectNode
+              project={project}
+              onSelect={handleSelect}
+              buttonRef={(el) => {
+                itemRefs.current[project.name] = el;
+              }}
+            />
+          </li>
+        ))}
+      </ul>
     </div>
+  );
+};
+
+const RobotScene = () => {
+  const isDesktop = useMediaQuery('(min-width: 768px)');
+  return (
+    <MotionConfig reducedMotion="user">
+      <div className="mx-auto w-full max-w-6xl">{isDesktop ? <DesktopRobotScene /> : <MobileRobotScene />}</div>
+    </MotionConfig>
   );
 };
 

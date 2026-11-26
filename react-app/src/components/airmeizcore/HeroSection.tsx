@@ -13,12 +13,12 @@ const HeroSection = () => {
         }}
       />
 
-      <div className="relative z-10 mx-auto flex min-h-screen w-full max-w-7xl flex-col items-center px-6 pt-28 pb-16 text-center">
+      <div className="relative z-10 mx-auto flex min-h-screen w-full max-w-7xl flex-col items-center px-5 pt-6 pb-16 text-center sm:px-6 md:pt-28">
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="font-heading text-5xl font-semibold tracking-[-0.02em] text-foreground md:text-7xl"
+          className="font-heading text-4xl font-semibold min-[380px]:text-[2.6rem] sm:text-5xl tracking-[-0.02em] text-foreground md:text-7xl"
         >
           your vision,
           <br />
@@ -29,7 +29,7 @@ const HeroSection = () => {
           initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.15 }}
-          className="mt-5 text-sm uppercase tracking-[0.42em] text-muted-foreground md:text-[13px]"
+          className="mt-3 text-[11px] uppercase tracking-[0.28em] text-muted-foreground md:mt-5 md:text-[13px] md:tracking-[0.42em]"
         >
           precision engineered for tomorrow
         </motion.p>
@@ -38,7 +38,7 @@ const HeroSection = () => {
           initial={{ opacity: 0, y: 26 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, delay: 0.25 }}
-          className="mt-10 w-full"
+          className="mt-5 w-full md:mt-10"
         >
           <RobotScene />
         </motion.div>
