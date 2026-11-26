@@ -5,9 +5,9 @@
   X-XSS-Protection: 1; mode=block
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: geolocation=(), microphone=(), camera=()
-  
-  # Cache Control for Static Assets
-  Cache-Control: public, max-age=31536000, immutable
+  # No Cache-Control here: this rule matches every path, including HTML.
+  # Cloudflare Pages merges matching rules, so a long-lived value here would
+  # be appended to the HTML rules below and make pages "immutable".
 
 /css/*
   Cache-Control: public, max-age=31536000, immutable
@@ -18,9 +18,11 @@
 /assets/*
   Cache-Control: public, max-age=31536000, immutable
 
-# HTML pages - shorter cache, revalidate
+# HTML pages - always revalidate so a new deployment is picked up immediately
+# (an old HTML page would reference hashed bundles that no longer exist).
+# SPA routes rewritten to /index.html get Pages' default, which also revalidates.
 /*.html
-  Cache-Control: public, max-age=3600, must-revalidate
+  Cache-Control: public, max-age=0, must-revalidate
 
 /
-  Cache-Control: public, max-age=3600, must-revalidate
+  Cache-Control: public, max-age=0, must-revalidate

@@ -1,252 +1,86 @@
-# Cloudflare Pages Deployment Guide
+# Deployment (Cloudflare Pages)
 
-Step-by-step instructions for deploying the AIRMEIZ website to Cloudflare Pages.
+## Production at a glance
 
-## Prerequisites
+| | |
+|---|---|
+| Live domains | `https://airmeiz.com`, `https://www.airmeiz.com` |
+| Cloudflare account | `33c877338d93a3cc446a9b1419a27d5b` (the account that also owns the `airmeiz.com` zone) |
+| Pages project | `airmeiz` (`https://airmeiz.pages.dev`) — a **Direct Upload** project, not Git-connected |
+| Deploys from | GitHub Actions workflow [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml) |
+| Trigger | Every push to `main`, or manually via *Actions → Deploy to Cloudflare Pages (production) → Run workflow* |
+| Build | `npm ci --prefix react-app` then `npm run build` → uploads `react-app/dist` |
+| Static config | `public/_headers` and `public/_redirects` (copied into `react-app/dist` by Vite) |
 
-- A Cloudflare account (free tier works perfectly)
-- The AIRMEIZ site files ready to deploy
+Do **not** connect this repository to Cloudflare Pages through the Cloudflare GitHub app
+(dashboard "Connect to Git"). Deployments go through the workflow above with an API token, so
+the account and project are explicit in the repository. A Git-connected Pages project in another
+account was the cause of an outage where pushes deployed successfully but never reached the live
+domains (see *History* below).
 
-## Option 1: Direct Upload (Fastest)
+## How a deployment works
 
-### Step 1: Prepare Files
-1. Ensure all files are in the correct structure
-2. No build process needed - it's a static site!
+1. A push to `main` starts the workflow. Production deployments are serialized
+   (`concurrency: cloudflare-pages-production-airmeiz`): a newer push waits for the running one.
+2. The workflow builds the React app and runs
+   `wrangler pages deploy react-app/dist --project-name=airmeiz --branch=main` against account
+   `33c877338d93a3cc446a9b1419a27d5b`, recording the commit hash on the Cloudflare deployment.
+3. It then checks that both `airmeiz.com` and `www.airmeiz.com` serve the JavaScript bundle
+   from this build, and fails the run if they don't within ~3 minutes.
 
-### Step 2: Upload to Cloudflare
-1. Log in to [Cloudflare Dashboard](https://dash.cloudflare.com)
-2. Click **"Workers & Pages"** in the left sidebar
-3. Click **"Create application"**
-4. Go to the **"Pages"** tab
-5. Click **"Upload assets"**
-6. Give your project a name: `airmeiz` (or your preferred name)
-7. Drag and drop your entire project folder OR click to browse
-8. Click **"Deploy site"**
+## Required GitHub configuration
 
-### Step 3: Wait for Deployment
-- Cloudflare will upload and deploy your site
-- Usually takes 1-2 minutes
-- You'll receive a URL like: `airmeiz.pages.dev`
+Repository secret (Settings → Secrets and variables → Actions → *New repository secret*):
 
-### Step 4: Test Your Site
-1. Click the provided URL to view your site
-2. Test all pages and navigation
-3. Verify responsive design on mobile
+| Secret | Value |
+|---|---|
+| `CLOUDFLARE_API_TOKEN` | A Cloudflare API token limited to account `33c877338d93a3cc446a9b1419a27d5b` with **Account → Cloudflare Pages → Edit**. Nothing else is needed. |
 
-## Option 2: Git Integration (Recommended for Teams)
+Create the token at Cloudflare dashboard → *My Profile → API Tokens → Create Token → Custom token*:
 
-### Step 1: Push to Git Repository
+- Permissions: `Account` · `Cloudflare Pages` · `Edit`
+- Account resources: *Include* → the account that owns `airmeiz.com`
+- Optionally set an expiry and rotate it by updating the secret.
+
+The account ID and project name are not secrets; they are set in the workflow's `env` block.
+
+## Manual deployment (fallback)
+
+From a clean checkout of the commit you want live, logged in with `npx wrangler login`
+to the account above:
 
 ```bash
-# Initialize git (if not done)
-git init
-
-# Add all files
-git add .
-
-# Commit
-git commit -m "Initial deployment of AIRMEIZ website"
-
-# Add remote (GitHub example)
-git remote add origin https://github.com/yourusername/airmeiz.git
-
-# Push to main branch
-git push -u origin main
+npm ci --prefix react-app
+npm run build
+npx wrangler@4.160.1 pages deploy react-app/dist --project-name=airmeiz --branch=main
 ```
 
-### Step 2: Connect to Cloudflare Pages
+Rollback: Cloudflare dashboard → Workers & Pages → `airmeiz` → Deployments → pick a previous
+production deployment → *Rollback to this deployment*.
 
-1. Log in to [Cloudflare Dashboard](https://dash.cloudflare.com)
-2. Click **"Workers & Pages"** → **"Create application"**
-3. Go to **"Pages"** tab → **"Connect to Git"**
-4. Authorize Cloudflare to access your GitHub/GitLab account
-5. Select your repository
-6. Configure build settings:
+## Caching
 
-   ```
-   Production branch: main
-   Build command: (leave empty)
-   Build output directory: /
-   ```
+- `/assets/*` (Vite output, content-hashed filenames): `max-age=31536000, immutable`.
+- HTML (`/`, `/*.html`, and SPA routes rewritten to `/index.html`): always revalidated
+  (`max-age=0, must-revalidate`), so a new deployment is visible immediately and browsers never
+  request bundles from an older deployment.
+- Do not add a `Cache-Control` header to the `/*` rule in `public/_headers`: Cloudflare Pages
+  merges every matching rule, so it would also apply to HTML.
 
-7. Click **"Save and Deploy"**
+## Local development
 
-### Step 3: Automatic Deployments
-- Every push to the main branch will trigger a new deployment
-- Pull requests get preview deployments automatically
+See [LOCAL_DEV.md](LOCAL_DEV.md). `npm run dev` serves `http://localhost:5173`.
 
-## Custom Domain Setup
+## History
 
-### Step 1: Add Custom Domain
-1. In your Cloudflare Pages project, click **"Custom domains"**
-2. Click **"Set up a custom domain"**
-3. Enter your domain (e.g., `airmeiz.com`)
-4. Click **"Continue"**
-
-### Step 2: Update DNS
-If your domain is already on Cloudflare:
-- DNS records are automatically configured
-- No action needed!
-
-If your domain is elsewhere:
-- Update your domain's nameservers to Cloudflare's nameservers
-- Or add a CNAME record pointing to your `.pages.dev` domain
-
-### Step 3: SSL Certificate
-- Cloudflare automatically provisions SSL certificates
-- Usually takes 5-10 minutes
-- Your site will be accessible via HTTPS
-
-## Environment Variables (Future Use)
-
-If you add contact form or analytics:
-
-1. Go to **Settings** → **Environment variables**
-2. Add your variables:
-   ```
-   CONTACT_API_KEY=your_key_here
-   ANALYTICS_ID=your_id_here
-   ```
-3. Available in Cloudflare Workers/Functions
-
-## Performance Optimization
-
-### Enable Auto Minify
-1. Go to your Cloudflare Pages project
-2. Click **"Settings"** → **"Build & deployments"**
-3. Enable:
-   - ✅ Auto Minify CSS
-   - ✅ Auto Minify JavaScript
-   - ✅ Auto Minify HTML
-
-### Enable Brotli Compression
-Automatically enabled by Cloudflare - no configuration needed!
-
-### Configure Caching
-The included `_headers` file already sets optimal cache headers.
-
-## Analytics Setup
-
-### Cloudflare Web Analytics (Free)
-
-1. Go to [Cloudflare Dashboard](https://dash.cloudflare.com)
-2. Click **"Web Analytics"**
-3. Click **"Add a site"**
-4. Enter your domain
-5. Copy the provided JavaScript snippet
-6. Add it to your HTML files (before `</body>`):
-
-```html
-<!-- Cloudflare Web Analytics -->
-<script defer src='https://static.cloudflareinsights.com/beacon.min.js' 
-        data-cf-beacon='{"token": "YOUR_TOKEN_HERE"}'></script>
-```
-
-## Troubleshooting
-
-### Issue: 404 Errors on Page Refresh
-
-**Solution**: The `_redirects` file should handle this. If issues persist:
-1. Check that `_redirects` file is in the `/public/` directory
-2. Verify redirect rules syntax
-3. Redeploy the site
-
-### Issue: Assets Not Loading
-
-**Solution**: Check file paths
-1. Ensure all paths start with `/` (e.g., `/css/main.css`)
-2. Verify file names match exactly (case-sensitive)
-3. Check browser console for 404 errors
-
-### Issue: Custom Domain Not Working
-
-**Solution**: DNS propagation
-1. Wait 24-48 hours for DNS to propagate
-2. Clear browser cache
-3. Use [DNS Checker](https://dnschecker.org) to verify DNS records
-
-### Issue: Slow Performance
-
-**Solution**: Optimize assets
-1. Compress images (use TinyPNG, ImageOptim)
-2. Enable auto-minify in Cloudflare settings
-3. Check Cloudflare cache settings
-
-## Monitoring & Maintenance
-
-### View Analytics
-- Cloudflare Dashboard → Web Analytics
-- Monitor traffic, performance, and user behavior
-
-### Check Deployment Status
-- Cloudflare Dashboard → Workers & Pages → Your Project
-- View deployment history and logs
-
-### Update Content
-**Method 1 - Direct Upload**:
-1. Go to your project → Deployments
-2. Click "Create deployment"
-3. Upload updated files
-
-**Method 2 - Git Integration**:
-1. Make changes locally
-2. Commit and push:
-   ```bash
-   git add .
-   git commit -m "Update content"
-   git push
-   ```
-3. Automatic deployment starts
-
-## Cost Estimation
-
-Cloudflare Pages pricing (as of 2026):
-
-- **Free Tier**:
-  - Unlimited bandwidth
-  - Unlimited requests
-  - 500 builds per month
-  - 1 build at a time
-  
-- **Paid Tier** ($20/month):
-  - Everything in Free
-  - 5,000 builds per month
-  - 5 concurrent builds
-  - Advanced build features
-
-**For AIRMEIZ**: The free tier is more than sufficient!
-
-## Support Resources
-
-- [Cloudflare Pages Documentation](https://developers.cloudflare.com/pages/)
-- [Cloudflare Community](https://community.cloudflare.com/)
-- [Status Page](https://www.cloudflarestatus.com/)
-
-## Post-Deployment Checklist
-
-- [ ] Site accessible at `.pages.dev` URL
-- [ ] All pages load correctly
-- [ ] Navigation works on all pages
-- [ ] Mobile menu functions properly
-- [ ] All links are working
-- [ ] Forms display correctly
-- [ ] Images/placeholders display
-- [ ] Custom domain configured (if applicable)
-- [ ] SSL certificate active
-- [ ] Analytics tracking enabled
-- [ ] Performance tested (PageSpeed Insights)
-
-## Next Steps
-
-1. ✅ **Deploy the site** using one of the methods above
-2. ⏳ **Add real content** (images, videos, text)
-3. ⏳ **Implement contact form** backend
-4. ⏳ **Set up custom domain**
-5. ⏳ **Enable analytics**
-6. ⏳ **Monitor and optimize**
-
----
-
-**Ready to deploy?** Follow Option 1 (Direct Upload) for the fastest deployment!
-
-**Questions?** Check the troubleshooting section or contact Cloudflare support.
+- **Jan 16 – Feb 9, 2026:** pushes were built by a Git-connected Pages project
+  `airmeiz-portfolio` in account `33c877338d93a3cc446a9b1419a27d5b`.
+- **Feb 20 – Nov 26, 2026:** pushes were built by a Git-connected Pages project also named
+  `airmeiz-portfolio`, but in a different account (`8d2961f75cd8abdd89a2e3c1ad431d5a`). That
+  project has no access to the `airmeiz.com` zone.
+- **Aug 27, 2026:** the `airmeiz` Direct Upload project was created in the domain's account,
+  commit `61006c3` was uploaded manually, and both custom domains were attached to it. From then
+  on, pushes kept deploying to the other account and never reached the live site.
+- **Nov 26, 2026:** production moved to the GitHub Actions workflow above, targeting `airmeiz`.
+  Automatic deployments to `airmeiz-portfolio` in account `8d29…` are to be disabled and that
+  project removed.

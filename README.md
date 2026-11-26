@@ -34,6 +34,13 @@ npm run build
 npm run preview
 ```
 
+## Deployment
+
+Pushes to `main` deploy to production (`airmeiz.com`, `www.airmeiz.com`) through the GitHub
+Actions workflow `.github/workflows/deploy.yml`, which uploads `react-app/dist` to the Cloudflare
+Pages project `airmeiz` in account `33c877338d93a3cc446a9b1419a27d5b`.
+See [DEPLOYMENT.md](DEPLOYMENT.md).
+
 ## Legacy Static Site
 
 Old static HTML site files were isolated and are no longer active:
